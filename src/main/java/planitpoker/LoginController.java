@@ -7,18 +7,18 @@ import javax.swing.*;
  *
  * @author Jude Shin 
  */
-public class LoginNanny {
+public class LoginController {
 
 	private Main main;
 
-	public LoginNanny(Main main) {
+	public LoginController(Main main) {
 		this.main = main;
 	}
 
 	public void enterRoom(String name) {
 		System.out.println(name + " entering a room ...");
-		Room currentRoom = Blackboard.getCurrentRoom();
-		User user = Blackboard.getCurrentUser();
+		Room currentRoom = Blackboard.getCurrentRoom(); // TODO
+		User user = Blackboard.getCurrentUser(); // TODO
 		currentRoom.addUser(user);
 		switchGUI();
 	}

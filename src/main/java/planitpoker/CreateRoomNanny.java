@@ -9,18 +9,18 @@ import java.util.Random;
  *
  * @author Jude Shin 
  */
-public class CreateRoomNanny {
+public class CreateRoomController {
 	
 	private Main main;
 	
-	public CreateRoomNanny(Main main) {
+	public CreateRoomController(Main main) {
 		this.main = main;
 	}
 	
 	public void createRoom(String name, String selectedItem) {
 		System.out.println(" Creating room..." + name + ", mode: " + selectedItem);
 		Room room = new Room(name, selectedItem);
-		Blackboard.setCurrentRoom(room);
+		Blackboard.setCurrentRoom(room); // TODO
 		switchGUI();
 	}
 	

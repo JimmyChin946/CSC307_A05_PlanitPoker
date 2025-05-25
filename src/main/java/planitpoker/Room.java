@@ -10,15 +10,12 @@ import java.util.*;
 public class Room {
 	private String name;
 	private String mode;
-	private int id;
+	private int id; // may not need this
 	private ArrayList<User> users;
-	private static int rollingId = 0;
 
 	public Room (String name, String mode) {
 		this.name = name;
 		this.mode = mode;
-		this.id = rollingId;
-		rollingId ++;
 		this.users = new ArrayList<>();
 	}
 

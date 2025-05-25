@@ -10,7 +10,7 @@ import java.awt.*;
  * @author Jude Shin 
  */
 public class ExportPanel extends JPanel {
-	public ExportPanel (ExportNanny exportNanny) {
+	public ExportPanel (ExportController exportController) {
 		setLayout(new GridLayout(4, 1));
 		JLabel title = new JLabel("Export Votes");
 		title.setHorizontalAlignment(SwingConstants.CENTER);
@@ -30,7 +30,7 @@ public class ExportPanel extends JPanel {
 		box2.add(exportButton);
 		add(box2);
 
-		exportButton.addActionListener(e -> exportNanny.export((String) comboBox.getSelectedItem()));
+		exportButton.addActionListener(e -> exportController.export((String) comboBox.getSelectedItem()));
 	}
 }
 

@@ -10,14 +10,15 @@ import java.io.IOException;
 
 /**
  * Controller for the ExportPanel
+ * when exporting files or the data as csv
  *
  * @author Jude Shin 
  */
-public class ExportNanny {
+public class ExportController {
 
 	private Main main;
 
-	public ExportNanny(Main main) {
+	public ExportController(Main main) {
 		this.main = main;
 	}
 
@@ -33,7 +34,7 @@ public class ExportNanny {
 
 		if (result == JFileChooser.APPROVE_OPTION) {
 			File selectedFile = fileChooser.getSelectedFile();
-			LinkedList<Vote> votes = Blackboard.getVotes();
+			LinkedList<Vote> votes = Blackboard.getVotes(); // TODO
 
 			try (FileWriter writer = new FileWriter(selectedFile)) {
 

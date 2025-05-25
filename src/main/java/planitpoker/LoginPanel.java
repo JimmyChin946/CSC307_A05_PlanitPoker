@@ -11,13 +11,13 @@ import java.util.*;
  * @author Jude Shin 
  */
 public class LoginPanel extends JPanel{
-	public LoginPanel(LoginNanny joinRoomNanny) {
+	public LoginPanel(LoginController joinRoomController) {
 		JLabel titleLabel = new JLabel("Lets Start!");
 		titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		JLabel subtitleLabel = new JLabel("Join the room:");
 		subtitleLabel.setHorizontalAlignment(SwingConstants.CENTER);
 
-		Room room = Blackboard.getCurrentRoom();
+		Room room = Blackboard.getCurrentRoom(); // TODO
 		JLabel roomName = new JLabel("Room Name: " + room.getName());
 		roomName.setHorizontalAlignment(SwingConstants.CENTER);
 		JLabel roomMode = new JLabel("Mode: " + room.getMode());
@@ -36,6 +36,6 @@ public class LoginPanel extends JPanel{
 		add(roomMode);
 		add(roomUsers);
 
-		enterButton.addActionListener(e -> joinRoomNanny.enterRoom(nameField.getText()));
+		enterButton.addActionListener(e -> joinRoomController.enterRoom(nameField.getText()));
 	}
 }

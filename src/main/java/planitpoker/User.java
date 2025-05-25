@@ -8,14 +8,9 @@ import java.util.*;
  * @author Jude Shin 
  */
 public class User {
-	private String name;
-	private int id;
+	private String name; // this will be the unique id
 
-	public User(String name, int id) {
-		this.name = name;
-		this.id = id;
-	}
+	public User(String name) { this.name = name; }
 
 	public String getName() { return name; }
-	public int getId() { return id; }
 }

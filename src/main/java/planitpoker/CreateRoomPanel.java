@@ -10,7 +10,7 @@ import java.awt.*;
  */
 public class CreateRoomPanel extends JPanel {
 	
-	public CreateRoomPanel(CreateRoomNanny createRoomNanny) {
+	public CreateRoomPanel(CreateRoomController createRoomController) {
 		setLayout(new GridLayout(4, 1));
 		JLabel title = new JLabel("Create new Room");
 		title.setHorizontalAlignment(SwingConstants.CENTER);
@@ -28,7 +28,7 @@ public class CreateRoomPanel extends JPanel {
 		box2.setLayout(new GridLayout(1, 2));
 		JLabel modeLabel = new JLabel("Mode:");
 		box2.add(modeLabel);
-		String[] options = Blackboard.getModeOptions();
+		String[] options = Blackboard.getModeOptions(); // TODO
 		JComboBox<String> comboBox = new JComboBox<>(options);
 		box2.add(comboBox);
 		add(box2);
@@ -38,7 +38,7 @@ public class CreateRoomPanel extends JPanel {
 		box3.add(createButton);
 		add(box3);
 
-		createButton.addActionListener(e -> createRoomNanny.createRoom(nameField.getText(), (String) comboBox.getSelectedItem()));
+		createButton.addActionListener(e -> createRoomController.createRoom(nameField.getText(), (String) comboBox.getSelectedItem()));
 	}
 }
 
