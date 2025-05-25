@@ -17,8 +17,8 @@ public class LoginController {
 
 	public void enterRoom(String name) {
 		System.out.println(name + " entering a room ...");
-		Room currentRoom = Blackboard.getCurrentRoom(); // TODO
-		User user = Blackboard.getCurrentUser(); // TODO
+		Room currentRoom = Repository.getInstance().getCurrentRoom();
+		User user = Repository.getInstance().getCurrentUser();
 		currentRoom.addUser(user);
 		switchGUI();
 	}

@@ -20,7 +20,7 @@ public class CreateRoomController {
 	public void createRoom(String name, String selectedItem) {
 		System.out.println(" Creating room..." + name + ", mode: " + selectedItem);
 		Room room = new Room(name, selectedItem);
-		Blackboard.setCurrentRoom(room); // TODO
+		Repository.getInstance().setCurrentRoom(room);
 		switchGUI();
 	}
 	

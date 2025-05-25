@@ -17,7 +17,7 @@ public class LoginPanel extends JPanel{
 		JLabel subtitleLabel = new JLabel("Join the room:");
 		subtitleLabel.setHorizontalAlignment(SwingConstants.CENTER);
 
-		Room room = Blackboard.getCurrentRoom(); // TODO
+		Room room = Repository.getInstance().getCurrentRoom();
 		JLabel roomName = new JLabel("Room Name: " + room.getName());
 		roomName.setHorizontalAlignment(SwingConstants.CENTER);
 		JLabel roomMode = new JLabel("Mode: " + room.getMode());
