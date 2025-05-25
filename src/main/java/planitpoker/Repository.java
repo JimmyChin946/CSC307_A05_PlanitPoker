@@ -1,6 +1,7 @@
 package planitpoker;
 
 import java.util.*;
+import java.util.concurrent.*;
 import java.beans.*;
 
 /**
@@ -11,8 +12,11 @@ import java.beans.*;
 public class Repository extends PropertyChangeSupport{
 	private static Repository instance;
 
+	private Queue<PublishItem> publishQueue;
+
 	private Repository() {
 		super(new Object());
+		publishQueue = new LinkedBlockingQueue<>();
 	};
 
 	public static Repository getInstance() {
@@ -21,18 +25,27 @@ public class Repository extends PropertyChangeSupport{
 	}
 	
 	// users
-	private static Room currentRoom = new Room("TESTING ROOM", "Scrum");
-	private static User currentUser = new User("John Doe");
+	private Room currentRoom = new Room("TESTING ROOM", "Scrum");
+	private User currentUser = new User("John Doe");
 	
 	// stories
-	private static ArrayList<String> names = new ArrayList<>();
-	private static ArrayList<String> stories = new ArrayList<>();
-	private static String[] modeOptions = {"Scrum", "Fibonacci", "Sequential", "Hours", "T-shirt", "Custom deck"};
+	private ArrayList<String> names = new ArrayList<>();
+	private ArrayList<String> stories = new ArrayList<>();
+	private String[] modeOptions = {"Scrum", "Fibonacci", "Sequential", "Hours", "T-shirt", "Custom deck"};
+
 	
 	// testing code for export logic
 	private static ArrayList<Vote> votes = new ArrayList<>(List.of(new Vote("Testing", "this is a testing vote that should be the default", 4.5)));
 
 	// gettters and setters
+	public void pushPublishQueue(PublishItem publishItem) { publishQueue.offer(publishItem); }
+	public PublishItem popPublishQueue() {
+		PublishItem publishItem = publishQueue.poll();
+		return publishItem;
+	}
+
+
+
 	public void addName(String name) { names.add(name); }
 	public void addStory(String story) { stories.add(story); }
 	public void setCurrentRoom (Room room) { currentRoom = room; }
