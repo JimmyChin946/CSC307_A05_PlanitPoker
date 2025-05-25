@@ -27,8 +27,8 @@ public class LoginController {
 		main.setTitle("Room");
 		// this should kick the user to the panel to vote (the session/ room)
 		// the example code below kicks the user to the Create Room panel
-		// CreateRoomNanny createRoomNanny = new CreateRoomNanny(main);
-		// CreateRoomPanel createRoomPanel = new CreateRoomPanel(createRoomNanny);
+		// CreateRoomController createRoomController = new CreateRoomController(main);
+		// CreateRoomPanel createRoomPanel = new CreateRoomPanel(createRoomController);
 		// main.setContentPane(createRoomPanel);
 		main.revalidate();
 		main.repaint();

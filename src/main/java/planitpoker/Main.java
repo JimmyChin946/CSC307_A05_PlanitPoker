@@ -12,23 +12,23 @@ public class Main extends JFrame {
 	public Main(int launchNumber) {
 		switch (launchNumber) {
 			case 1:
-				// ----- LoginNanny -----
-				LoginNanny loginNanny = new LoginNanny(this);
-				LoginPanel loginPanel = new LoginPanel(loginNanny);
+				// ----- Login -----
+				LoginController loginController = new LoginController(this);
+				LoginPanel loginPanel = new LoginPanel(loginController);
 				add(loginPanel);
 				break;
 
 			case 2:
 				// ----- CreateRoom -----
-				CreateRoomNanny createRoomNanny = new CreateRoomNanny(this);
-				CreateRoomPanel createRoomPanel = new CreateRoomPanel(createRoomNanny);
+				CreateRoomController createRoomController = new CreateRoomController(this);
+				CreateRoomPanel createRoomPanel = new CreateRoomPanel(createRoomController);
 				add(createRoomPanel);
 				break;
 
 			case 3:
 				// ----- Export -----
-				ExportNanny exportNanny  = new ExportNanny(this);
-				ExportPanel exportPanel = new ExportPanel(exportNanny);
+				ExportController exportController = new ExportController(this);
+				ExportPanel exportPanel = new ExportPanel(exportController);
 				add(exportPanel);
 				break;
 		}
