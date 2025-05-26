@@ -23,12 +23,10 @@ public class LoginController {
 	}
 
 	public void switchGUI() {
-		main.setTitle("Room");
-		// this should kick the user to a dashboard page, which gives the option to join a room, or create a room
+		main.setTitle("Dashboard");
 		ChoiceController choiceController = new ChoiceController(main);
 		ChoicePanel choicePanel = new ChoicePanel(choiceController);
 		main.setContentPane(choicePanel);
-
 		main.revalidate();
 		main.repaint();
 	}

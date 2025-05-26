@@ -30,11 +30,9 @@ public class CreateRoomController {
 	
 	private void switchGUI() {
 		main.setTitle("Stories");
-		// these will be implemented by someone else
-		// for now, I commented them out so that they don't break the program
-		// StoriesNanny createRoomNanny = new StoriesNanny(main);
-		// StoriesPanel createRoomPanel = new StoriesPanel(createRoomNanny);
-		// main.setContentPane(createRoomPanel);
+		StoriesController storiesController = new StoriesController(main);
+		StoriesPanel storiesPanel = new StoriesPanel(storiesController);
+		main.setContentPane(storiesPanel);
 		main.revalidate();
 		main.repaint();
 	}
