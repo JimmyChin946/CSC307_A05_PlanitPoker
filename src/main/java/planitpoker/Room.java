@@ -10,8 +10,8 @@ import java.util.*;
 public class Room {
 	private String name;
 	private String mode;
-	private int id; // may not need this
 	private ArrayList<User> users;
+	private ArrayList<User> stories;
 
 	public Room (String name, String mode) {
 		this.name = name;
@@ -20,7 +20,6 @@ public class Room {
 	}
 
 	public String getName() { return name; }
-	public int getId() { return id; }
 	public String getMode() { return mode; }
 	public ArrayList<User> getUsers() { return users; }
 
