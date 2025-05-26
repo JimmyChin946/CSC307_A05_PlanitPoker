@@ -15,21 +15,20 @@ public class LoginController {
 		this.main = main;
 	}
 
-	public void enterRoom(String name) {
-		System.out.println(name + " entering a room ...");
-		Room currentRoom = Repository.getInstance().getCurrentRoom();
-		User user = Repository.getInstance().getCurrentUser();
-		currentRoom.addUser(user);
+	public void login(String name) {
+		System.out.println("loging in " + name + "...");
+		User user = new User(name);
+		Repository.getInstance().setCurrentUser(user);
 		switchGUI();
 	}
 
 	public void switchGUI() {
 		main.setTitle("Room");
-		// this should kick the user to the panel to vote (the session/ room)
-		// the example code below kicks the user to the Create Room panel
-		// CreateRoomController createRoomController = new CreateRoomController(main);
-		// CreateRoomPanel createRoomPanel = new CreateRoomPanel(createRoomController);
-		// main.setContentPane(createRoomPanel);
+		// this should kick the user to a dashboard page, which gives the option to join a room, or create a room
+		ChoiceController choiceController = new ChoiceController(main);
+		ChoicePanel choicePanel = new ChoicePanel(choiceController);
+		main.setContentPane(choicePanel);
+
 		main.revalidate();
 		main.repaint();
 	}

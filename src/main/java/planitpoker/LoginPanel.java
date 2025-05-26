@@ -11,31 +11,32 @@ import java.util.*;
  * @author Jude Shin 
  */
 public class LoginPanel extends JPanel{
-	public LoginPanel(LoginController joinRoomController) {
-		JLabel titleLabel = new JLabel("Lets Start!");
+	public LoginPanel(LoginController loginController) {
+		JLabel titleLabel = new JLabel("PlanItPoker");
 		titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		JLabel subtitleLabel = new JLabel("Join the room:");
-		subtitleLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		// JLabel subtitleLabel = new JLabel("Join the room:");
+		// subtitleLabel.setHorizontalAlignment(SwingConstants.CENTER);
 
-		Room room = Repository.getInstance().getCurrentRoom();
-		JLabel roomName = new JLabel("Room Name: " + room.getName());
-		roomName.setHorizontalAlignment(SwingConstants.CENTER);
-		JLabel roomMode = new JLabel("Mode: " + room.getMode());
-		roomMode.setHorizontalAlignment(SwingConstants.CENTER);
-		JLabel roomUsers = new JLabel("Users: " + room.getUsers().toString());
-		roomUsers.setHorizontalAlignment(SwingConstants.CENTER);
+		// Room room = Repository.getInstance().getCurrentRoom();
+		// JLabel roomName = new JLabel("Room Name: " + room.getName());
+		// roomName.setHorizontalAlignment(SwingConstants.CENTER);
+		// JLabel roomMode = new JLabel("Mode: " + room.getMode());
+		// roomMode.setHorizontalAlignment(SwingConstants.CENTER);
+		// JLabel roomUsers = new JLabel("Users: " + room.getUsers().toString());
+		// roomUsers.setHorizontalAlignment(SwingConstants.CENTER);
+
 		JTextField nameField = new JTextField("Enter your name");
-		JButton enterButton = new JButton("Enter");
+		JButton enterButton = new JButton("Login!");
 
 		setLayout(new GridLayout(8, 1));
 		add(titleLabel);
-		add(subtitleLabel);
+		// add(subtitleLabel);
 		add(nameField);
 		add(enterButton);
-		add(roomName);
-		add(roomMode);
-		add(roomUsers);
+		// add(roomName);
+		// add(roomMode);
+		// add(roomUsers);
 
-		enterButton.addActionListener(e -> joinRoomController.enterRoom(nameField.getText()));
+		enterButton.addActionListener(e -> loginController.login(nameField.getText()));
 	}
 }

@@ -34,7 +34,7 @@ public class ExportController {
 
 		if (result == JFileChooser.APPROVE_OPTION) {
 			File selectedFile = fileChooser.getSelectedFile();
-			ArrayList<Vote> votes = Repository.getInstance().getVotes();
+			ArrayList<Vote> votes = null; //Repository.getInstance().getVotes();
 
 			try (FileWriter writer = new FileWriter(selectedFile)) {
 

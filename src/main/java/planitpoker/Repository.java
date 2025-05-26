@@ -25,14 +25,8 @@ public class Repository extends PropertyChangeSupport{
 	}
 	
 	// users
-	private Room currentRoom = new Room("TESTING ROOM", "Scrum");
-	private User currentUser = new User("John Doe");
-	
-	// stories
-	private ArrayList<String> names = new ArrayList<>();
-	private ArrayList<String> stories = new ArrayList<>();
-	private String[] modeOptions = {"Scrum", "Fibonacci", "Sequential", "Hours", "T-shirt", "Custom deck"};
-
+	private User currentUser = null; 
+	private Room currentRoom = null; 
 	
 	// testing code for export logic
 	private static ArrayList<Vote> votes = new ArrayList<>(List.of(new Vote("Testing", "this is a testing vote that should be the default", 4.5)));
@@ -44,14 +38,9 @@ public class Repository extends PropertyChangeSupport{
 		return publishItem;
 	}
 
-
-
-	public void addName(String name) { names.add(name); }
-	public void addStory(String story) { stories.add(story); }
-	public void setCurrentRoom (Room room) { currentRoom = room; }
-	public void setCurrentUser (User user) { currentUser = user; }
-	public String[] getModeOptions() { return modeOptions; }
-	public ArrayList<Vote> getVotes() { return votes; }
-	public Room getCurrentRoom() { return currentRoom; }
 	public User getCurrentUser() { return currentUser; }
+	public void setCurrentUser (User user) { currentUser = user; }
+
+	public Room getCurrentRoom() { return currentRoom; }
+	public void setCurrentRoom (Room room) { currentRoom = room; }
 }

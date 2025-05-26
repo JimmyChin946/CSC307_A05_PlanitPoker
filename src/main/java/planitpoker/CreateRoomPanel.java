@@ -28,7 +28,7 @@ public class CreateRoomPanel extends JPanel {
 		box2.setLayout(new GridLayout(1, 2));
 		JLabel modeLabel = new JLabel("Mode:");
 		box2.add(modeLabel);
-		String[] options = Repository.getInstance().getModeOptions();
+		String[] options = null; // Repository.getInstance().getModeOptions();
 		JComboBox<String> comboBox = new JComboBox<>(options);
 		box2.add(comboBox);
 		add(box2);
