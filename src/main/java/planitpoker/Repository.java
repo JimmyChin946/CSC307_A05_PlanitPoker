@@ -46,7 +46,4 @@ public class Repository extends PropertyChangeSupport{
 	}
 	
 	// ================================
-	// testing code for export logic
-	private static ArrayList<Vote> votes = new ArrayList<>(List.of(new Vote("Testing", "this is a testing vote that should be the default", 4.5)));
-
 }

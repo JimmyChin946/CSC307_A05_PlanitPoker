@@ -34,10 +34,9 @@ public class CreateRoomPanel extends JPanel {
 
 		JPanel box3 = new JPanel();
 		JButton createButton = new JButton("Create");
+		createButton.addActionListener(e -> createRoomController.createRoom(nameField.getText(), (String) comboBox.getSelectedItem()));
 		box3.add(createButton);
 		add(box3);
-
-		createButton.addActionListener(e -> createRoomController.createRoom(nameField.getText(), (String) comboBox.getSelectedItem()));
 	}
 }
 
