@@ -10,10 +10,15 @@ import java.beans.*;
  * @author Jude Shin 
  */
 public class Repository extends PropertyChangeSupport{
+	// var def
 	private static Repository instance;
-
+	private User currentUser = null; 
+	private Room currentRoom = null; 
+	private final String[] votingMethodNames = {"Sequential", "Fibonacci"};;
+	private final Double[][] votingMethodNumbers = {{0.0, 1.0, 2.0, 3.0, 4.0, 5.0, 6.0}, {0.0, 0.5, 1.0, 2.0, 3.0, 5.0, 8.0}};;
 	private Queue<PublishItem> publishQueue;
-
+	
+	// singleton
 	private Repository() {
 		super(new Object());
 		publishQueue = new LinkedBlockingQueue<>();
@@ -24,23 +29,24 @@ public class Repository extends PropertyChangeSupport{
 		return instance;
 	}
 	
-	// users
-	private User currentUser = null; 
-	private Room currentRoom = null; 
 	
-	// testing code for export logic
-	private static ArrayList<Vote> votes = new ArrayList<>(List.of(new Vote("Testing", "this is a testing vote that should be the default", 4.5)));
-
 	// gettters and setters
+	public User getCurrentUser() { return currentUser; }
+	public void setCurrentUser (User user) { currentUser = user; }
+	public Room getCurrentRoom() { return currentRoom; }
+	public void setCurrentRoom (Room room) { currentRoom = room; }
+
+	public String[] getVotingMethodNames() { return votingMethodNames; }
+	public Double[][] getVotingMethodNumbers() { return votingMethodNumbers; }
+
 	public void pushPublishQueue(PublishItem publishItem) { publishQueue.offer(publishItem); }
 	public PublishItem popPublishQueue() {
 		PublishItem publishItem = publishQueue.poll();
 		return publishItem;
 	}
+	
+	// ================================
+	// testing code for export logic
+	private static ArrayList<Vote> votes = new ArrayList<>(List.of(new Vote("Testing", "this is a testing vote that should be the default", 4.5)));
 
-	public User getCurrentUser() { return currentUser; }
-	public void setCurrentUser (User user) { currentUser = user; }
-
-	public Room getCurrentRoom() { return currentRoom; }
-	public void setCurrentRoom (Room room) { currentRoom = room; }
 }

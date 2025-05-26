@@ -9,7 +9,6 @@ import java.awt.*;
  * @author Jude Shin 
  */
 public class CreateRoomPanel extends JPanel {
-	
 	public CreateRoomPanel(CreateRoomController createRoomController) {
 		setLayout(new GridLayout(4, 1));
 		JLabel title = new JLabel("Create new Room");
@@ -28,7 +27,7 @@ public class CreateRoomPanel extends JPanel {
 		box2.setLayout(new GridLayout(1, 2));
 		JLabel modeLabel = new JLabel("Mode:");
 		box2.add(modeLabel);
-		String[] options = null; // Repository.getInstance().getModeOptions();
+		String[] options = Repository.getInstance().getVotingMethodNames(); 
 		JComboBox<String> comboBox = new JComboBox<>(options);
 		box2.add(comboBox);
 		add(box2);
