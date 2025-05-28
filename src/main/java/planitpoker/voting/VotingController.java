@@ -7,7 +7,7 @@ import planitpoker.Main;
 import planitpoker.Repository;
 
 /**
- * Controller for the CreateRoomPanel
+ * Controller for the VotingPanel 
  *
  * @author Nathan Lackie
  */

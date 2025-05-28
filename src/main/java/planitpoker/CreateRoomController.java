@@ -1,9 +1,5 @@
 package planitpoker;
 
-import java.util.*;
-import java.util.Base64;
-import java.util.Random;
-
 /**
  * Controller for the CreateRoomPanel
  *
@@ -23,13 +19,13 @@ public class CreateRoomController {
 		// all other clients will be voting on this TOPIC
 		// people will share that TOPIC code manually
 		System.out.println(" Creating room..." + name + ", mode: " + selectedItem);
-		Room room = new Room(name, selectedItem);
-		Repository.getInstance().setCurrentRoom(room);
+		// Room room = new Room(name, selectedItem);
+		// Repository.getInstance().setCurrentRoom(room);
 		switchGUI();
 	}
 	
 	private void switchGUI() {
-		main.setTitle("Stories");
+		main.setTitle("Create Room");
 		RoomPanel roomPanel = new RoomPanel(main);
 		main.setContentPane(roomPanel);
 		main.revalidate();
