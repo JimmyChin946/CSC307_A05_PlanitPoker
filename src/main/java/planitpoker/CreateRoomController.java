@@ -30,9 +30,8 @@ public class CreateRoomController {
 	
 	private void switchGUI() {
 		main.setTitle("Stories");
-		StoriesController storiesController = new StoriesController(main);
-		StoriesPanel storiesPanel = new StoriesPanel(storiesController);
-		main.setContentPane(storiesPanel);
+		RoomPanel roomPanel = new RoomPanel(main);
+		main.setContentPane(roomPanel);
 		main.revalidate();
 		main.repaint();
 	}

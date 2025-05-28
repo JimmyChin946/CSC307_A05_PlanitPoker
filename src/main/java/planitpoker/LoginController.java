@@ -10,6 +10,7 @@ import javax.swing.*;
 public class LoginController {
 
 	private Main main;
+	private RoomModel roomModel = RoomModel.getInstance();
 
 	public LoginController(Main main) {
 		this.main = main;
@@ -19,6 +20,7 @@ public class LoginController {
 		System.out.println("loging in " + name + "...");
 		User user = new User(name);
 		Repository.getInstance().setCurrentUser(user);
+		roomModel.addUser(user, false);
 		switchGUI();
 	}
 
