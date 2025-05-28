@@ -1,4 +1,4 @@
-package planitpoker;
+package planitpoker.mqtt;
 
 import java.io.*;
 

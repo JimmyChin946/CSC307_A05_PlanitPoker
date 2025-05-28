@@ -1,9 +1,11 @@
-package planitpoker;
+package planitpoker.mqtt;
 
 import org.eclipse.paho.client.mqttv3.MqttClient;
 import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
-import java.util.Arrays; 
+import java.util.Arrays;
+
+import planitpoker.*;
 
 /**
  * Publishes data to the cloud with mqtt 

@@ -4,6 +4,8 @@ import java.util.*;
 import java.util.concurrent.*;
 import java.beans.*;
 
+import planitpoker.mqtt.PublishItem;
+
 /**
  * Singleton Data Repository for all the information that is being stored in our program
  *

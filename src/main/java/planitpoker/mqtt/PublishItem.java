@@ -1,4 +1,4 @@
-package planitpoker;
+package planitpoker.mqtt;
 
 /**
  * A datastructure to hold a "message"
@@ -8,7 +8,7 @@ package planitpoker;
  * @author Jude Shin
  *
  */
-class PublishItem {
+public class PublishItem {
 	private final String subTopic;
 	private final byte[] message; 
 

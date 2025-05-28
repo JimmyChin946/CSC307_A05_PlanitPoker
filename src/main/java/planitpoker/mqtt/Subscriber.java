@@ -1,4 +1,4 @@
-package org.pong;
+package planitpoker.mqtt;
 
 import java.util.ArrayList;
 import org.eclipse.paho.client.mqttv3.*;
