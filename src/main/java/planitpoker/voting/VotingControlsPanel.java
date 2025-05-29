@@ -29,6 +29,7 @@ public class VotingControlsPanel extends JPanel implements PropertyChangeListene
     private void votingNotStartedUI() {
         JButton startButton = new JButton("Start voting");
         startButton.addActionListener(e -> votingController.startVoting());
+        startButton.setAlignmentX(JComponent.CENTER_ALIGNMENT);
         add(startButton);
     }
 
@@ -38,6 +39,7 @@ public class VotingControlsPanel extends JPanel implements PropertyChangeListene
         if (timeLeft != null) {
             String timerString = String.format("%02d:%02d", timeLeft.toMinutesPart(), timeLeft.toSecondsPart());
             JLabel timer = new JLabel(timerString);
+            timer.setAlignmentX(JComponent.CENTER_ALIGNMENT);
             add(timer);
         }
 

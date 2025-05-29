@@ -16,7 +16,7 @@ public class VotingController {
 	private VotingModel votingModel = VotingModel.getInstance();
 	private Repository repository = Repository.getInstance();
 
-	private Timer votingTimer = new Timer();
+	private Timer votingTimer;
 
 	public VotingController(Main main) {
 		this.main = main;
@@ -29,6 +29,7 @@ public class VotingController {
 
 		votingModel.setTimeLeft(Duration.ofSeconds(30), false);
 		// TODO: only do this if host
+		votingTimer = new Timer();
 		votingTimer.schedule(new CountDown(), 0, 1000);
 	}
 

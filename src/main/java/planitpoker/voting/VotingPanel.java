@@ -1,5 +1,6 @@
 package planitpoker.voting;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.*;
@@ -15,6 +16,8 @@ public class VotingPanel extends JPanel {
 
 	public VotingPanel(VotingController votingController) {
 		super();
+
+		setLayout(new GridLayout(1, 2));
 
 		cards = new CardsPanel(votingController, new ArrayList<>(List.of(1, 2, 3, 4)));
 		add(cards);
