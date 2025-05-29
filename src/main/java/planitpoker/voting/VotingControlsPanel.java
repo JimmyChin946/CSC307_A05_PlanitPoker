@@ -5,13 +5,13 @@ import java.beans.PropertyChangeListener;
 import java.time.Duration;
 import java.util.HashMap;
 import javax.swing.*;
-import planitpoker.RoomModel;
 import planitpoker.User;
+import planitpoker.Repository;
 
 public class VotingControlsPanel extends JPanel implements PropertyChangeListener {
     VotingController votingController;
     VotingModel votingModel = VotingModel.getInstance();
-    RoomModel roomModel = RoomModel.getInstance();
+		Repository repository = Repository.getInstance();
 
     public VotingControlsPanel(VotingController votingController) {
         super();
@@ -42,7 +42,7 @@ public class VotingControlsPanel extends JPanel implements PropertyChangeListene
         }
 
         HashMap<User, Double> votes = votingModel.getVotes();
-        for (User user : roomModel.getUsers()) {
+        for (User user : repository.getUsers()) {
             add(new JLabel(user.getName() + ": " + votes.get(user)));
         }
     }

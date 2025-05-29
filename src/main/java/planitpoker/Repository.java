@@ -19,17 +19,27 @@ import planitpoker.mqtt.*;
  */
 public class Repository extends PropertyChangeSupport{
 	private static Repository instance;
-	private User currentUser; // could be final?
-	// private Room currentRoom = null; // TODO : put this in the singleton? 
+
+	private User currentUser; 
+
+	private ArrayList<User> users;
+	private Story activeStory;
+	private String currentRoomName;
+
 	public enum Type { HOST, CLIENT }
-	private Type type; // could be final?
+	private Type type; 
+
 	private final String[] votingMethodNames = {"Sequential", "Fibonacci"};;
-	private final Double[][] votingMethodNumbers = {{0.0, 1.0, 2.0, 3.0, 4.0, 5.0, 6.0}, {0.0, 0.5, 1.0, 2.0, 3.0, 5.0, 8.0}};;
+	private final Double[][] votingMethodNumbers = {{0.0, 1.0, 2.0, 3.0, 4.0, 5.0, 6.0}, {0.0, 0.5, 1.0, 2.0, 3.0, 5.0, 8.0}};
+
 	private Queue<PublishItem> publishQueue;
 	
-	// singleton
 	private Repository() {
 		super(new Object());
+		currentUser = null;
+		users = new ArrayList<User>();
+		activeStory = null;
+		currentRoomName = null;
 		publishQueue = new LinkedBlockingQueue<>();
 	};
 
@@ -38,17 +48,15 @@ public class Repository extends PropertyChangeSupport{
 		return instance;
 	}
 	
-	// gettters and setters
 	public User getCurrentUser() { return currentUser; }
-	public void setCurrentUser (User currentUser, boolean isSilent) throws IOException{
+	public void setCurrentUser (User currentUser, boolean isSilent) throws IOException {
 		this.currentUser = currentUser; 
 		if (!isSilent) { 
 			PublishItem publishItem = new PublishItem("currentUser", ByteConverter.toBytes(currentUser), 0);
 			pushPublishQueue(publishItem); 
 		}
 	}
-	// public Room getCurrentRoom() { return currentRoom; }
-	// public void setCurrentRoom (Room room) { currentRoom = room; }
+
 	public Type getType() { return type; }
 	public void setType(Type type, boolean isSilent) throws IOException {
 		this.type = type; 
@@ -57,6 +65,48 @@ public class Repository extends PropertyChangeSupport{
 			pushPublishQueue(publishItem); 
 		}
 	}
+
+	public ArrayList<User> getUsers() { return users; }
+	public void setUsers(ArrayList<User> users, boolean isSilent) throws IOException { 
+		this.users = users;
+		if (!isSilent) { 
+			PublishItem publishItem = new PublishItem("users", ByteConverter.toBytes(users), 0);
+			pushPublishQueue(publishItem); 
+		}
+	}
+	public void addUser(ArrayList<User> users, boolean isSilent) throws IOException { 
+		this.users.addAll(users);
+		if (!isSilent) { 
+			PublishItem publishItem = new PublishItem("users", ByteConverter.toBytes(users), 0);
+			pushPublishQueue(publishItem); 
+		}
+	}
+	public void addUser(User user, boolean isSilent) throws IOException { 
+		this.users.add(user);
+		if (!isSilent) { 
+			PublishItem publishItem = new PublishItem("users", ByteConverter.toBytes(users), 0); 
+			pushPublishQueue(publishItem); 
+		}
+	}
+	
+	public Story getActiveStory() { return activeStory; }
+	public void setActiveStory(Story story, boolean isSilent) throws IOException { 
+		this.activeStory = story;
+		if (!isSilent) { 
+			PublishItem publishItem = new PublishItem("story", ByteConverter.toBytes(activeStory), 0);
+			pushPublishQueue(publishItem); 
+		}
+	}
+
+	public String getCurrentRoomName() { return currentRoomName; }
+	public void setCurrentRoomName(String roomName, boolean isSilent) throws IOException {
+		this.currentRoomName = roomName;
+		if (!isSilent) { 
+			PublishItem publishItem = new PublishItem("currentRoomName", ByteConverter.toBytes(currentRoomName), 0);
+			pushPublishQueue(publishItem); 
+		}
+	}
+
 
 	public String[] getVotingMethodNames() { return votingMethodNames; }
 	public Double[][] getVotingMethodNumbers() { return votingMethodNumbers; }
