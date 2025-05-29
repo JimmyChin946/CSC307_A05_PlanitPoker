@@ -4,6 +4,7 @@ import java.util.*;
 import java.util.concurrent.*;
 import java.beans.*;
 import java.io.*;
+import java.time.Duration;
 
 import planitpoker.mqtt.*;
 
@@ -17,7 +18,7 @@ import planitpoker.mqtt.*;
  *
  * @author Jude Shin 
  */
-public class Repository extends PropertyChangeSupport{
+public class Repository extends PropertyChangeSupport {
 	private static Repository instance;
 
 	private User currentUser; 
@@ -31,6 +32,9 @@ public class Repository extends PropertyChangeSupport{
 	public ArrayList<Story> getStories() {
 		return stories;
 	}
+	private boolean votingStarted = false;
+	private Duration timeLeft;
+	HashMap<User, Double> votes = new HashMap<>();
 
 	public enum Type { HOST, CLIENT }
 	private Type type; 
@@ -75,11 +79,11 @@ public class Repository extends PropertyChangeSupport{
 	public Type getType() { return type; }
 	public void setType(Type type, boolean isSilent) {
 		try {
-		this.type = type; 
-		if (!isSilent) { 
-			PublishItem publishItem = new PublishItem("type", ByteConverter.toBytes(currentUser), 0);
-			pushPublishQueue(publishItem); 
-		}
+			this.type = type; 
+			if (!isSilent) { 
+				PublishItem publishItem = new PublishItem("type", ByteConverter.toBytes(currentUser), 0);
+				pushPublishQueue(publishItem); 
+			}
 		} catch (IOException e) {
 			System.out.println("Error in Repository: " + e);
 		}
@@ -88,46 +92,46 @@ public class Repository extends PropertyChangeSupport{
 	public ArrayList<User> getUsers() { return users; }
 	public void setUsers(ArrayList<User> users, boolean isSilent) { 
 		try {
-		this.users = users;
-		if (!isSilent) { 
-			PublishItem publishItem = new PublishItem("users", ByteConverter.toBytes(users), 0);
-			pushPublishQueue(publishItem); 
-		}
+			this.users = users;
+			if (!isSilent) { 
+				PublishItem publishItem = new PublishItem("users", ByteConverter.toBytes(users), 0);
+				pushPublishQueue(publishItem); 
+			}
 		} catch (IOException e) {
 			System.out.println("Error in Repository: " + e);
 		}
 	}
 	public void addUser(ArrayList<User> users, boolean isSilent) { 
 		try {
-		this.users.addAll(users);
-		if (!isSilent) { 
-			PublishItem publishItem = new PublishItem("users", ByteConverter.toBytes(users), 0);
-			pushPublishQueue(publishItem); 
-		}
+			this.users.addAll(users);
+			if (!isSilent) { 
+				PublishItem publishItem = new PublishItem("users", ByteConverter.toBytes(users), 0);
+				pushPublishQueue(publishItem); 
+			}
 		} catch (IOException e) {
 			System.out.println("Error in Repository: " + e);
 		}
 	}
 	public void addUser(User user, boolean isSilent) { 
 		try {
-		this.users.add(user);
-		if (!isSilent) { 
-			PublishItem publishItem = new PublishItem("users", ByteConverter.toBytes(users), 0); 
-			pushPublishQueue(publishItem); 
-		}
+			this.users.add(user);
+			if (!isSilent) { 
+				PublishItem publishItem = new PublishItem("users", ByteConverter.toBytes(users), 0); 
+				pushPublishQueue(publishItem); 
+			}
 		} catch (IOException e) {
 			System.out.println("Error in Repository: " + e);
 		}
 	}
-	
+
 	public Story getActiveStory() { return activeStory; }
 	public void setActiveStory(Story story, boolean isSilent) { 
 		try {
-		this.activeStory = story;
-		if (!isSilent) { 
-			PublishItem publishItem = new PublishItem("story", ByteConverter.toBytes(activeStory), 0);
-			pushPublishQueue(publishItem); 
-		}
+			this.activeStory = story;
+			if (!isSilent) { 
+				PublishItem publishItem = new PublishItem("story", ByteConverter.toBytes(activeStory), 0);
+				pushPublishQueue(publishItem); 
+			}
 		} catch (IOException e) {
 			System.out.println("Error in Repository: " + e);
 		}
@@ -136,15 +140,58 @@ public class Repository extends PropertyChangeSupport{
 	public String getCurrentRoomName() { return currentRoomName; }
 	public void setCurrentRoomName(String roomName, boolean isSilent) {
 		try {
-		this.currentRoomName = roomName;
-		if (!isSilent) { 
-			PublishItem publishItem = new PublishItem("currentRoomName", ByteConverter.toBytes(currentRoomName), 0);
-			pushPublishQueue(publishItem); 
-		}
+			this.currentRoomName = roomName;
+			if (!isSilent) { 
+				PublishItem publishItem = new PublishItem("currentRoomName", ByteConverter.toBytes(currentRoomName), 0);
+				pushPublishQueue(publishItem); 
+			}
 		} catch (IOException e) {
 			System.out.println("Error in Repository: " + e);
 		}
 	}
+
+	public Duration getTimeLeft() { return timeLeft; }
+	public void setTimeLeft(Duration timeLeft, boolean isSilent) {
+		try {
+			this.timeLeft = timeLeft;
+			if (!isSilent) { 
+				PublishItem publishItem = new PublishItem("timeLeft", ByteConverter.toBytes(timeLeft), 0);
+				pushPublishQueue(publishItem); 
+			}
+			// firePropertyChange("timeLeft", null, this.timeLeft);
+		} catch (IOException e) {
+			System.out.println("Error in Repository: " + e);
+		}
+	}
+
+	public boolean getVotingStarted() { return votingStarted; }
+	public void setVotingStarted(boolean votingStarted, boolean isSilent) {
+		try {
+			this.votingStarted = votingStarted;
+			if (!isSilent) { 
+				PublishItem publishItem = new PublishItem("votingStarted", ByteConverter.toBytes(votingStarted), 0);
+				pushPublishQueue(publishItem); 
+			}
+			// firePropertyChange("votingStarted", null, this.votingStarted);
+		} catch (IOException e) {
+			System.out.println("Error in Repository: " + e);
+		}
+	}
+
+	public HashMap<User, Double> getVotes() { return votes; }
+	public void addVote(User user, double score, boolean isSilent) {
+		try {
+			this.votes.put(user, score);
+			if (!isSilent) { 
+				PublishItem publishItem = new PublishItem("votes", ByteConverter.toBytes(votes), 0);
+				pushPublishQueue(publishItem); 
+			}
+			// firePropertyChange("votes", null, votes);
+		} catch (IOException e) {
+			System.out.println("Error in Repository: " + e);
+		}
+	}
+
 
 
 	public String[] getVotingMethodNames() { return votingMethodNames; }
