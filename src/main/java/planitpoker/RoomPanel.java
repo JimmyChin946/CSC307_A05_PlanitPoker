@@ -20,7 +20,7 @@ public class RoomPanel extends JPanel {
         VotingController votingController = new VotingController(main);
         add(new VotingPanel(votingController));
 
-        StoriesController storiesController = new StoriesController(main);
-        add(new StoriesPanel(storiesController));
+        CreateStoryController createStoryController = new CreateStoryController(main);
+        add(new StoriesPanel(createStoryController));
     }
 }

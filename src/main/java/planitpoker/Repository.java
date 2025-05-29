@@ -26,6 +26,12 @@ public class Repository extends PropertyChangeSupport{
 	private Story activeStory;
 	private String currentRoomName;
 
+	private ArrayList<Story> stories = new ArrayList<>();
+
+	public ArrayList<Story> getStories() {
+		return stories;
+	}
+
 	public enum Type { HOST, CLIENT }
 	private Type type; 
 
@@ -42,6 +48,11 @@ public class Repository extends PropertyChangeSupport{
 		currentRoomName = null;
 		publishQueue = new LinkedBlockingQueue<>();
 	};
+
+	public void addStory(Story story) {
+		stories.add(story);
+		firePropertyChange("stories", null, stories);
+	}
 
 	public static Repository getInstance() {
 		if (instance == null) { instance = new Repository(); }

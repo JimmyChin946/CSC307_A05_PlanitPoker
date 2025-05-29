@@ -10,15 +10,18 @@ import javax.swing.*;
  */
 public class Main extends JFrame {
 	public Main() {
+		// ----- Stories -----
+		// showStoriesOverlay();
+
 		// ----- Login -----
-		LoginController loginController = new LoginController(this);
-		LoginPanel loginPanel = new LoginPanel(loginController);
-		add(loginPanel);
+//		LoginController loginController = new LoginController(this);
+//		LoginPanel loginPanel = new LoginPanel(loginController);
+//		add(loginPanel);
 
 		// // ----- CreateRoom -----
-		// CreateRoomController createRoomController = new CreateRoomController(this);
-		// CreateRoomPanel createRoomPanel = new CreateRoomPanel(createRoomController);
-		// add(createRoomPanel);
+		 CreateRoomController createRoomController = new CreateRoomController(this);
+		 CreateRoomPanel createRoomPanel = new CreateRoomPanel(createRoomController);
+		 add(createRoomPanel);
 
 		// // ----- Export -----
 		// ExportController exportController = new ExportController(this);
@@ -44,5 +47,15 @@ public class Main extends JFrame {
 		// exportTestMain.setSize(400, 400);
 		// exportTestMain.setLocationRelativeTo(null);
 		// exportTestMain.setVisible(true);
+	}
+
+	public void showStoriesOverlay() {
+		JDialog overlay = new JDialog(this, "Create New Story", true);
+		CreateStoryController controller = new CreateStoryController(this);
+		CreateStoryPanel panel = new CreateStoryPanel(controller, overlay);
+		overlay.setContentPane(panel);
+		overlay.setSize(400, 400);
+		overlay.setLocationRelativeTo(this);
+		overlay.setVisible(true);
 	}
 }
