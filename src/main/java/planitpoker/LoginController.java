@@ -1,6 +1,7 @@
 package planitpoker;
 
 import javax.swing.*;
+import java.io.IOException;
 
 /**
  * Controller for the Login Panel
@@ -10,7 +11,6 @@ import javax.swing.*;
 public class LoginController {
 
 	private Main main;
-	private RoomModel roomModel = RoomModel.getInstance();
 
 	public LoginController(Main main) {
 		this.main = main;
@@ -19,8 +19,8 @@ public class LoginController {
 	public void login(String name) {
 		System.out.println("loging in " + name + "...");
 		User user = new User(name);
-		Repository.getInstance().setCurrentUser(user);
-		roomModel.addUser(user, false);
+		Repository.getInstance().setCurrentUser(user, false);
+		Repository.getInstance().addUser(user, false);
 		switchGUI();
 	}
 
