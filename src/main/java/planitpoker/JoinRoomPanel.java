@@ -25,7 +25,7 @@ public class JoinRoomPanel extends JPanel {
 
 		JPanel box2 = new JPanel();
 		JButton joinButton = new JButton("Join");
-		joinButton.addActionListener(e -> joinRoomController.createRoom(nameField.getText()));
+		joinButton.addActionListener(e -> joinRoomController.joinRoom(nameField.getText()));
 		box2.add(joinButton);
 		add(box2);
 	}

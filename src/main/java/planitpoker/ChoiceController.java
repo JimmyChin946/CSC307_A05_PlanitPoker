@@ -16,7 +16,10 @@ public class ChoiceController{
 	
 	public void chooseJoinRoom() {
 		main.setTitle("Join Room");
-		System.out.println("JOIN ROOM NOT IMPLEMENTED YET");
+		// System.out.println("JOIN ROOM NOT IMPLEMENTED YET");
+		JoinRoomController joinRoomController = new JoinRoomController(main);
+		JoinRoomPanel joinRoomPanel = new JoinRoomPanel(joinRoomController);
+		main.setContentPane(joinRoomPanel);
 		switchGUI();
 	}
 

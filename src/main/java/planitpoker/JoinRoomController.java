@@ -13,7 +13,7 @@ public class JoinRoomController{
 		this.main = main;
 	}
 	
-	public void joinRoom(String name, String selectedItem) {
+	public void joinRoom(String name) {
 		System.out.println(" Joining a room..." + name);
 		switchGUI();
 	}
