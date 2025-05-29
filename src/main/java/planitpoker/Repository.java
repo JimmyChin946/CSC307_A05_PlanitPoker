@@ -27,14 +27,11 @@ public class Repository extends PropertyChangeSupport {
 	private Story activeStory;
 	private String currentRoomName;
 
-	private ArrayList<Story> stories = new ArrayList<>();
-
-	public ArrayList<Story> getStories() {
-		return stories;
-	}
 	private boolean votingStarted = false;
 	private Duration timeLeft;
 	HashMap<User, Double> votes = new HashMap<>();
+
+	private ArrayList<Story> stories = new ArrayList<>();
 
 	public enum Type { HOST, CLIENT }
 	private Type type; 
@@ -53,10 +50,6 @@ public class Repository extends PropertyChangeSupport {
 		publishQueue = new LinkedBlockingQueue<>();
 	};
 
-	public void addStory(Story story) {
-		stories.add(story);
-		firePropertyChange("stories", null, stories);
-	}
 
 	public static Repository getInstance() {
 		if (instance == null) { instance = new Repository(); }
@@ -191,6 +184,33 @@ public class Repository extends PropertyChangeSupport {
 			System.out.println("Error in Repository: " + e);
 		}
 	}
+
+	public ArrayList<Story> getStories() { return stories; }
+	public void setStories(ArrayList<Story> stories, boolean isSilent) { 
+		try {
+			this.stories = stories;
+			if (!isSilent) { 
+				PublishItem publishItem = new PublishItem("stories", ByteConverter.toBytes(stories), 0);
+				pushPublishQueue(publishItem); 
+			}
+			firePropertyChange("stories", null, stories);
+		} catch (IOException e) {
+			System.out.println("Error in Repository: " + e);
+		}
+	}
+	public void addStory(Story story, boolean isSilent) { 
+		try {
+			this.stories.add(story);
+			if (!isSilent) { 
+				PublishItem publishItem = new PublishItem("stories", ByteConverter.toBytes(stories), 0);
+				pushPublishQueue(publishItem); 
+			}
+			firePropertyChange("stories", null, stories);
+		} catch (IOException e) {
+			System.out.println("Error in Repository: " + e);
+		}
+	}
+
 
 
 
