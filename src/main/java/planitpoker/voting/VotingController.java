@@ -13,8 +13,6 @@ import planitpoker.Repository;
  */
 public class VotingController {
 	private Main main;
-	private VotingModel votingModel = VotingModel.getInstance();
-	private Repository repository = Repository.getInstance();
 
 	private Timer votingTimer;
 
@@ -23,31 +21,31 @@ public class VotingController {
 	}
 
 	public void startVoting() {
-		if (votingModel.isVotingStarted()) return;
+		if (Repository.getInstance().getVotingStarted()) return;
 
-		votingModel.setVotingStarted(true, false);
+		Repository.getInstance().setVotingStarted(true, false);
 
-		votingModel.setTimeLeft(Duration.ofSeconds(30), false);
+		Repository.getInstance().setTimeLeft(Duration.ofSeconds(30), false);
 		// TODO: only do this if host
 		votingTimer = new Timer();
 		votingTimer.schedule(new CountDown(), 0, 1000);
 	}
 
 	public void vote(double score) {
-		if (votingModel.isVotingStarted()) {
-			this.votingModel.addVote(repository.getCurrentUser(), score, false);
+		if (Repository.getInstance().getVotingStarted()) {
+			Repository.getInstance().addVote(Repository.getInstance().getCurrentUser(), score, false);
 		}
 	}
 
 	protected class CountDown extends TimerTask {
 		@Override
 		public void run() {
-			Duration timeLeft = votingModel.getTimeLeft();
+			Duration timeLeft = Repository.getInstance().getTimeLeft();
 			if (timeLeft.isPositive()) {
-				votingModel.setTimeLeft(timeLeft.minus(Duration.ofSeconds(1)), false);
+				Repository.getInstance().setTimeLeft(timeLeft.minus(Duration.ofSeconds(1)), false);
 			} else {
-				votingModel.setTimeLeft(Duration.ZERO, false);
-				votingModel.setVotingStarted(false, true);
+				Repository.getInstance().setTimeLeft(Duration.ZERO, false);
+				Repository.getInstance().setVotingStarted(false, true);
 				votingTimer.cancel();
 			}
 		}

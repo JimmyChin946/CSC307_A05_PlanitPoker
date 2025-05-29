@@ -10,8 +10,6 @@ import planitpoker.Repository;
 
 public class VotingControlsPanel extends JPanel implements PropertyChangeListener {
     VotingController votingController;
-    VotingModel votingModel = VotingModel.getInstance();
-		Repository repository = Repository.getInstance();
 
     public VotingControlsPanel(VotingController votingController) {
         super();
@@ -20,8 +18,8 @@ public class VotingControlsPanel extends JPanel implements PropertyChangeListene
 
         this.votingController = votingController;
 
-        votingModel.addPropertyChangeListener("votingStarted", this);
-        votingModel.addPropertyChangeListener("timeLeft", this);
+        Repository.getInstance().addPropertyChangeListener("votingStarted", this);
+        Repository.getInstance().addPropertyChangeListener("timeLeft", this);
 
         votingNotStartedUI();
     }
@@ -35,7 +33,7 @@ public class VotingControlsPanel extends JPanel implements PropertyChangeListene
 
     private void votingStartedUI() {
         // TODO: add buttons for when voting has been started
-        Duration timeLeft = votingModel.getTimeLeft();
+        Duration timeLeft = Repository.getInstance().getTimeLeft();
         if (timeLeft != null) {
             String timerString = String.format("%02d:%02d", timeLeft.toMinutesPart(), timeLeft.toSecondsPart());
             JLabel timer = new JLabel(timerString);
@@ -43,8 +41,8 @@ public class VotingControlsPanel extends JPanel implements PropertyChangeListene
             add(timer);
         }
 
-        HashMap<User, Double> votes = votingModel.getVotes();
-        for (User user : repository.getUsers()) {
+        HashMap<User, Double> votes = Repository.getInstance().getVotes();
+        for (User user : Repository.getInstance().getUsers()) {
             add(new JLabel(user.getName() + ": " + votes.get(user)));
         }
     }
@@ -52,7 +50,7 @@ public class VotingControlsPanel extends JPanel implements PropertyChangeListene
     @Override
     public void propertyChange(PropertyChangeEvent propertyChangeEvent) {
         removeAll();
-        if (votingModel.isVotingStarted()) {;
+        if (Repository.getInstance().getVotingStarted()) {;
             votingStartedUI();
         } else {
             votingNotStartedUI();
