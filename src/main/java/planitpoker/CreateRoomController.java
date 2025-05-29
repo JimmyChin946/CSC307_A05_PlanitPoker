@@ -25,7 +25,7 @@ public class CreateRoomController {
 	}
 	
 	private void switchGUI() {
-		main.setTitle("Create Room");
+		main.setTitle("Room");
 		RoomPanel roomPanel = new RoomPanel(main);
 		main.setContentPane(roomPanel);
 		main.revalidate();
