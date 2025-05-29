@@ -37,10 +37,11 @@ public class Publisher implements Runnable {
 
 				byte[] content = publishItem.getMessage();
 				String subTopic = publishItem.getSubTopic();
-				String fullTopic = topic + "/" + subTopic;
+				int qos = publishItem.getQos();
 
+				String fullTopic = topic + "/" + subTopic;
 				MqttMessage message = new MqttMessage(content);
-				message.setQos(0); 
+				message.setQos(qos); 
 
 				if (client.isConnected()) {
 					client.publish(fullTopic, message);
