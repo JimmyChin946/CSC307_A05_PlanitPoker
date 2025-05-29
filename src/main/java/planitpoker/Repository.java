@@ -3,8 +3,14 @@ package planitpoker;
 import java.util.*;
 import java.util.concurrent.*;
 import java.beans.*;
+import java.io.*;
 
-import planitpoker.mqtt.PublishItem;
+import planitpoker.mqtt.*;
+
+/**
+ * Singleton Data Repository for all the information that is being stored in our program
+ *
+ * @author Jude Shin 
 
 /**
  * Singleton Data Repository for all the information that is being stored in our program
@@ -32,14 +38,25 @@ public class Repository extends PropertyChangeSupport{
 		return instance;
 	}
 	
-	
 	// gettters and setters
 	public User getCurrentUser() { return currentUser; }
-	public void setCurrentUser (User user) { currentUser = user; }
+	public void setCurrentUser (User currentUser, boolean isSilent) throws IOException{
+		this.currentUser = currentUser; 
+		if (!isSilent) { 
+			PublishItem publishItem = new PublishItem("currentUser", ByteConverter.toBytes(currentUser), 0);
+			pushPublishQueue(publishItem); 
+		}
+	}
 	// public Room getCurrentRoom() { return currentRoom; }
 	// public void setCurrentRoom (Room room) { currentRoom = room; }
 	public Type getType() { return type; }
-	public void setType(Type type) { this.type = type; }
+	public void setType(Type type, boolean isSilent) throws IOException {
+		this.type = type; 
+		if (!isSilent) { 
+			PublishItem publishItem = new PublishItem("type", ByteConverter.toBytes(currentUser), 0);
+			pushPublishQueue(publishItem); 
+		}
+	}
 
 	public String[] getVotingMethodNames() { return votingMethodNames; }
 	public Double[][] getVotingMethodNumbers() { return votingMethodNumbers; }

@@ -9,7 +9,7 @@ import java.io.*;
  * @author Jude Shin
  *
  */
-class ByteConverter {
+public class ByteConverter {
 	private ByteConverter(){}
 	
 	public static byte[] toBytes(Object obj) throws IOException {
