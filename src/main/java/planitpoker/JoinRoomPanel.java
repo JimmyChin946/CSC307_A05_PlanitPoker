@@ -11,7 +11,7 @@ import java.awt.*;
 public class JoinRoomPanel extends JPanel {
 	public JoinRoomPanel(JoinRoomController joinRoomController) {
 		setLayout(new GridLayout(3, 1));
-		JLabel title = new JLabel("Create new Room");
+		JLabel title = new JLabel("Join an existing room");
 		title.setHorizontalAlignment(SwingConstants.CENTER);
 		add(title);
 
