@@ -25,10 +25,20 @@ public class VotingController {
 
 		Repository.getInstance().setVotingStarted(true, false);
 
-		Repository.getInstance().setTimeLeft(Duration.ofSeconds(30), false);
-		// TODO: only do this if host
+		Repository.getInstance().setTimeLeft(Duration.ZERO, false);
+
 		votingTimer = new Timer();
 		votingTimer.schedule(new CountDown(), 0, 1000);
+	}
+
+	public void stopVoting() {
+		if (!Repository.getInstance().getVotingStarted()) return;
+
+		Repository.getInstance().setVotingStarted(false, false);
+
+		votingTimer.cancel();
+
+		// TODO: calculate results and publish story
 	}
 
 	public void vote(double score) {
@@ -37,17 +47,11 @@ public class VotingController {
 		}
 	}
 
-	protected class CountDown extends TimerTask {
+	protected static class CountDown extends TimerTask {
 		@Override
 		public void run() {
 			Duration timeLeft = Repository.getInstance().getTimeLeft();
-			if (timeLeft.isPositive()) {
-				Repository.getInstance().setTimeLeft(timeLeft.minus(Duration.ofSeconds(1)), false);
-			} else {
-				Repository.getInstance().setTimeLeft(Duration.ZERO, false);
-				Repository.getInstance().setVotingStarted(false, true);
-				votingTimer.cancel();
-			}
+			Repository.getInstance().setTimeLeft(timeLeft.plus(Duration.ofSeconds(1)), false);
 		}
 	}
 }
