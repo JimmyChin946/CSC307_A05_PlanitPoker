@@ -1,9 +1,10 @@
 package planitpoker.mqtt;
 
-import java.util.ArrayList;
+import java.util.*;
 import org.eclipse.paho.client.mqttv3.*;
 import java.io.IOException;
-
+import java.time.Duration;
+import planitpoker.*;
 
 /**
  * Subscribes for the cloud based on a topic
@@ -36,8 +37,33 @@ public class Subscriber implements MqttCallback {
 		String[] topics = s.split("/");
 		String subTopic = topics[topics.length - 1];
 		
-		// ByteConverter.fromBytes(...)
-		// Repository.getInstance().setVaraible(...);
+		if (Repository.getInstance().getType() == Repository.Type.HOST) {
+			switch (subTopic) {
+				// votes on the currentStoryIndex 
+				case "votes":
+					HashMap<User, Double> votes = ByteConverter.fromBytes(bytes, HashMap.class);
+					Repository.getInstance().setVotes(votes, true);
+					break;
+			}
+		}
+		else {
+			switch (subTopic) {
+				// stories
+				case "stories":
+					ArrayList<Story> stories = ByteConverter.fromBytes(bytes, ArrayList.class);
+					Repository.getInstance().setStories(stories, true);
+					break;
+				// timeLeft 
+				case "timeLeft":
+					Duration timeLeft = ByteConverter.fromBytes(bytes, Duration.class);
+					Repository.getInstance().setTimeLeft(timeLeft, true);
+					break;
+				case "currentStoryIndex":
+					int currentStoryIndex = ByteConverter.fromBytes(bytes, Integer.class);
+					Repository.getInstance().setCurrentStoryIndex(currentStoryIndex, true);
+					break;
+			}
+		}
 	}
 
 	@Override

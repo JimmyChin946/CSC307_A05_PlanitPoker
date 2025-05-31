@@ -27,11 +27,12 @@ public class Repository extends PropertyChangeSupport {
 	private Story activeStory;
 	private String currentRoomName;
 
-	private boolean votingStarted = false;
+	private boolean votingStarted;
 	private Duration timeLeft;
-	HashMap<User, Double> votes = new HashMap<>();
+	HashMap<User, Double> votes;
+	private int currentStoryIndex;
 
-	private ArrayList<Story> stories = new ArrayList<>();
+	private ArrayList<Story> stories;
 
 	public enum Type { HOST, CLIENT }
 	private Type type; 
@@ -47,8 +48,12 @@ public class Repository extends PropertyChangeSupport {
 		users = new ArrayList<User>();
 		activeStory = null;
 		currentRoomName = null;
+		votingStarted = false;
+		votes = new HashMap<>();
+		currentStoryIndex = 0;
+		stories = new ArrayList<>();
 		publishQueue = new LinkedBlockingQueue<>();
-	};
+	}
 
 	public static Repository getInstance() {
 		if (instance == null) { instance = new Repository(); }
@@ -178,6 +183,18 @@ public class Repository extends PropertyChangeSupport {
 	}
 
 	public HashMap<User, Double> getVotes() { return votes; }
+	public void setVotes(HashMap<User, Double> votes, boolean isSilent) {
+		try {
+			this.votes = votes;	
+			if (!isSilent) { 
+				PublishItem publishItem = new PublishItem("votes", ByteConverter.toBytes(votes), 0);
+				pushPublishQueue(publishItem); 
+			}
+			firePropertyChange("votes", null, this.votes);
+		} catch (IOException e) {
+			System.out.println("Error in Repository: " + e);
+		}
+	}
 	public void addVote(User user, double score, boolean isSilent) {
 		try {
 			this.votes.put(user, score);
@@ -186,6 +203,20 @@ public class Repository extends PropertyChangeSupport {
 				pushPublishQueue(publishItem); 
 			}
 			firePropertyChange("votes", null, this.votes);
+		} catch (IOException e) {
+			System.out.println("Error in Repository: " + e);
+		}
+	}
+
+	public int getCurrentStoryIndex() { return currentStoryIndex; }
+	public void setCurrentStoryIndex(int storyIndex, boolean isSilent) {
+		try {
+			this.currentStoryIndex = storyIndex;
+			if (!isSilent) { 
+				PublishItem publishItem = new PublishItem("currentStoryIndex", ByteConverter.toBytes(currentStoryIndex), 0);
+				pushPublishQueue(publishItem); 
+			}
+			firePropertyChange("currentStoryIndex", null, this.stories);
 		} catch (IOException e) {
 			System.out.println("Error in Repository: " + e);
 		}
@@ -216,9 +247,6 @@ public class Repository extends PropertyChangeSupport {
 			System.out.println("Error in Repository: " + e);
 		}
 	}
-
-
-
 
 	public String[] getVotingMethodNames() { return votingMethodNames; }
 	public Double[][] getVotingMethodNumbers() { return votingMethodNumbers; }
