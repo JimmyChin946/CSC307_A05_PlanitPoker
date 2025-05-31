@@ -1,5 +1,6 @@
 package planitpoker;
 
+import java.io.Serializable;
 import java.util.*;
 
 /**
@@ -7,7 +8,7 @@ import java.util.*;
  *
  * @author Jude Shin 
  */
-public class Story {
+public class Story implements Serializable {
 	private String title;
 	private boolean active;
 	private ArrayList<Double> votes;

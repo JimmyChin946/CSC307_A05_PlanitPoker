@@ -1,5 +1,6 @@
 package planitpoker;
 
+import java.io.Serializable;
 import java.util.*;
 
 /**
@@ -7,7 +8,7 @@ import java.util.*;
  *
  * @author Jude Shin 
  */
-public class User {
+public class User implements Serializable {
 	private String name; // this will be the unique id
 
 	public User(String name) { this.name = name; }
