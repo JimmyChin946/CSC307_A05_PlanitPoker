@@ -29,7 +29,7 @@ public class LoginController {
 		switchGUI();
 	}
 
-	public void switchGUI() {
+	private void switchGUI() {
 		main.setTitle("Dashboard");
 		ChoiceController choiceController = new ChoiceController(main);
 		ChoicePanel choicePanel = new ChoicePanel(choiceController);
