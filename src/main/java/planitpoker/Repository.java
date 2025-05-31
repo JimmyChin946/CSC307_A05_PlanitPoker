@@ -258,4 +258,26 @@ public class Repository extends PropertyChangeSupport {
 	}
 	
 	// ================================
+
+	public void publishResults() { 
+		try {
+			PublishItem publishItem = new PublishItem("results", ByteConverter.toBytes(stories), 0);
+			pushPublishQueue(publishItem); 
+		} catch (IOException e) {
+			System.out.println("Error in Repository: " + e);
+		}
+	}
+
+	public void publishInit() { 
+		try {
+			// TODO : publish everything relevant
+			PublishItem publishItem1 = new PublishItem("users", ByteConverter.toBytes(users), 0);
+			pushPublishQueue(publishItem1); 
+
+			// PublishItem publishItem2 = new PublishItem("", ByteConverter.toBytes(), 0);
+			// pushPublishQueue(publishItem2); 
+		} catch (IOException e) {
+			System.out.println("Error in Repository: " + e);
+		}
+	}
 }
