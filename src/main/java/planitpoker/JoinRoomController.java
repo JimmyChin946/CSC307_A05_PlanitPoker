@@ -12,7 +12,7 @@ import planitpoker.mqtt.Subscriber;
  *
  * @author Jude Shin 
  */
-public class JoinRoomController{
+public class JoinRoomController {
 	private Logger logger = LoggerFactory.getLogger(JoinRoomController.class);
 
 	private Main main;
