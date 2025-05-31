@@ -24,7 +24,6 @@ public class Repository extends PropertyChangeSupport {
 	private User currentUser; 
 
 	private ArrayList<User> users;
-	private Story activeStory;
 	private String currentRoomName;
 
 	private boolean votingStarted;
@@ -46,7 +45,6 @@ public class Repository extends PropertyChangeSupport {
 		super(new Object());
 		currentUser = null;
 		users = new ArrayList<User>();
-		activeStory = null;
 		currentRoomName = null;
 		votingStarted = false;
 		votes = new HashMap<>();
@@ -121,20 +119,6 @@ public class Repository extends PropertyChangeSupport {
 				pushPublishQueue(publishItem); 
 			}
 			firePropertyChange("users", null, this.users);
-		} catch (IOException e) {
-			System.out.println("Error in Repository: " + e);
-		}
-	}
-
-	public Story getActiveStory() { return activeStory; }
-	public void setActiveStory(Story story, boolean isSilent) { 
-		try {
-			this.activeStory = story;
-			if (!isSilent) { 
-				PublishItem publishItem = new PublishItem("activeStory", ByteConverter.toBytes(activeStory), 0);
-				pushPublishQueue(publishItem); 
-			}
-			firePropertyChange("activeStory", null, this.activeStory);
 		} catch (IOException e) {
 			System.out.println("Error in Repository: " + e);
 		}
