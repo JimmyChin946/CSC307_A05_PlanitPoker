@@ -18,9 +18,7 @@ public class StoriesController {
 
 	private Main main;
 	
-	public StoriesController(Main main) {
-		this.main = main;
-	}
+	public StoriesController(Main main) { this.main = main; }
 	
 	public void addStory() {
 		// TODO
