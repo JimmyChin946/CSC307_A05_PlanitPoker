@@ -1,6 +1,8 @@
 package planitpoker;
 
+import java.util.UUID;
 import javax.swing.*;
+import planitpoker.mqtt.Publisher;
 
 /**
  * Main class that creates the JFrame
@@ -14,14 +16,14 @@ public class Main extends JFrame {
 		// showStoriesOverlay();
 
 		// ----- Login -----
-//		LoginController loginController = new LoginController(this);
-//		LoginPanel loginPanel = new LoginPanel(loginController);
-//		add(loginPanel);
+		LoginController loginController = new LoginController(this);
+		LoginPanel loginPanel = new LoginPanel(loginController);
+		add(loginPanel);
 
-		// // ----- CreateRoom -----
-		 CreateRoomController createRoomController = new CreateRoomController(this);
-		 CreateRoomPanel createRoomPanel = new CreateRoomPanel(createRoomController);
-		 add(createRoomPanel);
+		// ----- CreateRoom -----
+		// CreateRoomController createRoomController = new CreateRoomController(this);
+		// CreateRoomPanel createRoomPanel = new CreateRoomPanel(createRoomController);
+		// add(createRoomPanel);
 
 		// // ----- Export -----
 		// ExportController exportController = new ExportController(this);

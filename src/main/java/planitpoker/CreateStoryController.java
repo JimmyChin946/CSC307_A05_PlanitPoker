@@ -4,6 +4,7 @@ package planitpoker;
 import javax.swing.*;
 
 public class CreateStoryController {
+    private Repository repository = Repository.getInstance();
     private Main main;
 
     public CreateStoryController(Main main) {
@@ -12,12 +13,12 @@ public class CreateStoryController {
 
     public void saveAddNew(String text) {
         Story story = new Story(text);
-        Repository.getInstance().addStory(story, false); // TODO: is this supoosed to be silent?
+        repository.addStory(story, false);
     }
 
     public void saveClose(String text) {
         Story story = new Story(text);
-        Repository.getInstance().addStory(story, false); // TODO: is this supoosed to be silent?
+        repository.addStory(story, false);
     }
 
     public void createNewStoryDialog() {
