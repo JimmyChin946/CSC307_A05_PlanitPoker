@@ -58,9 +58,15 @@ public class Subscriber implements MqttCallback {
 					Duration timeLeft = ByteConverter.fromBytes(bytes, Duration.class);
 					Repository.getInstance().setTimeLeft(timeLeft, true);
 					break;
+				// currentStoryIndex
 				case "currentStoryIndex":
 					int currentStoryIndex = ByteConverter.fromBytes(bytes, Integer.class);
 					Repository.getInstance().setCurrentStoryIndex(currentStoryIndex, true);
+					break;
+				// results 
+				case "results":
+					ArrayList<Story> stories = ByteConverter.fromBytes(bytes, ArrayList.class);
+					// Repository.getInstance().setStories(stories, true); TODO do something special with results
 					break;
 			}
 		}
