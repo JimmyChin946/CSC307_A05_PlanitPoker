@@ -1,5 +1,8 @@
 package planitpoker;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.*;
 import java.util.Base64;
 import java.util.Random;
@@ -11,7 +14,8 @@ import java.util.Random;
  * @author Jude Shin 
  */
 public class StoriesController {
-	
+	private Logger logger = LoggerFactory.getLogger(Repository.class);
+
 	private Main main;
 	
 	public StoriesController(Main main) {
@@ -20,17 +24,20 @@ public class StoriesController {
 	
 	public void addStory() {
 		// TODO
-		System.out.println("adding a new story");
+		// System.out.println("adding a new story");
+		logger.info("adding a new story");
 	}
 
 	public void deleteStory() {
 		// TODO
-		System.out.println("deleting a story");
+		// System.out.println("deleting a story");
+		logger.info("deleting a story");
 	}
 
 	public void importStories() {
 		// TODO
-		System.out.println("importing stories from csv");
+		// System.out.println("importing stories from csv");
+		logger.info("importing stories from csv");
 	}
 
 	public void startVoting() {

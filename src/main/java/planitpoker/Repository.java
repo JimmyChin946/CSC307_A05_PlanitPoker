@@ -5,8 +5,8 @@ import java.util.concurrent.*;
 import java.beans.*;
 import java.io.*;
 import java.time.Duration;
-
 import planitpoker.mqtt.*;
+import org.slf4j.*;
 
 /**
  * Singleton Data Repository for all the information that is being stored in our program
@@ -19,6 +19,7 @@ import planitpoker.mqtt.*;
  * @author Jude Shin 
  */
 public class Repository extends PropertyChangeSupport {
+	private Logger logger = LoggerFactory.getLogger(Repository.class);
 	private static Repository instance;
 
 	private User currentUser; 
@@ -68,7 +69,8 @@ public class Repository extends PropertyChangeSupport {
 			}
 			firePropertyChange("currentUser", null, this.currentUser);
 		} catch (IOException e) {
-			System.out.println("Error in Repository: " + e);
+			// System.out.println("Error in Repository: " + e);
+			logger.error("Error in Repository: " + e);
 		}
 	}
 
@@ -82,7 +84,8 @@ public class Repository extends PropertyChangeSupport {
 			}
 			firePropertyChange("type", null, this.type);
 		} catch (IOException e) {
-			System.out.println("Error in Repository: " + e);
+			// System.out.println("Error in Repository: " + e);
+			logger.error("Error in Repository: " + e);
 		}
 	}
 
@@ -96,7 +99,8 @@ public class Repository extends PropertyChangeSupport {
 			}
 			firePropertyChange("users", null, this.users);
 		} catch (IOException e) {
-			System.out.println("Error in Repository: " + e);
+			// System.out.println("Error in Repository: " + e);
+			logger.error("Error in Repository: " + e);
 		}
 	}
 	public void addUser(ArrayList<User> users, boolean isSilent) { 
@@ -108,7 +112,8 @@ public class Repository extends PropertyChangeSupport {
 			}
 			firePropertyChange("users", null, this.users);
 		} catch (IOException e) {
-			System.out.println("Error in Repository: " + e);
+			// System.out.println("Error in Repository: " + e);
+			logger.error("Error in Repository: " + e);
 		}
 	}
 	public void addUser(User user, boolean isSilent) { 
@@ -120,7 +125,8 @@ public class Repository extends PropertyChangeSupport {
 			}
 			firePropertyChange("users", null, this.users);
 		} catch (IOException e) {
-			System.out.println("Error in Repository: " + e);
+			// System.out.println("Error in Repository: " + e);
+			logger.error("Error in Repository: " + e);
 		}
 	}
 
@@ -134,7 +140,8 @@ public class Repository extends PropertyChangeSupport {
 			}
 			firePropertyChange("currentRoomName", null, this.currentRoomName);
 		} catch (IOException e) {
-			System.out.println("Error in Repository: " + e);
+			// System.out.println("Error in Repository: " + e);
+			logger.error("Error in Repository: " + e);
 		}
 	}
 
@@ -148,7 +155,8 @@ public class Repository extends PropertyChangeSupport {
 			}
 			firePropertyChange("timeLeft", null, this.timeLeft);
 		} catch (IOException e) {
-			System.out.println("Error in Repository: " + e);
+			// System.out.println("Error in Repository: " + e);
+			logger.error("Error in Repository: " + e);
 		}
 	}
 
@@ -162,7 +170,8 @@ public class Repository extends PropertyChangeSupport {
 			}
 			firePropertyChange("votingStarted", null, this.votingStarted);
 		} catch (IOException e) {
-			System.out.println("Error in Repository: " + e);
+			// System.out.println("Error in Repository: " + e);
+			logger.error("Error in Repository: " + e);
 		}
 	}
 
@@ -176,7 +185,8 @@ public class Repository extends PropertyChangeSupport {
 			}
 			firePropertyChange("votes", null, this.votes);
 		} catch (IOException e) {
-			System.out.println("Error in Repository: " + e);
+			// System.out.println("Error in Repository: " + e);
+			logger.error("Error in Repository: " + e);
 		}
 	}
 	public void addVote(User user, double score, boolean isSilent) {
@@ -188,7 +198,8 @@ public class Repository extends PropertyChangeSupport {
 			}
 			firePropertyChange("votes", null, this.votes);
 		} catch (IOException e) {
-			System.out.println("Error in Repository: " + e);
+			// System.out.println("Error in Repository: " + e);
+			logger.error("Error in Repository: " + e);
 		}
 	}
 
@@ -202,7 +213,8 @@ public class Repository extends PropertyChangeSupport {
 			}
 			firePropertyChange("currentStoryIndex", null, this.stories);
 		} catch (IOException e) {
-			System.out.println("Error in Repository: " + e);
+			// System.out.println("Error in Repository: " + e);
+			logger.error("Error in Repository: " + e);
 		}
 	}
 
@@ -216,7 +228,8 @@ public class Repository extends PropertyChangeSupport {
 			}
 			firePropertyChange("stories", null, this.stories);
 		} catch (IOException e) {
-			System.out.println("Error in Repository: " + e);
+			// System.out.println("Error in Repository: " + e);
+			logger.error("Error in Repository: " + e);
 		}
 	}
 	public void addStory(Story story, boolean isSilent) { 
@@ -228,7 +241,8 @@ public class Repository extends PropertyChangeSupport {
 			}
 			firePropertyChange("stories", null, this.stories);
 		} catch (IOException e) {
-			System.out.println("Error in Repository: " + e);
+			// System.out.println("Error in Repository: " + e);
+			logger.error("Error in Repository: " + e);
 		}
 	}
 
@@ -248,7 +262,8 @@ public class Repository extends PropertyChangeSupport {
 			PublishItem publishItem = new PublishItem("results", ByteConverter.toBytes(stories), 0);
 			pushPublishQueue(publishItem); 
 		} catch (IOException e) {
-			System.out.println("Error in Repository: " + e);
+			// System.out.println("Error in Repository: " + e);
+			logger.error("Error in Repository: " + e);
 		}
 	}
 
@@ -261,7 +276,8 @@ public class Repository extends PropertyChangeSupport {
 			// PublishItem publishItem2 = new PublishItem("", ByteConverter.toBytes(), 0);
 			// pushPublishQueue(publishItem2); 
 		} catch (IOException e) {
-			System.out.println("Error in Repository: " + e);
+			// System.out.println("Error in Repository: " + e);
+			logger.error("Error in Repository: " + e);
 		}
 	}
 }

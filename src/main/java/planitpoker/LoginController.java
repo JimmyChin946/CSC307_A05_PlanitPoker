@@ -1,5 +1,8 @@
 package planitpoker;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import javax.swing.*;
 import java.io.IOException;
 
@@ -9,6 +12,7 @@ import java.io.IOException;
  * @author Jude Shin 
  */
 public class LoginController {
+	private Logger logger = LoggerFactory.getLogger(Repository.class);
 
 	private Main main;
 
@@ -17,7 +21,8 @@ public class LoginController {
 	}
 
 	public void login(String name) {
-		System.out.println("loging in " + name + "...");
+		// System.out.println("loging in " + name + "...");
+		logger.info("loging in " + name + "...");
 		User user = new User(name);
 		Repository.getInstance().setCurrentUser(user, false);
 		Repository.getInstance().addUser(user, false);

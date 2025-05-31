@@ -1,6 +1,9 @@
 package planitpoker;
 
 import java.util.UUID;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import planitpoker.mqtt.Publisher;
 import planitpoker.mqtt.Subscriber;
 
@@ -10,7 +13,8 @@ import planitpoker.mqtt.Subscriber;
  * @author Jude Shin 
  */
 public class JoinRoomController{
-	
+	private Logger logger = LoggerFactory.getLogger(Repository.class);
+
 	private Main main;
 	
 	public JoinRoomController(Main main) {
@@ -18,7 +22,8 @@ public class JoinRoomController{
 	}
 	
 	public void joinRoom(String name) {
-		System.out.println(" Joining a room..." + name);
+		// System.out.println("Joining a room..." + name);
+		logger.info("Joining a room..." + name);
 		initMqtt(name);
 		switchGUI();
 	}

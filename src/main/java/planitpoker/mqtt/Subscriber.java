@@ -4,6 +4,9 @@ import java.util.*;
 import org.eclipse.paho.client.mqttv3.*;
 import java.io.IOException;
 import java.time.Duration;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import planitpoker.*;
 
 /**
@@ -13,14 +16,18 @@ import planitpoker.*;
  * 
  */
 public class Subscriber implements MqttCallback {
+	private Logger logger = LoggerFactory.getLogger(Repository.class);
+
 	public Subscriber(String broker, String topic, String id) {
 		try {
 			MqttClient client = new MqttClient(broker, id);
 			client.setCallback(this);
 			client.connect();
-			System.out.println("Connected to BROKER: " + broker);
+			// System.out.println("Connected to BROKER: " + broker);
+			logger.info("Connected to BROKER: " + broker);
 			client.subscribe(topic);
-			System.out.println("Subscribed to TOPIC: " + topic);
+			// System.out.println("Subscribed to TOPIC: " + topic);
+			logger.info("Subscribed to TOPIC: " + topic);
 		} catch (MqttException e) {
 			e.printStackTrace();
 		}
@@ -28,7 +35,8 @@ public class Subscriber implements MqttCallback {
 
 	@Override
 	public void connectionLost(Throwable throwable) {
-		System.out.println("Connection lost: " + throwable.getMessage());
+		// System.out.println("Connection lost: " + throwable.getMessage());
+		logger.info("Connection lost: " + throwable.getMessage());
 	}
 
 	@Override
@@ -65,7 +73,7 @@ public class Subscriber implements MqttCallback {
 					break;
 				// results 
 				case "results":
-					ArrayList<Story> stories = ByteConverter.fromBytes(bytes, ArrayList.class);
+					ArrayList<Story> results = ByteConverter.fromBytes(bytes, ArrayList.class);
 					// Repository.getInstance().setStories(stories, true); TODO do something special with results
 					break;
 			}
@@ -74,7 +82,8 @@ public class Subscriber implements MqttCallback {
 
 	@Override
 	public void deliveryComplete(IMqttDeliveryToken iMqttDeliveryToken) {
-		System.out.println("Delivered complete: " + iMqttDeliveryToken.getMessageId());
+		// System.out.println("Delivered complete: " + iMqttDeliveryToken.getMessageId());
+		logger.info("Delivered complete: " + iMqttDeliveryToken.getMessageId());
 	}
 }
 

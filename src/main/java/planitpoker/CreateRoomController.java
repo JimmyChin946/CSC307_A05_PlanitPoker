@@ -1,6 +1,9 @@
 package planitpoker;
 
 import java.util.UUID;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import planitpoker.mqtt.Publisher;
 import planitpoker.mqtt.Subscriber;
 
@@ -10,7 +13,8 @@ import planitpoker.mqtt.Subscriber;
  * @author Jude Shin 
  */
 public class CreateRoomController {
-	
+	private Logger logger = LoggerFactory.getLogger(Repository.class);
+
 	private Main main;
 	
 	public CreateRoomController(Main main) {
@@ -21,7 +25,8 @@ public class CreateRoomController {
 		// generate a string that will be the TOPIC
 		// all other clients will be voting on this TOPIC
 		// people will share that TOPIC code manually
-		System.out.println(" Creating room..." + name + ", mode: " + selectedItem);
+		// System.out.println("Creating room..." + name + ", mode: " + selectedItem);
+		logger.info("Creating room..." + name + ", mode: " + selectedItem);
 
 		initMqtt(name);
 		// Room room = new Room(name, selectedItem);

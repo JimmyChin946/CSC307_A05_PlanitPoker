@@ -4,7 +4,8 @@ import org.eclipse.paho.client.mqttv3.MqttClient;
 import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
 import java.util.Arrays;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import planitpoker.*;
 
 /**
@@ -14,6 +15,8 @@ import planitpoker.*;
  * 
  */
 public class Publisher implements Runnable {
+	private Logger logger = LoggerFactory.getLogger(Repository.class);
+
 	private String broker;
 	private String topic;
 	private String id;
@@ -29,7 +32,8 @@ public class Publisher implements Runnable {
 		try {
 			MqttClient client = new MqttClient(broker, id);
 			client.connect();
-			System.out.println("Connected to BROKER: " + broker);
+			// System.out.println("Connected to BROKER: " + broker);
+			logger.info("Connected to BROKER: " + broker);
 
 			while (true) {
 				PublishItem publishItem = Repository.getInstance().popPublishQueue();
