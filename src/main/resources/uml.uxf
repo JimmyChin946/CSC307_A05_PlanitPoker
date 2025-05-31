@@ -1,18 +1,173 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <diagram program="umlet" version="15.1">
-  <zoom_level>10</zoom_level>
+  <zoom_level>5</zoom_level>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>440</x>
-      <y>390</y>
-      <w>210</w>
+      <x>150</x>
+      <y>225</y>
+      <w>155</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>LoginController
+--
+- main : Main
+--
++ LoginController(main : Main)
++ login(name : String) : void
+- switchGUI() : void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>150</x>
+      <y>455</y>
+      <w>155</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>VotingController
+--
+- main : Main
+- votingTimer : Timer
+--
++ startVoting() : void
++ vote(double score) : void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>150</x>
+      <y>375</y>
+      <w>155</w>
       <h>70</h>
     </coordinates>
-    <panel_attributes>_object: Class_
+    <panel_attributes>StoriesController
 --
-id: Long="36548"
-[waiting for message]</panel_attributes>
+- main : Main
+--
++ StoriesController(main : Main)
++ addStory() : void
++ deleteStory() : void
++ importStory() : void
++ startVoting() : void
+bg=RED</panel_attributes>
     <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>150</x>
+      <y>525</y>
+      <w>155</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>JoinRoomController
+--
+- main : Main
+--
++ JoinRoomController()
++ joinRoom(name : String) : void 
++ initMqtt(roomName : String) void
+- switchGUI() : void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>100</x>
+      <y>595</y>
+      <w>250</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>CreateRoomController
+--
+- main : Main
+--
++ CreateRoomController(main : Main)
++ createRoom(name : String, selectedItem : String) : void
++ initMqtt(roomName : String) : void
+- switchGUI() : void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>150</x>
+      <y>665</y>
+      <w>155</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>CreateStoryController
+--
+- main : Main
+--
++ CreateStoryController() 
++ saveAddNew(text : String) : void
++ saveClose(text : String) : void
++ createNewStoryDialog() : void
+bg=RED</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>150</x>
+      <y>295</y>
+      <w>155</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>ChoiceController
+--
+- main : Main
+--
++ ChoiceController(main : Main)
++ chooseJoinRoom() : void
++ chooseCreateRoom() : void
+- switchGUI() : void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>15</x>
+      <y>455</y>
+      <w>105</w>
+      <h>25</h>
+    </coordinates>
+    <panel_attributes>_CountDown_
+--
++ run()
+group=group-0
+bg=RED</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>15</x>
+      <y>500</y>
+      <w>105</w>
+      <h>25</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Abstract&gt;&gt;
+_TimerTask_
+group=group-0
+bg=RED</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>60</x>
+      <y>475</y>
+      <w>15</w>
+      <h>35</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.
+group=group-0
+bg=RED</panel_attributes>
+    <additional_attributes>10.0;50.0;10.0;10.0</additional_attributes>
   </element>
 </diagram>
