@@ -15,7 +15,7 @@ import planitpoker.*;
  * 
  */
 public class Publisher implements Runnable {
-	private Logger logger = LoggerFactory.getLogger(Repository.class);
+	private Logger logger = LoggerFactory.getLogger(Publisher.class);
 
 	private String broker;
 	private String topic;

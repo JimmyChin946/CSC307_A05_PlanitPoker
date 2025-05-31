@@ -14,7 +14,7 @@ import java.util.Random;
  * @author Jude Shin 
  */
 public class StoriesController {
-	private Logger logger = LoggerFactory.getLogger(Repository.class);
+	private Logger logger = LoggerFactory.getLogger(StoriesController.class);
 
 	private Main main;
 	

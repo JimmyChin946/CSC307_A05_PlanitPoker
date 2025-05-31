@@ -16,7 +16,7 @@ import planitpoker.*;
  * 
  */
 public class Subscriber implements MqttCallback {
-	private Logger logger = LoggerFactory.getLogger(Repository.class);
+	private Logger logger = LoggerFactory.getLogger(Subscriber.class);
 
 	public Subscriber(String broker, String topic, String id) {
 		try {

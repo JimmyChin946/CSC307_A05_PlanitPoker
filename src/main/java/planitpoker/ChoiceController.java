@@ -13,7 +13,7 @@ import org.slf4j.LoggerFactory;
  * @author Jude Shin 
  */
 public class ChoiceController{
-	private Logger logger = LoggerFactory.getLogger(Repository.class);
+	private Logger logger = LoggerFactory.getLogger(ChoiceController.class);
 	private Main main;
 	
 	public ChoiceController(Main main) { this.main = main; }

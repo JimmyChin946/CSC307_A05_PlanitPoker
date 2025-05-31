@@ -12,12 +12,10 @@ import java.io.IOException;
  * @author Jude Shin 
  */
 public class LoginController {
-	private Logger logger = LoggerFactory.getLogger(Repository.class);
+	private Logger logger = LoggerFactory.getLogger(LoginController.class);
 	private Main main;
 
-	public LoginController(Main main) {
-		this.main = main;
-	}
+	public LoginController(Main main) { this.main = main; }
 
 	public void login(String name) {
 		// System.out.println("loging in " + name + "...");

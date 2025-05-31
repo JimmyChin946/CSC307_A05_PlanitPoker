@@ -13,13 +13,10 @@ import planitpoker.mqtt.Subscriber;
  * @author Jude Shin 
  */
 public class CreateRoomController {
-	private Logger logger = LoggerFactory.getLogger(Repository.class);
-
+	private Logger logger = LoggerFactory.getLogger(CreateRoomController.class);
 	private Main main;
 	
-	public CreateRoomController(Main main) {
-		this.main = main;
-	}
+	public CreateRoomController(Main main) { this.main = main; }
 	
 	public void createRoom(String name, String selectedItem) {
 		// generate a string that will be the TOPIC
