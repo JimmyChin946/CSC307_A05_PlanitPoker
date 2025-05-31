@@ -13,7 +13,6 @@ import java.io.IOException;
  */
 public class LoginController {
 	private Logger logger = LoggerFactory.getLogger(Repository.class);
-
 	private Main main;
 
 	public LoginController(Main main) {
