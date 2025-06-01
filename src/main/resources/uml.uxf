@@ -1,30 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <diagram program="umlet" version="15.1">
-  <zoom_level>5</zoom_level>
+  <zoom_level>6</zoom_level>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>150</x>
-      <y>225</y>
-      <w>155</w>
-      <h>60</h>
-    </coordinates>
-    <panel_attributes>LoginController
---
-- main : Main
---
-+ LoginController(main : Main)
-+ login(name : String) : void
-- switchGUI() : void</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>150</x>
-      <y>455</y>
-      <w>155</w>
-      <h>60</h>
+      <x>162</x>
+      <y>378</y>
+      <w>186</w>
+      <h>72</h>
     </coordinates>
     <panel_attributes>VotingController
 --
@@ -38,10 +21,10 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>150</x>
-      <y>375</y>
-      <w>155</w>
-      <h>70</h>
+      <x>162</x>
+      <y>282</y>
+      <w>186</w>
+      <h>84</h>
     </coordinates>
     <panel_attributes>StoriesController
 --
@@ -58,10 +41,10 @@ bg=RED</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>150</x>
-      <y>525</y>
-      <w>155</w>
-      <h>60</h>
+      <x>162</x>
+      <y>462</y>
+      <w>186</w>
+      <h>72</h>
     </coordinates>
     <panel_attributes>JoinRoomController
 --
@@ -76,10 +59,10 @@ bg=RED</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>100</x>
-      <y>595</y>
-      <w>250</w>
-      <h>60</h>
+      <x>102</x>
+      <y>546</y>
+      <w>300</w>
+      <h>72</h>
     </coordinates>
     <panel_attributes>CreateRoomController
 --
@@ -94,10 +77,10 @@ bg=RED</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>150</x>
-      <y>665</y>
-      <w>155</w>
-      <h>60</h>
+      <x>162</x>
+      <y>630</y>
+      <w>186</w>
+      <h>72</h>
     </coordinates>
     <panel_attributes>CreateStoryController
 --
@@ -113,10 +96,10 @@ bg=RED</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>150</x>
-      <y>295</y>
-      <w>155</w>
-      <h>70</h>
+      <x>162</x>
+      <y>186</y>
+      <w>186</w>
+      <h>84</h>
     </coordinates>
     <panel_attributes>ChoiceController
 --
@@ -131,10 +114,10 @@ bg=RED</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>15</x>
-      <y>455</y>
-      <w>105</w>
-      <h>25</h>
+      <x>0</x>
+      <y>378</y>
+      <w>126</w>
+      <h>30</h>
     </coordinates>
     <panel_attributes>_CountDown_
 --
@@ -146,10 +129,10 @@ bg=RED</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>15</x>
-      <y>500</y>
-      <w>105</w>
-      <h>25</h>
+      <x>0</x>
+      <y>432</y>
+      <w>126</w>
+      <h>30</h>
     </coordinates>
     <panel_attributes>&lt;&lt;Abstract&gt;&gt;
 _TimerTask_
@@ -160,14 +143,157 @@ bg=RED</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>60</x>
-      <y>475</y>
-      <w>15</w>
-      <h>35</h>
+      <x>54</x>
+      <y>402</y>
+      <w>18</w>
+      <h>42</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.
 group=group-0
 bg=RED</panel_attributes>
     <additional_attributes>10.0;50.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>162</x>
+      <y>102</y>
+      <w>186</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>LoginController
+--
+- main : Main
+--
++ LoginController(main : Main)
++ login(name : String) : void
+- switchGUI() : void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>414</x>
+      <y>552</y>
+      <w>318</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>CreateRoomPanel
+--
+--
++ CreateRoomPanel(createRoomController : CreateRoomController)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>630</x>
+      <y>102</y>
+      <w>126</w>
+      <h>66</h>
+    </coordinates>
+    <panel_attributes>JPanel
+--
+
+bg=BLUE</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>696</x>
+      <y>162</y>
+      <w>48</w>
+      <h>420</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;60.0;680.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>420</x>
+      <y>192</y>
+      <w>186</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>ChoicePanel
+--
+--
++ ChoicePanel()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>426</x>
+      <y>786</y>
+      <w>186</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>RoomPanel
+--
+--
++ RoomPanel(main : Main)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>426</x>
+      <y>378</y>
+      <w>252</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>VotingPanel
+--
+~ cards Cards
+--
++ VotingPanel(votingController VotingController)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>426</x>
+      <y>738</y>
+      <w>186</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>ResultsPanel
+--
+--
++ ResultsPanel()
+bg=RED</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>396</x>
+      <y>438</y>
+      <w>318</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>ChoicePanel
+--
+- value : double
+--
++ CardPanel(votingController : VotingController, value double)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>426</x>
+      <y>612</y>
+      <w>186</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>StoriesPanel
+--
+--
++ StoriesPanel()</panel_attributes>
+    <additional_attributes/>
   </element>
 </diagram>

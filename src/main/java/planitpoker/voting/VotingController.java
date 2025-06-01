@@ -40,8 +40,6 @@ public class VotingController {
 		Repository.getInstance().setVotingStarted(false, false);
 
 		votingTimer.cancel();
-
-		// TODO: calculate results and publish story
 	}
 
 	public void vote(double score) {
