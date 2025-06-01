@@ -17,6 +17,9 @@ public class RoomPanel extends JPanel {
 
         setLayout(new GridLayout(2, 1));
 
+				TitlePanel titlePanel = new TitlePanel(main);
+				add(titlePanel);
+
         VotingController votingController = new VotingController(main);
         add(new VotingPanel(votingController));
 

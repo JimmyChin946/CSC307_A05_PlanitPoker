@@ -22,6 +22,7 @@ public class VotingController {
 
 	public void startVoting() {
 		if (Repository.getInstance().getVotingStarted()) return;
+		if (Repository.getInstance().getStories().size() > Repository.getInstance().getCurrentStoryIndex()) return;
 
 		Repository.getInstance().setVotingStarted(true, false);
 
@@ -29,6 +30,8 @@ public class VotingController {
 
 		votingTimer = new Timer();
 		votingTimer.schedule(new CountDown(), 0, 1000);
+
+		Repository.getInstance().incrementCurrentStoryIndex(false);
 	}
 
 	public void stopVoting() {

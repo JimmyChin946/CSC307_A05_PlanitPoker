@@ -208,7 +208,20 @@ public class Repository extends PropertyChangeSupport {
 				PublishItem publishItem = new PublishItem("currentStoryIndex", ByteConverter.toBytes(currentStoryIndex), 0);
 				pushPublishQueue(publishItem); 
 			}
-			firePropertyChange("currentStoryIndex", null, this.stories);
+			firePropertyChange("currentStoryIndex", null, this.currentStoryIndex);
+		} catch (IOException e) {
+			// System.out.println("Error in Repository: " + e);
+			logger.error("Error in Repository: " + e);
+		}
+	}
+	public void incrementCurrentStoryIndex(boolean isSilent) {
+		try {
+			this.currentStoryIndex = currentStoryIndex + 1;
+			if (!isSilent) { 
+				PublishItem publishItem = new PublishItem("currentStoryIndex", ByteConverter.toBytes(currentStoryIndex), 0);
+				pushPublishQueue(publishItem); 
+			}
+			firePropertyChange("currentStoryIndex", null, this.currentStoryIndex);
 		} catch (IOException e) {
 			// System.out.println("Error in Repository: " + e);
 			logger.error("Error in Repository: " + e);

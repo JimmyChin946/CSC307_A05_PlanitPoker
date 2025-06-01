@@ -13,11 +13,13 @@ public class CreateStoryController {
     public void saveAddNew(String text) {
         Story story = new Story(text);
         Repository.getInstance().addStory(story, false);
+				Repository.getInstance().setCurrentStoryIndex( Repository.getInstance().getCurrentStoryIndex(), false);
     }
 
     public void saveClose(String text) {
         Story story = new Story(text);
         Repository.getInstance().addStory(story, false);
+				Repository.getInstance().setCurrentStoryIndex( Repository.getInstance().getCurrentStoryIndex(), false);
     }
 
     public void createNewStoryDialog() {
