@@ -19,15 +19,9 @@ public class CreateRoomController {
 	public CreateRoomController(Main main) { this.main = main; }
 	
 	public void createRoom(String name, String selectedItem) {
-		// generate a string that will be the TOPIC
-		// all other clients will be voting on this TOPIC
-		// people will share that TOPIC code manually
-		// System.out.println("Creating room..." + name + ", mode: " + selectedItem);
 		logger.info("Creating room..." + name + ", mode: " + selectedItem);
-
 		initMqtt(name);
 		Repository.getInstance().setCurrentRoomName(name, false);
-
 		switchGUI();
 	}
 

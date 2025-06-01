@@ -21,7 +21,6 @@ public class ChoiceController{
 	public void chooseJoinRoom() {
 		main.setTitle("Join Room");
 		Repository.getInstance().setType(Repository.Type.CLIENT, false);
-		// System.out.println("JOIN ROOM NOT IMPLEMENTED YET");
 		JoinRoomController joinRoomController = new JoinRoomController(main);
 		JoinRoomPanel joinRoomPanel = new JoinRoomPanel(joinRoomController);
 		main.setContentPane(joinRoomPanel);
