@@ -66,6 +66,7 @@ public class Subscriber implements MqttCallback {
 				case "votingMethodIndex":
 					int votingMethodIndex = ByteConverter.fromBytes(bytes, Integer.class);
 					Repository.getInstance().setVotingMethodIndex(votingMethodIndex, true);
+					break;
 				// stories
 				case "stories":
 					ArrayList<Story> stories = ByteConverter.fromBytes(bytes, ArrayList.class);
