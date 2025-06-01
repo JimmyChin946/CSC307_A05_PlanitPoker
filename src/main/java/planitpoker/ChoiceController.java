@@ -20,7 +20,7 @@ public class ChoiceController{
 	
 	public void chooseJoinRoom() {
 		main.setTitle("Join Room");
-		Repository.getInstance().setType(Repository.Type.CLIENT, false);
+		Repository.getInstance().setType(Repository.Type.CLIENT);
 		JoinRoomController joinRoomController = new JoinRoomController(main);
 		JoinRoomPanel joinRoomPanel = new JoinRoomPanel(joinRoomController);
 		main.setContentPane(joinRoomPanel);
@@ -29,7 +29,7 @@ public class ChoiceController{
 
 	public void chooseCreateRoom() {
 		main.setTitle("Create Room");
-		Repository.getInstance().setType(Repository.Type.HOST, false);
+		Repository.getInstance().setType(Repository.Type.HOST);
 		CreateRoomController createRoomController = new CreateRoomController(main);
 		CreateRoomPanel createRoomPanel = new CreateRoomPanel(createRoomController);
 		main.setContentPane(createRoomPanel);

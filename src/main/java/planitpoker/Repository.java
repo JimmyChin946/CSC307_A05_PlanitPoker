@@ -63,17 +63,9 @@ public class Repository extends PropertyChangeSupport {
 	}
 
 	public Type getType() { return type; }
-	public void setType(Type type, boolean isSilent) {
-		try {
-			this.type = type; 
-			if (!isSilent) { 
-				PublishItem publishItem = new PublishItem("type", ByteConverter.toBytes(currentUser), 0);
-				pushPublishQueue(publishItem); 
-			}
-			firePropertyChange("type", null, this.type);
-		} catch (IOException e) {
-			logger.error("Error in Repository: " + e);
-		}
+	public void setType(Type type) {
+		this.type = type;
+		firePropertyChange("type", null, this.type);
 	}
 
 	public ArrayList<User> getUsers() { return users; }
@@ -272,9 +264,7 @@ public class Repository extends PropertyChangeSupport {
 
 	public void publishInit() { 
 		try {
-			// TODO : publish everything relevant
-			PublishItem publishItem1 = new PublishItem("users", ByteConverter.toBytes(users), 2);
-			pushPublishQueue(publishItem1); 
+			pushPublishQueue(new PublishItem("users", ByteConverter.toBytes(users), 2));
 
 			// PublishItem publishItem2 = new PublishItem("", ByteConverter.toBytes(), 0);
 			// pushPublishQueue(publishItem2); 
