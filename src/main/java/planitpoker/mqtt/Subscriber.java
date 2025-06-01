@@ -23,10 +23,8 @@ public class Subscriber implements MqttCallback {
 			MqttClient client = new MqttClient(broker, id, null);
 			client.setCallback(this);
 			client.connect();
-			// System.out.println("Connected to BROKER: " + broker);
 			logger.info("Connected to BROKER: " + broker);
 			client.subscribe(topic);
-			// System.out.println("Subscribed to TOPIC: " + topic);
 			logger.info("Subscribed to TOPIC: " + topic);
 		} catch (MqttException e) {
 			e.printStackTrace();
@@ -35,7 +33,6 @@ public class Subscriber implements MqttCallback {
 
 	@Override
 	public void connectionLost(Throwable throwable) {
-		// System.out.println("Connection lost: " + throwable.getMessage());
 		logger.info("Connection lost: " + throwable.getMessage());
 	}
 
@@ -91,7 +88,6 @@ public class Subscriber implements MqttCallback {
 
 	@Override
 	public void deliveryComplete(IMqttDeliveryToken iMqttDeliveryToken) {
-		// System.out.println("Delivered complete: " + iMqttDeliveryToken.getMessageId());
 		logger.info("Delivered complete: " + iMqttDeliveryToken.getMessageId());
 	}
 }

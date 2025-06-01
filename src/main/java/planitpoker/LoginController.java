@@ -18,7 +18,6 @@ public class LoginController {
 	public LoginController(Main main) { this.main = main; }
 
 	public void login(String name) {
-		// System.out.println("loging in " + name + "...");
 		logger.info("loging in " + name + "...");
 		User user = new User(name);
 		Repository.getInstance().setCurrentUser(user, false);

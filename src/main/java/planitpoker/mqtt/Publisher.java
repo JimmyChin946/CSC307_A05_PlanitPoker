@@ -32,7 +32,6 @@ public class Publisher implements Runnable {
 		try {
 			MqttClient client = new MqttClient(broker, id, null);
 			client.connect();
-			// System.out.println("Connected to BROKER: " + broker);
 			logger.info("Connected to BROKER: " + broker);
 
 			while (true) {
