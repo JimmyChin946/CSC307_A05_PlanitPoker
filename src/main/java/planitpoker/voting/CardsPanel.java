@@ -4,6 +4,11 @@ import java.awt.*;
 import java.util.ArrayList;
 import javax.swing.JPanel;
 
+/**
+ * Panel that contains all the cards
+ *
+ * @author Nathan Lackie
+ */
 public class CardsPanel extends JPanel {
     public CardsPanel(VotingController votingController, ArrayList<Double> cards) {
         super();

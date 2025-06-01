@@ -4,6 +4,11 @@ import javax.swing.JButton;
 import javax.swing.border.LineBorder;
 import java.awt.*;
 
+/**
+ * Button that represents an individual card
+ *
+ * @author Nathan Lackie
+ */
 public class CardPanel extends JButton {
     private double value;
 

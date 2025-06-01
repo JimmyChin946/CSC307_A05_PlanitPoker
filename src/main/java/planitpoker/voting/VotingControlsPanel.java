@@ -7,6 +7,12 @@ import java.util.HashMap;
 import javax.swing.*;
 import planitpoker.*;
 
+/**
+ * The voting controls sidebar
+ * Includes the timer and buttons to control the current story
+ *
+ * @author Nathan Lackie
+ */
 public class VotingControlsPanel extends JPanel implements PropertyChangeListener {
     private VotingController votingController;
     private Repository repository = Repository.getInstance();
