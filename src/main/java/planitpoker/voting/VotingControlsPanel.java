@@ -5,8 +5,7 @@ import java.beans.PropertyChangeListener;
 import java.time.Duration;
 import java.util.HashMap;
 import javax.swing.*;
-import planitpoker.User;
-import planitpoker.Repository;
+import planitpoker.*;
 
 public class VotingControlsPanel extends JPanel implements PropertyChangeListener {
     private VotingController votingController;
@@ -23,6 +22,9 @@ public class VotingControlsPanel extends JPanel implements PropertyChangeListene
         Repository.getInstance().addPropertyChangeListener("timeLeft", this);
 
         votingNotStartedUI();
+				InvitePlayerPanel invitePlayerPanel = new InvitePlayerPanel();
+				add(invitePlayerPanel);
+
     }
 
     private void votingNotStartedUI() {
