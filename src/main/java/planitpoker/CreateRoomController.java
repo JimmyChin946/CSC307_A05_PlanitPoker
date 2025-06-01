@@ -26,8 +26,8 @@ public class CreateRoomController {
 		logger.info("Creating room..." + name + ", mode: " + selectedItem);
 
 		initMqtt(name);
-		// Room room = new Room(name, selectedItem);
-		// Repository.getInstance().setCurrentRoom(room);
+		Repository.getInstance().setCurrentRoomName(name, false);
+
 		switchGUI();
 	}
 
