@@ -22,7 +22,7 @@ public class JoinRoomController {
 	public void joinRoom(String name) {
 		logger.info("Joining a room..." + name);
 		initMqtt(name);
-		Repository.getInstance().setCurrentRoomName(name, false);
+		Repository.getInstance().setCurrentRoomName(name);
 		switchGUI();
 	}
 

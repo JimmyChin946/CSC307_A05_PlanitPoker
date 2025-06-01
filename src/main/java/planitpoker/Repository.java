@@ -107,17 +107,9 @@ public class Repository extends PropertyChangeSupport {
 	}
 
 	public String getCurrentRoomName() { return currentRoomName; }
-	public void setCurrentRoomName(String roomName, boolean isSilent) {
-		try {
-			this.currentRoomName = roomName;
-			if (!isSilent) { 
-				PublishItem publishItem = new PublishItem("currentRoomName", ByteConverter.toBytes(currentRoomName), 2);
-				pushPublishQueue(publishItem); 
-			}
-			firePropertyChange("currentRoomName", null, this.currentRoomName);
-		} catch (IOException e) {
-			logger.error("Error in Repository: " + e);
-		}
+	public void setCurrentRoomName(String roomName) {
+		this.currentRoomName = roomName;
+		firePropertyChange("currentRoomName", null, this.currentRoomName);
 	}
 
 	public Duration getTimeLeft() { return timeLeft; }

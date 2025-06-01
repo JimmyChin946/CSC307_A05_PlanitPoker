@@ -22,7 +22,7 @@ public class CreateRoomController {
 	public void createRoom(String name, int selectedIndex) {
 		logger.info("Creating room..." + name + ", mode: " + selectedIndex);
 		initMqtt(name);
-		Repository.getInstance().setCurrentRoomName(name, false);
+		Repository.getInstance().setCurrentRoomName(name);
 
 		Repository.getInstance().setVotingMethodIndex(selectedIndex, false);
 
