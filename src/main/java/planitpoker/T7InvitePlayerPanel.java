@@ -10,15 +10,15 @@ import java.awt.datatransfer.*;
  *
  * @author Kai Swangler
  */
-public class InvitePlayerPanel extends JPanel {
+public class T7InvitePlayerPanel extends JPanel {
     private JTextField roomNameField;
     private JButton copyButton;
 
-    public InvitePlayerPanel() {
+    public T7InvitePlayerPanel() {
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         JLabel label = new JLabel("Invite a teammate:");
-        roomNameField = new JTextField(Repository.getInstance().getCurrentRoomName());
+        roomNameField = new JTextField(T7Repository.getInstance().getCurrentRoomName());
         roomNameField.setEditable(false);
         copyButton = new JButton("Copy");
 

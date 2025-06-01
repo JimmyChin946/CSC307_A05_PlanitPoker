@@ -5,10 +5,8 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import javax.swing.*;
-import planitpoker.Repository;
-import java.util.stream.*;
+import planitpoker.T7Repository;
 
 /**
  * Where people will vote
@@ -16,17 +14,17 @@ import java.util.stream.*;
  *
  * @author Nathan Lackie
  */
-public class VotingPanel extends JPanel implements PropertyChangeListener {
-	VotingController votingController;
+public class T7VotingPanel extends JPanel implements PropertyChangeListener {
+	T7VotingController votingController;
 
-	public VotingPanel(VotingController votingController) {
+	public T7VotingPanel(T7VotingController votingController) {
 		super();
 
 		this.votingController = votingController;
 
 		setLayout(new GridLayout(1, 2));
 
-		Repository.getInstance().addPropertyChangeListener("votingStarted", this);
+		T7Repository.getInstance().addPropertyChangeListener("votingStarted", this);
 
 		drawUI();
 	}
@@ -34,18 +32,18 @@ public class VotingPanel extends JPanel implements PropertyChangeListener {
 	private void drawUI() {
 		removeAll();
 
-		if (Repository.getInstance().getVotingStarted()) {
+		if (T7Repository.getInstance().getVotingStarted()) {
 			// add(new CardsPanel(votingController, new ArrayList<>(List.of(1, 2, 3, 4))));
-			int votingMethodIndex = Repository.getInstance().getVotingMethodIndex();
-			Double[][] votingMethodNumbers = Repository.getInstance().getVotingMethodNumbers();
+			int votingMethodIndex = T7Repository.getInstance().getVotingMethodIndex();
+			Double[][] votingMethodNumbers = T7Repository.getInstance().getVotingMethodNumbers();
 			Double[] votingMethod = votingMethodNumbers[votingMethodIndex];
 
-			add(new CardsPanel(votingController, new ArrayList<Double>(Arrays.asList(votingMethod))));
+			add(new T7CardsPanel(votingController, new ArrayList<Double>(Arrays.asList(votingMethod))));
 		} else {
-			add(new ResultsPanel());
+			add(new T7ResultsPanel());
 		}
 
-		VotingControlsPanel votingControls = new VotingControlsPanel(votingController);
+		T7VotingControlsPanel votingControls = new T7VotingControlsPanel(votingController);
 		add(votingControls);
 
 		revalidate();

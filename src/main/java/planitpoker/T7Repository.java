@@ -13,13 +13,13 @@ import org.slf4j.*;
  *
  * @author Jude Shin 
  */
-public class Repository extends PropertyChangeSupport {
-	private Logger logger = LoggerFactory.getLogger(Repository.class);
-	private static Repository instance;
+public class T7Repository extends PropertyChangeSupport {
+	private Logger logger = LoggerFactory.getLogger(T7Repository.class);
+	private static T7Repository instance;
 
-	private User currentUser; 
+	private T7User currentUser;
 
-	private ArrayList<User> users;
+	private ArrayList<T7User> users;
 	private String currentRoomName;
 
 	private boolean votingStarted;
@@ -27,7 +27,7 @@ public class Repository extends PropertyChangeSupport {
 	HashMap<String, Double> votes;
 	private int currentStoryIndex;
 
-	private ArrayList<Story> stories;
+	private ArrayList<T7Story> stories;
 
 	public enum Type { HOST, CLIENT }
 	private Type type;
@@ -38,12 +38,12 @@ public class Repository extends PropertyChangeSupport {
 		{0.0, 1.0, 2.0, 3.0, 5.0, 8.0, 13.0, 21.0, 34.0, 55.0, 89.0}};
 	private int votingMethodIndex;
 
-	private Queue<PublishItem> publishQueue;
+	private Queue<T7PublishItem> publishQueue;
 	
-	private Repository() {
+	private T7Repository() {
 		super(new Object());
 		currentUser = null;
-		users = new ArrayList<User>();
+		users = new ArrayList<>();
 		currentRoomName = null;
 		votingStarted = false;
 		votes = new HashMap<>();
@@ -53,17 +53,17 @@ public class Repository extends PropertyChangeSupport {
 		votingMethodIndex = 0;
 	}
 
-	public static Repository getInstance() {
-		if (instance == null) { instance = new Repository(); }
+	public static T7Repository getInstance() {
+		if (instance == null) { instance = new T7Repository(); }
 		return instance;
 	}
 	
-	public User getCurrentUser() { return currentUser; }
-	public void setCurrentUser(User currentUser, boolean isSilent) {
+	public T7User getCurrentUser() { return currentUser; }
+	public void setCurrentUser(T7User currentUser, boolean isSilent) {
 		try {
 			this.currentUser = currentUser;
 			if (!isSilent) {
-				PublishItem publishItem = new PublishItem("join", ByteConverter.toBytes(currentUser), 2);
+				T7PublishItem publishItem = new T7PublishItem("join", T7ByteConverter.toBytes(currentUser), 2);
 				pushPublishQueue(publishItem);
 			}
 			firePropertyChange("currentUser", null, this.currentUser);
@@ -78,12 +78,12 @@ public class Repository extends PropertyChangeSupport {
 		firePropertyChange("type", null, this.type);
 	}
 
-	public ArrayList<User> getUsers() { return users; }
-	public void setUsers(ArrayList<User> users, boolean isSilent) { 
+	public ArrayList<T7User> getUsers() { return users; }
+	public void setUsers(ArrayList<T7User> users, boolean isSilent) {
 		try {
 			this.users = users;
 			if (!isSilent) { 
-				PublishItem publishItem = new PublishItem("users", ByteConverter.toBytes(users), 2);
+				T7PublishItem publishItem = new T7PublishItem("users", T7ByteConverter.toBytes(users), 2);
 				pushPublishQueue(publishItem); 
 			}
 			firePropertyChange("users", null, this.users);
@@ -91,11 +91,11 @@ public class Repository extends PropertyChangeSupport {
 			logger.error("Error in Repository: " + e);
 		}
 	}
-	public void addUser(User user, boolean isSilent) { 
+	public void addUser(T7User user, boolean isSilent) {
 		try {
 			this.users.add(user);
 			if (!isSilent) {
-				PublishItem publishItem = new PublishItem("users", ByteConverter.toBytes(users), 2);
+				T7PublishItem publishItem = new T7PublishItem("users", T7ByteConverter.toBytes(users), 2);
 				pushPublishQueue(publishItem); 
 			}
 			firePropertyChange("users", null, this.users);
@@ -115,7 +115,7 @@ public class Repository extends PropertyChangeSupport {
 		try {
 			this.timeLeft = timeLeft;
 			if (!isSilent) { 
-				PublishItem publishItem = new PublishItem("timeLeft", ByteConverter.toBytes(timeLeft), 0);
+				T7PublishItem publishItem = new T7PublishItem("timeLeft", T7ByteConverter.toBytes(timeLeft), 0);
 				pushPublishQueue(publishItem); 
 			}
 			firePropertyChange("timeLeft", null, this.timeLeft);
@@ -129,7 +129,7 @@ public class Repository extends PropertyChangeSupport {
 		try {
 			this.votingStarted = votingStarted;
 			if (!isSilent) { 
-				PublishItem publishItem = new PublishItem("votingStarted", ByteConverter.toBytes(votingStarted), 2);
+				T7PublishItem publishItem = new T7PublishItem("votingStarted", T7ByteConverter.toBytes(votingStarted), 2);
 				pushPublishQueue(publishItem); 
 			}
 			firePropertyChange("votingStarted", null, this.votingStarted);
@@ -143,7 +143,7 @@ public class Repository extends PropertyChangeSupport {
 		try {
 			this.votes = votes;	
 			if (!isSilent) { 
-				PublishItem publishItem = new PublishItem("votes", ByteConverter.toBytes(votes), 2);
+				T7PublishItem publishItem = new T7PublishItem("votes", T7ByteConverter.toBytes(votes), 2);
 				pushPublishQueue(publishItem); 
 			}
 			firePropertyChange("votes", null, this.votes);
@@ -151,14 +151,14 @@ public class Repository extends PropertyChangeSupport {
 			logger.error("Error in Repository: " + e);
 		}
 	}
-	public void addVote(User user, double score, boolean isSilent) {
+	public void addVote(T7User user, double score, boolean isSilent) {
 		try {
-			Vote vote = new Vote(user, score);
+			T7Vote vote = new T7Vote(user, score);
 
 			this.votes.put(user.getName(), score);
 
 			if (!isSilent) { 
-				PublishItem publishItem = new PublishItem("vote", ByteConverter.toBytes(vote), 2);
+				T7PublishItem publishItem = new T7PublishItem("vote", T7ByteConverter.toBytes(vote), 2);
 				pushPublishQueue(publishItem); 
 			}
 			firePropertyChange("vote", null, vote);
@@ -172,7 +172,7 @@ public class Repository extends PropertyChangeSupport {
 		try {
 			this.currentStoryIndex = storyIndex;
 			if (!isSilent) { 
-				PublishItem publishItem = new PublishItem("currentStoryIndex", ByteConverter.toBytes(currentStoryIndex), 2);
+				T7PublishItem publishItem = new T7PublishItem("currentStoryIndex", T7ByteConverter.toBytes(currentStoryIndex), 2);
 				pushPublishQueue(publishItem); 
 			}
 			firePropertyChange("currentStoryIndex", null, this.currentStoryIndex);
@@ -184,7 +184,7 @@ public class Repository extends PropertyChangeSupport {
 		try {
 			this.currentStoryIndex = currentStoryIndex + 1;
 			if (!isSilent) { 
-				PublishItem publishItem = new PublishItem("currentStoryIndex", ByteConverter.toBytes(currentStoryIndex), 2);
+				T7PublishItem publishItem = new T7PublishItem("currentStoryIndex", T7ByteConverter.toBytes(currentStoryIndex), 2);
 				pushPublishQueue(publishItem); 
 			}
 			firePropertyChange("currentStoryIndex", null, this.currentStoryIndex);
@@ -193,12 +193,12 @@ public class Repository extends PropertyChangeSupport {
 		}
 	}
 
-	public ArrayList<Story> getStories() { return stories; }
-	public void setStories(ArrayList<Story> stories, boolean isSilent) { 
+	public ArrayList<T7Story> getStories() { return stories; }
+	public void setStories(ArrayList<T7Story> stories, boolean isSilent) {
 		try {
 			this.stories = stories;
 			if (!isSilent) { 
-				PublishItem publishItem = new PublishItem("stories", ByteConverter.toBytes(stories), 2);
+				T7PublishItem publishItem = new T7PublishItem("stories", T7ByteConverter.toBytes(stories), 2);
 				pushPublishQueue(publishItem); 
 			}
 			firePropertyChange("stories", null, this.stories);
@@ -206,11 +206,11 @@ public class Repository extends PropertyChangeSupport {
 			logger.error("Error in Repository: " + e);
 		}
 	}
-	public void addStory(Story story, boolean isSilent) { 
+	public void addStory(T7Story story, boolean isSilent) {
 		try {
 			this.stories.add(story);
 			if (!isSilent) { 
-				PublishItem publishItem = new PublishItem("stories", ByteConverter.toBytes(stories), 2);
+				T7PublishItem publishItem = new T7PublishItem("stories", T7ByteConverter.toBytes(stories), 2);
 				pushPublishQueue(publishItem); 
 			}
 			firePropertyChange("stories", null, this.stories);
@@ -226,7 +226,7 @@ public class Repository extends PropertyChangeSupport {
 		try {
 			this.votingMethodIndex = votingMethodIndex;
 			if (!isSilent) { 
-				PublishItem publishItem = new PublishItem("votingMethodIndex", ByteConverter.toBytes(votingMethodIndex), 2);
+				T7PublishItem publishItem = new T7PublishItem("votingMethodIndex", T7ByteConverter.toBytes(votingMethodIndex), 2);
 				pushPublishQueue(publishItem); 
 			}
 			firePropertyChange("votingMethodIndex", null, this.votingMethodIndex);
@@ -235,9 +235,9 @@ public class Repository extends PropertyChangeSupport {
 		}
 	}
 
-	public void pushPublishQueue(PublishItem publishItem) { publishQueue.offer(publishItem); }
-	public PublishItem popPublishQueue() {
-		PublishItem publishItem = publishQueue.poll();
+	public void pushPublishQueue(T7PublishItem publishItem) { publishQueue.offer(publishItem); }
+	public T7PublishItem popPublishQueue() {
+		T7PublishItem publishItem = publishQueue.poll();
 		return publishItem;
 	}
 	
@@ -245,13 +245,13 @@ public class Repository extends PropertyChangeSupport {
 
 	public void publishInit() { 
 		try {
-			pushPublishQueue(new PublishItem("users", ByteConverter.toBytes(users), 2));
-			pushPublishQueue(new PublishItem("timeLeft", ByteConverter.toBytes(timeLeft), 0));
-			pushPublishQueue(new PublishItem("votingStarted", ByteConverter.toBytes(votingStarted), 2));
-			pushPublishQueue(new PublishItem("votes", ByteConverter.toBytes(votes), 2));
-			pushPublishQueue(new PublishItem("currentStoryIndex", ByteConverter.toBytes(currentStoryIndex), 2));
-			pushPublishQueue(new PublishItem("stories", ByteConverter.toBytes(stories), 2));
-			pushPublishQueue(new PublishItem("votingMethodIndex", ByteConverter.toBytes(votingMethodIndex), 2));
+			pushPublishQueue(new T7PublishItem("users", T7ByteConverter.toBytes(users), 2));
+			pushPublishQueue(new T7PublishItem("timeLeft", T7ByteConverter.toBytes(timeLeft), 0));
+			pushPublishQueue(new T7PublishItem("votingStarted", T7ByteConverter.toBytes(votingStarted), 2));
+			pushPublishQueue(new T7PublishItem("votes", T7ByteConverter.toBytes(votes), 2));
+			pushPublishQueue(new T7PublishItem("currentStoryIndex", T7ByteConverter.toBytes(currentStoryIndex), 2));
+			pushPublishQueue(new T7PublishItem("stories", T7ByteConverter.toBytes(stories), 2));
+			pushPublishQueue(new T7PublishItem("votingMethodIndex", T7ByteConverter.toBytes(votingMethodIndex), 2));
 		} catch (IOException e) {
 			logger.error("Error in Repository: " + e);
 		}

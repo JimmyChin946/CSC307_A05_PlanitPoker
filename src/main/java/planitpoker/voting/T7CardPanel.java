@@ -9,10 +9,10 @@ import java.awt.*;
  *
  * @author Nathan Lackie
  */
-public class CardPanel extends JButton {
+public class T7CardPanel extends JButton {
     private double value;
 
-    public CardPanel(VotingController votingController, double value) {
+    public T7CardPanel(T7VotingController votingController, double value) {
         super();
 
         // Don't display decimal places unless non-integer

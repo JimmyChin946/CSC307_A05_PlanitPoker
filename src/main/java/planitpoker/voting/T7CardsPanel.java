@@ -9,8 +9,8 @@ import javax.swing.JPanel;
  *
  * @author Nathan Lackie
  */
-public class CardsPanel extends JPanel {
-    public CardsPanel(VotingController votingController, ArrayList<Double> cards) {
+public class T7CardsPanel extends JPanel {
+    public T7CardsPanel(T7VotingController votingController, ArrayList<Double> cards) {
         super();
 
         GridLayout layout = new GridLayout(2,3);
@@ -19,7 +19,7 @@ public class CardsPanel extends JPanel {
         setLayout(layout);
 
         for (double card : cards) {
-            add(new CardPanel(votingController, card));
+            add(new T7CardPanel(votingController, card));
         }
     }
 }

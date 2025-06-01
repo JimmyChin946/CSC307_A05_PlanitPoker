@@ -4,16 +4,15 @@ import java.awt.*;
 import java.util.HashMap;
 import java.util.Set;
 import javax.swing.*;
-import planitpoker.Repository;
-import planitpoker.User;
+import planitpoker.T7Repository;
 
 /**
  * Panel for displaying the voting results for a story
  *
  * @author Nathan Lackie
  */
-public class ResultsPanel extends JPanel {
-    public ResultsPanel() {
+public class T7ResultsPanel extends JPanel {
+    public T7ResultsPanel() {
         super();
     }
 
@@ -22,7 +21,7 @@ public class ResultsPanel extends JPanel {
         super.paintComponent(g);
         int size = Math.min(getWidth(), getHeight());
 
-        HashMap<String, Double> votes = Repository.getInstance().getVotes();
+        HashMap<String, Double> votes = T7Repository.getInstance().getVotes();
 
         if (votes.isEmpty()) return;
 

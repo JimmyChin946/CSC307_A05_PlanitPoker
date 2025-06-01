@@ -9,12 +9,12 @@ package planitpoker.mqtt;
  * @author Jude Shin
  *
  */
-public class PublishItem {
+public class T7PublishItem {
 	private final String subTopic;
 	private final byte[] message; 
 	private final int qos;
 
-	public PublishItem(String subTopic, byte[] message, int qos) {
+	public T7PublishItem(String subTopic, byte[] message, int qos) {
 		this.subTopic = subTopic; 
 		this.message = message;	
 		this.qos = qos;

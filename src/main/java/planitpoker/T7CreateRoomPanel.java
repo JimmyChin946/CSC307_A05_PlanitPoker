@@ -2,15 +2,14 @@ package planitpoker;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
 
 /**
  * Creating a new room
  *
  * @author Jude Shin 
  */
-public class CreateRoomPanel extends JPanel {
-	public CreateRoomPanel(CreateRoomController createRoomController) {
+public class T7CreateRoomPanel extends JPanel {
+	public T7CreateRoomPanel(T7CreateRoomController createRoomController) {
 		setLayout(new GridLayout(4, 1));
 		JLabel title = new JLabel("Create new Room");
 		title.setHorizontalAlignment(SwingConstants.CENTER);
@@ -28,7 +27,7 @@ public class CreateRoomPanel extends JPanel {
 		box2.setLayout(new GridLayout(1, 2));
 		JLabel modeLabel = new JLabel("Mode:");
 		box2.add(modeLabel);
-		String[] options = Repository.getInstance().getVotingMethodNames();
+		String[] options = T7Repository.getInstance().getVotingMethodNames();
 		JComboBox<String> comboBox = new JComboBox<>(options);
 		box2.add(comboBox);
 		add(box2);

@@ -13,10 +13,10 @@ import java.io.IOException;
  *
  * @author Kai Swangler
  */
-public class CreateStoryController {
-    private Main main;
+public class T7CreateStoryController {
+    private T7Main main;
 
-    public CreateStoryController(Main main) {
+    public T7CreateStoryController(T7Main main) {
         this.main = main;
     }
 
@@ -27,15 +27,15 @@ public class CreateStoryController {
         for (String line : lines) {
             line = line.trim();
             if (!line.isEmpty()) {
-                Story story = new Story(line);
-                Repository.getInstance().addStory(story, false);
+                T7Story story = new T7Story(line);
+                T7Repository.getInstance().addStory(story, false);
                 count++;
             }
         }
 
         if (count > 0) {
-            Repository.getInstance().setCurrentStoryIndex(
-                    Repository.getInstance().getCurrentStoryIndex(), false
+            T7Repository.getInstance().setCurrentStoryIndex(
+                    T7Repository.getInstance().getCurrentStoryIndex(), false
             );
         }
     }
@@ -74,7 +74,7 @@ public class CreateStoryController {
             dialog.setSize(400, 400);
             dialog.setLocationRelativeTo(parentFrame);
 
-            CreateStoryPanel panel = new CreateStoryPanel(this, dialog);
+            T7CreateStoryPanel panel = new T7CreateStoryPanel(this, dialog);
             dialog.setContentPane(panel);
             dialog.setVisible(true);
         }

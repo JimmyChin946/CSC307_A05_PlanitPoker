@@ -8,8 +8,8 @@ import java.awt.*;
  *
  * @author Kai Swangler
  */
-public class CreateStoryPanel extends JPanel {
-    public CreateStoryPanel(CreateStoryController createStoryController, JDialog dialog) {
+public class T7CreateStoryPanel extends JPanel {
+    public T7CreateStoryPanel(T7CreateStoryController createStoryController, JDialog dialog) {
         setLayout(new BorderLayout());
 
         JLabel titleLabel = new JLabel("Create New Story", SwingConstants.CENTER);

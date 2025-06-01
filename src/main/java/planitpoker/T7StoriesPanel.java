@@ -4,15 +4,13 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import javax.swing.*;
 import java.awt.*;
-import java.time.Duration;
-import java.util.ArrayList;
 
 /**
  * Panel shown when a user is adding a story.
  *
  * @author Kai Swangler
  */
-public class StoriesPanel extends JPanel implements PropertyChangeListener {
+public class T7StoriesPanel extends JPanel implements PropertyChangeListener {
 	private enum ActivePanel {
 		ACTIVE_STORIES,
 		COMPLETED_STORIES,
@@ -22,7 +20,7 @@ public class StoriesPanel extends JPanel implements PropertyChangeListener {
 	private JPanel storyDisplayPanel;
 	private ActivePanel activePanel = ActivePanel.ACTIVE_STORIES;
 
-	public StoriesPanel(CreateStoryController createStoryController) {
+	public T7StoriesPanel(T7CreateStoryController createStoryController) {
 		setLayout(new BorderLayout());
 
 		JPanel buttonPanel = new JPanel(new GridLayout(1, 4));
@@ -34,7 +32,7 @@ public class StoriesPanel extends JPanel implements PropertyChangeListener {
 		buttonPanel.add(completedStories);
 		buttonPanel.add(allStories);
 
-		if (Repository.getInstance().getType() == Repository.Type.HOST) {
+		if (T7Repository.getInstance().getType() == T7Repository.Type.HOST) {
 			JButton newStory = new JButton("+ New");
 			buttonPanel.add(newStory);
 			newStory.addActionListener(e -> createStoryController.createNewStoryDialog());
@@ -50,7 +48,7 @@ public class StoriesPanel extends JPanel implements PropertyChangeListener {
 		completedStories.addActionListener(e -> switchPanel(ActivePanel.COMPLETED_STORIES));
 		allStories.addActionListener(e -> switchPanel(ActivePanel.ALL_STORIES));
 
-		Repository.getInstance().addPropertyChangeListener("stories", this);
+		T7Repository.getInstance().addPropertyChangeListener("stories", this);
 
 		drawPanel();
 	}
@@ -77,7 +75,7 @@ public class StoriesPanel extends JPanel implements PropertyChangeListener {
 	private void showActiveStories() {
 		storyDisplayPanel.removeAll();
 		storyDisplayPanel.add(createHeaderPanel());
-		for (Story story : Repository.getInstance().getStories()) {
+		for (T7Story story : T7Repository.getInstance().getStories()) {
 			if (story.isActive()) {
 				storyDisplayPanel.add(displayStory(story));
 			}
@@ -89,7 +87,7 @@ public class StoriesPanel extends JPanel implements PropertyChangeListener {
 	private void showCompletedStories() {
 		storyDisplayPanel.removeAll();
 		storyDisplayPanel.add(createDetailedHeaderPanel());
-		for (Story story : Repository.getInstance().getStories()) {
+		for (T7Story story : T7Repository.getInstance().getStories()) {
 			if (!story.isActive()) {
 				storyDisplayPanel.add(displayDetailedStory(story));
 			}
@@ -101,7 +99,7 @@ public class StoriesPanel extends JPanel implements PropertyChangeListener {
 	private void showAllStories() {
 		storyDisplayPanel.removeAll();
 		storyDisplayPanel.add(createDetailedHeaderPanel()); // Add column labels
-		for (Story story : Repository.getInstance().getStories()) {
+		for (T7Story story : T7Repository.getInstance().getStories()) {
 			storyDisplayPanel.add(displayDetailedStory(story));
 		}
 		storyDisplayPanel.revalidate();
@@ -136,7 +134,7 @@ public class StoriesPanel extends JPanel implements PropertyChangeListener {
 		return header;
 	}
 
-	private JPanel displayDetailedStory(Story story) {
+	private JPanel displayDetailedStory(T7Story story) {
 		JPanel panel = new JPanel(new GridLayout(1, 3));
 		panel.setMaximumSize(new Dimension(Integer.MAX_VALUE, 40));
 		panel.setBorder(BorderFactory.createLineBorder(Color.GRAY));
@@ -163,7 +161,7 @@ public class StoriesPanel extends JPanel implements PropertyChangeListener {
 	}
 
 
-	private JPanel displayStory(Story story) {
+	private JPanel displayStory(T7Story story) {
 		JPanel panel = new JPanel(new GridLayout(1, 1));
 		panel.setMaximumSize(new Dimension(Integer.MAX_VALUE, 40));
 		panel.setBorder(BorderFactory.createLineBorder(Color.GRAY));

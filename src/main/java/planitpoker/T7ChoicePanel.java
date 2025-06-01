@@ -8,9 +8,9 @@ import java.awt.*;
  *
  * @author Jude Shin 
  */
-public class ChoicePanel extends JPanel {
+public class T7ChoicePanel extends JPanel {
 	
-	public ChoicePanel(ChoiceController choiceController) {
+	public T7ChoicePanel(T7ChoiceController choiceController) {
 		setLayout(new GridLayout(4, 1));
 
 		JLabel title = new JLabel("Make a Choice:");
