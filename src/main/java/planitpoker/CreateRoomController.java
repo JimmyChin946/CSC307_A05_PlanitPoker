@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import planitpoker.mqtt.Publisher;
 import planitpoker.mqtt.Subscriber;
+import java.util.ArrayList;
 
 /**
  * Controller for the CreateRoomPanel
@@ -18,10 +19,13 @@ public class CreateRoomController {
 	
 	public CreateRoomController(Main main) { this.main = main; }
 	
-	public void createRoom(String name, String selectedItem) {
-		logger.info("Creating room..." + name + ", mode: " + selectedItem);
+	public void createRoom(String name, int selectedIndex) {
+		logger.info("Creating room..." + name + ", mode: " + selectedIndex);
 		initMqtt(name);
 		Repository.getInstance().setCurrentRoomName(name, false);
+
+		Repository.getInstance().setVotingMethodIndex(selectedIndex, false);
+
 		switchGUI();
 	}
 

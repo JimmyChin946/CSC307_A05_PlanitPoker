@@ -4,9 +4,11 @@ import java.awt.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import javax.swing.*;
 import planitpoker.Repository;
+import java.util.stream.*;
 
 /**
  * Where people will vote
@@ -33,7 +35,12 @@ public class VotingPanel extends JPanel implements PropertyChangeListener {
 		removeAll();
 
 		if (Repository.getInstance().getVotingStarted()) {
-			add(new CardsPanel(votingController, new ArrayList<>(List.of(1, 2, 3, 4))));
+			// add(new CardsPanel(votingController, new ArrayList<>(List.of(1, 2, 3, 4))));
+			int votingMethodIndex = Repository.getInstance().getVotingMethodIndex();
+			Double[][] votingMethodNumbers = Repository.getInstance().getVotingMethodNumbers();
+			Double[] votingMethod = votingMethodNumbers[votingMethodIndex];
+
+			add(new CardsPanel(votingController, new ArrayList<>(Arrays.asList(votingMethod))));
 		} else {
 			add(new ResultsPanel());
 		}

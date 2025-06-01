@@ -32,7 +32,7 @@ public class Repository extends PropertyChangeSupport {
 	public enum Type { HOST, CLIENT }
 	private Type type; 
 
-	private final String[] votingMethodNames = {"Sequential", "Fibonacci"};;
+	private final String[] votingMethodNames = {"Sequential", "Fibonacci"};
 	private final Double[][] votingMethodNumbers = {{0.0, 1.0, 2.0, 3.0, 4.0, 5.0, 6.0}, {0.0, 0.5, 1.0, 2.0, 3.0, 5.0, 8.0}};
 	private int votingMethodIndex;
 
