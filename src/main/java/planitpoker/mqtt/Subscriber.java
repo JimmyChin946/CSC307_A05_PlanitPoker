@@ -53,6 +53,10 @@ public class Subscriber implements MqttCallback {
 					Vote vote = ByteConverter.fromBytes(bytes, Vote.class);
 					Repository.getInstance().addVote(vote.getUser(), vote.getScore(), true);
 					break;
+				case "join": // could be changed to user
+					User user = ByteConverter.fromBytes(bytes, User.class);
+					Repository.getInstance().addUser(user, true);
+					break;
 			}
 		}
 		else {
@@ -78,10 +82,10 @@ public class Subscriber implements MqttCallback {
 					Repository.getInstance().setCurrentStoryIndex(currentStoryIndex, true);
 					break;
 				// results 
-				case "results":
-					ArrayList<Story> results = ByteConverter.fromBytes(bytes, ArrayList.class);
-					// Repository.getInstance().setStories(stories, true); TODO do something special with results
-					break;
+				// case "results": TODO if we don't need this just remove it as it is handled by the "stories" case
+				// 	ArrayList<Story> results = ByteConverter.fromBytes(bytes, ArrayList.class);
+				// 	// Repository.getInstance().setStories(stories, true); 
+				// 	break;
 				case "votingStarted":
 					boolean votingStarted = ByteConverter.fromBytes(bytes, Boolean.class);
 					Repository.getInstance().setVotingStarted(votingStarted, true);
