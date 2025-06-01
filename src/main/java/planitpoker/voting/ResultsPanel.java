@@ -20,28 +20,33 @@ public class ResultsPanel extends JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        int width = getWidth();
-        int height = getHeight();
+        int size = Math.min(getWidth(), getHeight());
 
         HashMap<User, Double> votes = Repository.getInstance().getVotes();
+
         HashMap<Double, Integer> voteCounts = new HashMap<>();
 
-        double totalVoteSum = 0;
         for (User user : votes.keySet()) {
             Double vote = votes.get(user);
             voteCounts.merge(vote, 1, Integer::sum);
-            totalVoteSum += vote;
         }
 
         Set<Double> distinctVotes = voteCounts.keySet();
+        double totalVoteSum = votes.size();
         int prevTotal = 0;
         int currTotal = 0;
         for (Double vote : distinctVotes) {
             currTotal += voteCounts.get(vote);
+
+            g.setColor(Color.getHSBColor(prevTotal / (float) totalVoteSum, 1, 0.8f));
+            ((Graphics2D) g).setStroke(new BasicStroke(10));
+
+            int startAngle = (int) (prevTotal * 360.0 / totalVoteSum);
+            int endAngle = (int) (currTotal * 360.0 / totalVoteSum);
             g.drawArc(
-                0, 0,
-                width, height,
-                (int) (prevTotal * 360.0 / totalVoteSum), (int) (currTotal * 360.0 / totalVoteSum)
+                50, 50,
+                size - 100, size - 100,
+                startAngle, endAngle - startAngle
             );
             prevTotal = currTotal;
         }
