@@ -1,6 +1,7 @@
 package planitpoker;
 
 import java.io.Serializable;
+import java.time.Duration;
 import java.util.*;
 
 /**
@@ -12,6 +13,8 @@ public class Story implements Serializable {
 	private String title;
 	private boolean active;
 	private ArrayList<Double> votes;
+	private double estimation;
+	private Duration time;
 
 
 	public Story (String title) {
@@ -21,6 +24,8 @@ public class Story implements Serializable {
 	}
 
 	public String getTitle() { return title; }
+	public Duration getTime() {return time;}
+	public double getEstimation() {return estimation; }
 	public boolean isActive() { return active; }
 	public void setActive(boolean active) { this.active = active;}
 	public ArrayList<Double> getVotes() { return votes; }
