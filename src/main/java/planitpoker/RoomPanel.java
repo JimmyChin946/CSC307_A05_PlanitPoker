@@ -15,16 +15,13 @@ public class RoomPanel extends JPanel {
     public RoomPanel(Main main) {
         super();
 
-        setLayout(new GridLayout(2, 1));
+        setLayout(new GridLayout(4, 1));
 
-				TitlePanel titlePanel = new TitlePanel(main);
-				add(titlePanel);
+        TitlePanel titlePanel = new TitlePanel(main);
+        add(titlePanel);
 
         VotingController votingController = new VotingController(main);
         add(new VotingPanel(votingController));
-
-        // InvitePlayerPanel invitePlayerPanel = new InvitePlayerPanel();
-        // add(invitePlayerPanel);
 
         CreateStoryController createStoryController = new CreateStoryController(main);
         add(new StoriesPanel(createStoryController));
