@@ -113,7 +113,7 @@ public class Repository extends PropertyChangeSupport {
 		try {
 			this.users.add(user);
 			if (!isSilent) { 
-				PublishItem publishItem = new PublishItem("users", ByteConverter.toBytes(users), 0); 
+				PublishItem publishItem = new PublishItem("users", ByteConverter.toBytes(users), 2); 
 				pushPublishQueue(publishItem); 
 			}
 			firePropertyChange("users", null, this.users);
@@ -127,7 +127,7 @@ public class Repository extends PropertyChangeSupport {
 		try {
 			this.currentRoomName = roomName;
 			if (!isSilent) { 
-				PublishItem publishItem = new PublishItem("currentRoomName", ByteConverter.toBytes(currentRoomName), 0);
+				PublishItem publishItem = new PublishItem("currentRoomName", ByteConverter.toBytes(currentRoomName), 2);
 				pushPublishQueue(publishItem); 
 			}
 			firePropertyChange("currentRoomName", null, this.currentRoomName);
@@ -169,7 +169,7 @@ public class Repository extends PropertyChangeSupport {
 		try {
 			this.votes = votes;	
 			if (!isSilent) { 
-				PublishItem publishItem = new PublishItem("votes", ByteConverter.toBytes(votes), 0);
+				PublishItem publishItem = new PublishItem("votes", ByteConverter.toBytes(votes), 2);
 				pushPublishQueue(publishItem); 
 			}
 			firePropertyChange("votes", null, this.votes);
@@ -184,7 +184,7 @@ public class Repository extends PropertyChangeSupport {
 			this.votes.put(user, score);
 
 			if (!isSilent) { 
-				PublishItem publishItem = new PublishItem("vote", ByteConverter.toBytes(vote), 0);
+				PublishItem publishItem = new PublishItem("vote", ByteConverter.toBytes(vote), 2);
 				pushPublishQueue(publishItem); 
 			}
 			firePropertyChange("vote", null, vote);
@@ -198,7 +198,7 @@ public class Repository extends PropertyChangeSupport {
 		try {
 			this.currentStoryIndex = storyIndex;
 			if (!isSilent) { 
-				PublishItem publishItem = new PublishItem("currentStoryIndex", ByteConverter.toBytes(currentStoryIndex), 0);
+				PublishItem publishItem = new PublishItem("currentStoryIndex", ByteConverter.toBytes(currentStoryIndex), 2);
 				pushPublishQueue(publishItem); 
 			}
 			firePropertyChange("currentStoryIndex", null, this.currentStoryIndex);
@@ -210,7 +210,7 @@ public class Repository extends PropertyChangeSupport {
 		try {
 			this.currentStoryIndex = currentStoryIndex + 1;
 			if (!isSilent) { 
-				PublishItem publishItem = new PublishItem("currentStoryIndex", ByteConverter.toBytes(currentStoryIndex), 0);
+				PublishItem publishItem = new PublishItem("currentStoryIndex", ByteConverter.toBytes(currentStoryIndex), 2);
 				pushPublishQueue(publishItem); 
 			}
 			firePropertyChange("currentStoryIndex", null, this.currentStoryIndex);
@@ -224,7 +224,7 @@ public class Repository extends PropertyChangeSupport {
 		try {
 			this.stories = stories;
 			if (!isSilent) { 
-				PublishItem publishItem = new PublishItem("stories", ByteConverter.toBytes(stories), 0);
+				PublishItem publishItem = new PublishItem("stories", ByteConverter.toBytes(stories), 2);
 				pushPublishQueue(publishItem); 
 			}
 			firePropertyChange("stories", null, this.stories);
@@ -236,7 +236,7 @@ public class Repository extends PropertyChangeSupport {
 		try {
 			this.stories.add(story);
 			if (!isSilent) { 
-				PublishItem publishItem = new PublishItem("stories", ByteConverter.toBytes(stories), 0);
+				PublishItem publishItem = new PublishItem("stories", ByteConverter.toBytes(stories), 2);
 				pushPublishQueue(publishItem); 
 			}
 			firePropertyChange("stories", null, this.stories);
@@ -252,7 +252,7 @@ public class Repository extends PropertyChangeSupport {
 		try {
 			this.votingMethodIndex = votingMethodIndex;
 			if (!isSilent) { 
-				PublishItem publishItem = new PublishItem("votingMethodIndex", ByteConverter.toBytes(votingMethodIndex), 0);
+				PublishItem publishItem = new PublishItem("votingMethodIndex", ByteConverter.toBytes(votingMethodIndex), 2);
 				pushPublishQueue(publishItem); 
 			}
 			firePropertyChange("votingMethodIndex", null, this.votingMethodIndex);
@@ -271,7 +271,7 @@ public class Repository extends PropertyChangeSupport {
 
 	public void publishResults() { 
 		try {
-			PublishItem publishItem = new PublishItem("results", ByteConverter.toBytes(stories), 0);
+			PublishItem publishItem = new PublishItem("results", ByteConverter.toBytes(stories), 2);
 			pushPublishQueue(publishItem); 
 		} catch (IOException e) {
 			logger.error("Error in Repository: " + e);
@@ -281,7 +281,7 @@ public class Repository extends PropertyChangeSupport {
 	public void publishInit() { 
 		try {
 			// TODO : publish everything relevant
-			PublishItem publishItem1 = new PublishItem("users", ByteConverter.toBytes(users), 0);
+			PublishItem publishItem1 = new PublishItem("users", ByteConverter.toBytes(users), 2);
 			pushPublishQueue(publishItem1); 
 
 			// PublishItem publishItem2 = new PublishItem("", ByteConverter.toBytes(), 0);
