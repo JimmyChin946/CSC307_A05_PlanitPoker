@@ -6,7 +6,7 @@ import javax.swing.*;
  * Main class that creates the JFrame
  * This initially kicks the user to a fresh login page
  *
- * @author
+ * @author Kai Swangler
  */
 public class T7Main extends JFrame {
 	public T7Main() {
