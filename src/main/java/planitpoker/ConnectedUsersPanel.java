@@ -6,6 +6,11 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.List;
 
+/**
+ * Panel for displaying active users.
+ *
+ * @author Kai Swangler
+ */
 public class ConnectedUsersPanel extends JPanel implements PropertyChangeListener {
     private JPanel usersListPanel;
 

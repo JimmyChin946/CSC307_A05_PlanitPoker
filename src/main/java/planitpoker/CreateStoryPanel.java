@@ -45,7 +45,7 @@ public class CreateStoryPanel extends JPanel {
         });
 
         importButton.addActionListener(e -> {
-            // TODO
+            createStoryController.importFromFile(this);
         });
 
     }

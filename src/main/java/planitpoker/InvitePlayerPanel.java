@@ -5,6 +5,11 @@ import java.awt.*;
 import java.awt.event.*;
 import java.awt.datatransfer.*;
 
+/**
+ * Panel for copying the room name.
+ *
+ * @author Kai Swangler
+ */
 public class InvitePlayerPanel extends JPanel {
     private JTextField roomNameField;
     private JButton copyButton;
