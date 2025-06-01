@@ -24,25 +24,29 @@ public class ResultsPanel extends JPanel {
 
         HashMap<String, Double> votes = Repository.getInstance().getVotes();
 
+        if (votes.isEmpty()) return;
+
         HashMap<Double, Integer> voteCounts = new HashMap<>();
 
+        double voteSum = 0;
         for (String user : votes.keySet()) {
             Double vote = votes.get(user);
             voteCounts.merge(vote, 1, Integer::sum);
+            voteSum += vote;
         }
 
         Set<Double> distinctVotes = voteCounts.keySet();
-        double totalVoteSum = votes.size();
+        double numVotes = votes.size();
         int prevTotal = 0;
         int currTotal = 0;
         for (Double vote : distinctVotes) {
             currTotal += voteCounts.get(vote);
 
-            g.setColor(Color.getHSBColor(prevTotal / (float) totalVoteSum, 1, 0.8f));
+            g.setColor(Color.getHSBColor(prevTotal / (float) numVotes, 1, 0.8f));
             ((Graphics2D) g).setStroke(new BasicStroke(10));
 
-            int startAngle = (int) (prevTotal * 360.0 / totalVoteSum);
-            int endAngle = (int) (currTotal * 360.0 / totalVoteSum);
+            int startAngle = (int) (prevTotal * 360.0 / numVotes);
+            int endAngle = (int) (currTotal * 360.0 / numVotes);
             g.drawArc(
                 50, 50,
                 size - 100, size - 100,
@@ -50,5 +54,8 @@ public class ResultsPanel extends JPanel {
             );
             prevTotal = currTotal;
         }
+        g.setColor(Color.black);
+        setFont(new Font("Impact", Font.PLAIN, 20));
+        g.drawString("Avg: " + (voteSum / numVotes), (size - 50) / 2, size / 2);
     }
 }

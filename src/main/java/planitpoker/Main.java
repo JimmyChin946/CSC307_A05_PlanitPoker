@@ -21,7 +21,7 @@ public class Main extends JFrame {
 	public static void main(String[] args) {
 		Main login = new Main();
 		login.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		login.setSize(800, 400);
+		login.setSize(800, 800);
 		login.setLocationRelativeTo(null);
 		login.setVisible(true);
 	}
