@@ -15,8 +15,6 @@ public class StoriesPanel extends JPanel {
 	private Repository repository = Repository.getInstance();
 
 	public StoriesPanel(CreateStoryController createStoryController) {
-		// TODO : should this be StoryController storyController?
-		// or should we just get rid of StoriesController
 		setLayout(new BorderLayout());
 
 		JPanel buttonPanel = new JPanel(new GridLayout(1, 4));
@@ -40,7 +38,6 @@ public class StoriesPanel extends JPanel {
 		completedStories.addActionListener(e -> showCompletedStories());
 		allStories.addActionListener(e -> showAllStories());
 		newStory.addActionListener(e -> createStoryController.createNewStoryDialog());
-		// TODO : that means that this will be storyController instead of createStoryController
 	}
 
 	private void showActiveStories() {
