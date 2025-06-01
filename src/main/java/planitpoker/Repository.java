@@ -45,7 +45,7 @@ public class Repository extends PropertyChangeSupport {
 		currentRoomName = null;
 		votingStarted = false;
 		votes = new HashMap<>();
-		currentStoryIndex = 0;
+		currentStoryIndex = -1;
 		stories = new ArrayList<>();
 		publishQueue = new LinkedBlockingQueue<>();
 		votingMethodIndex = 0;

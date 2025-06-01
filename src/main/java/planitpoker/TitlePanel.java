@@ -34,8 +34,9 @@ public class TitlePanel extends JPanel implements PropertyChangeListener {
 
 	private void refreshTitle(int index) {
 		ArrayList<Story> stories = Repository.getInstance().getStories();
+		int currentStoryIndex = Repository.getInstance().getCurrentStoryIndex();
 
-		if (stories.isEmpty()) {
+		if (stories.isEmpty() || (currentStoryIndex == -1)) {
 			currentStoryLabel.setText("No Stories Available");
 		}
 		else {
@@ -45,7 +46,6 @@ public class TitlePanel extends JPanel implements PropertyChangeListener {
 			logger.info("Stories: " + stories);
 			logger.info("STORY TITLE: " + currentStory.getTitle());
 		}
-
 	
 		revalidate();
 		repaint();
