@@ -46,7 +46,7 @@ public class Subscriber implements MqttCallback {
 			switch (subTopic) {
 				// votes on the currentStoryIndex 
 				case "votes":
-					HashMap<User, Double> votes = ByteConverter.fromBytes(bytes, HashMap.class);
+					HashMap<String, Double> votes = ByteConverter.fromBytes(bytes, HashMap.class);
 					Repository.getInstance().setVotes(votes, true);
 					break;
 				case "vote":

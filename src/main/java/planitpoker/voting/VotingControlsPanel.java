@@ -58,9 +58,9 @@ public class VotingControlsPanel extends JPanel implements PropertyChangeListene
             add(timer);
         }
 
-        HashMap<User, Double> votes = Repository.getInstance().getVotes();
+        HashMap<String, Double> votes = Repository.getInstance().getVotes();
         for (User user : Repository.getInstance().getUsers()) {
-            add(new JLabel(user.getName() + ": " + votes.get(user)));
+            add(new JLabel(user.getName() + ": " + votes.get(user.getName())));
         }
     }
 

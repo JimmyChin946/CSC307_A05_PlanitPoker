@@ -22,11 +22,11 @@ public class ResultsPanel extends JPanel {
         super.paintComponent(g);
         int size = Math.min(getWidth(), getHeight());
 
-        HashMap<User, Double> votes = Repository.getInstance().getVotes();
+        HashMap<String, Double> votes = Repository.getInstance().getVotes();
 
         HashMap<Double, Integer> voteCounts = new HashMap<>();
 
-        for (User user : votes.keySet()) {
+        for (String user : votes.keySet()) {
             Double vote = votes.get(user);
             voteCounts.merge(vote, 1, Integer::sum);
         }

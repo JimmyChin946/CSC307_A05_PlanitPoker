@@ -24,7 +24,7 @@ public class Repository extends PropertyChangeSupport {
 
 	private boolean votingStarted;
 	private Duration timeLeft;
-	HashMap<User, Double> votes;
+	HashMap<String, Double> votes;
 	private int currentStoryIndex;
 
 	private ArrayList<Story> stories;
@@ -138,8 +138,8 @@ public class Repository extends PropertyChangeSupport {
 		}
 	}
 
-	public HashMap<User, Double> getVotes() { return votes; }
-	public void setVotes(HashMap<User, Double> votes, boolean isSilent) {
+	public HashMap<String, Double> getVotes() { return votes; }
+	public void setVotes(HashMap<String, Double> votes, boolean isSilent) {
 		try {
 			this.votes = votes;	
 			if (!isSilent) { 
@@ -155,7 +155,7 @@ public class Repository extends PropertyChangeSupport {
 		try {
 			Vote vote = new Vote(user, score);
 
-			this.votes.put(user, score);
+			this.votes.put(user.getName(), score);
 
 			if (!isSilent) { 
 				PublishItem publishItem = new PublishItem("vote", ByteConverter.toBytes(vote), 2);
