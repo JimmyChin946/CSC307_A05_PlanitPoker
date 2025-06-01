@@ -81,6 +81,10 @@ public class Subscriber implements MqttCallback {
 					ArrayList<Story> results = ByteConverter.fromBytes(bytes, ArrayList.class);
 					// Repository.getInstance().setStories(stories, true); TODO do something special with results
 					break;
+				case "votingStarted":
+					boolean votingStarted = ByteConverter.fromBytes(bytes, Boolean.class);
+					Repository.getInstance().setVotingStarted(votingStarted, true);
+					break;
 			}
 		}
 	}

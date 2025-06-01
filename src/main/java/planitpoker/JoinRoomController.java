@@ -20,9 +20,9 @@ public class JoinRoomController {
 	public JoinRoomController(Main main) { this.main = main; }
 	
 	public void joinRoom(String name) {
-		// System.out.println("Joining a room..." + name);
 		logger.info("Joining a room..." + name);
 		initMqtt(name);
+		Repository.getInstance().setCurrentRoomName(name, false);
 		switchGUI();
 	}
 

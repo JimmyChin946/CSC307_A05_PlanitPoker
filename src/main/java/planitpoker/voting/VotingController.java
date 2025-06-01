@@ -22,7 +22,7 @@ public class VotingController {
 
 	public void startVoting() {
 		if (Repository.getInstance().getVotingStarted()) return;
-		if (Repository.getInstance().getStories().size() > Repository.getInstance().getCurrentStoryIndex()) return;
+		if (Repository.getInstance().getStories().size()-1 <= Repository.getInstance().getCurrentStoryIndex()) return;
 
 		Repository.getInstance().setVotingStarted(true, false);
 

@@ -162,7 +162,7 @@ public class Repository extends PropertyChangeSupport {
 		try {
 			this.votingStarted = votingStarted;
 			if (!isSilent) { 
-				PublishItem publishItem = new PublishItem("votingStarted", ByteConverter.toBytes(votingStarted), 0);
+				PublishItem publishItem = new PublishItem("votingStarted", ByteConverter.toBytes(votingStarted), 2);
 				pushPublishQueue(publishItem); 
 			}
 			firePropertyChange("votingStarted", null, this.votingStarted);
