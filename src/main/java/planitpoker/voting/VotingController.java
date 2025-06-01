@@ -40,6 +40,8 @@ public class VotingController {
 		Repository.getInstance().setVotingStarted(false, false);
 
 		votingTimer.cancel();
+
+		// updte the current story
 	}
 
 	public void vote(double score) {
