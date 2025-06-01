@@ -7,7 +7,6 @@ import java.beans.PropertyChangeListener;
 import java.util.List;
 
 public class ConnectedUsersPanel extends JPanel implements PropertyChangeListener {
-    private Repository repository = Repository.getInstance();
     private JPanel usersListPanel;
 
     public ConnectedUsersPanel() {
@@ -20,11 +19,9 @@ public class ConnectedUsersPanel extends JPanel implements PropertyChangeListene
         usersListPanel.setLayout(new BoxLayout(usersListPanel, BoxLayout.Y_AXIS));
         add(new JScrollPane(usersListPanel), BorderLayout.CENTER);
 
-        // Initial population
-        updateUserList(repository.getUsers());
+        updateUserList(Repository.getInstance().getUsers());
 
-        // Listen for user list updates
-        repository.addPropertyChangeListener("users", this);
+        Repository.getInstance().addPropertyChangeListener("users", this);
     }
 
     private void updateUserList(List<User> users) {
