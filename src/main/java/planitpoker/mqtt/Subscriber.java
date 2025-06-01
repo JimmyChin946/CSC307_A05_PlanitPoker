@@ -20,7 +20,7 @@ public class Subscriber implements MqttCallback {
 
 	public Subscriber(String broker, String topic, String id) {
 		try {
-			MqttClient client = new MqttClient(broker, id);
+			MqttClient client = new MqttClient(broker, id, null);
 			client.setCallback(this);
 			client.connect();
 			// System.out.println("Connected to BROKER: " + broker);

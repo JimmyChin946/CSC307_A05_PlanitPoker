@@ -30,7 +30,7 @@ public class Publisher implements Runnable {
 	@Override
 	public void run() {
 		try {
-			MqttClient client = new MqttClient(broker, id);
+			MqttClient client = new MqttClient(broker, id, null);
 			client.connect();
 			// System.out.println("Connected to BROKER: " + broker);
 			logger.info("Connected to BROKER: " + broker);
