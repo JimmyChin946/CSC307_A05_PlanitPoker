@@ -1,5 +1,7 @@
 package planitpoker;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import javax.swing.*;
 import java.awt.*;
 import java.time.Duration;
@@ -10,8 +12,15 @@ import java.util.ArrayList;
  *
  * @author Kai Swangler
  */
-public class StoriesPanel extends JPanel {
+public class StoriesPanel extends JPanel implements PropertyChangeListener {
+	private enum ActivePanel {
+		ACTIVE_STORIES,
+		COMPLETED_STORIES,
+		ALL_STORIES,
+	}
+
 	private JPanel storyDisplayPanel;
+	private ActivePanel activePanel = ActivePanel.ACTIVE_STORIES;
 
 	public StoriesPanel(CreateStoryController createStoryController) {
 		setLayout(new BorderLayout());
@@ -37,9 +46,32 @@ public class StoriesPanel extends JPanel {
 		storyDisplayPanel.setLayout(new BoxLayout(storyDisplayPanel, BoxLayout.Y_AXIS));
 		add(new JScrollPane(storyDisplayPanel), BorderLayout.CENTER);
 
-		activeStories.addActionListener(e -> showActiveStories());
-		completedStories.addActionListener(e -> showCompletedStories());
-		allStories.addActionListener(e -> showAllStories());
+		activeStories.addActionListener(e -> switchPanel(ActivePanel.ACTIVE_STORIES));
+		completedStories.addActionListener(e -> switchPanel(ActivePanel.COMPLETED_STORIES));
+		allStories.addActionListener(e -> switchPanel(ActivePanel.ALL_STORIES));
+
+		Repository.getInstance().addPropertyChangeListener("stories", this);
+
+		drawPanel();
+	}
+
+	private void switchPanel(ActivePanel panel) {
+		activePanel = panel;
+		drawPanel();
+	}
+
+	private void drawPanel() {
+		switch (activePanel) {
+            case ACTIVE_STORIES -> {
+				showActiveStories();
+            }
+            case COMPLETED_STORIES -> {
+				showCompletedStories();
+            }
+            case ALL_STORIES -> {
+				showAllStories();
+            }
+        }
 	}
 
 	private void showActiveStories() {
@@ -142,5 +174,10 @@ public class StoriesPanel extends JPanel {
 		panel.add(titleLabel);
 
 		return panel;
+	}
+
+	@Override
+	public void propertyChange(PropertyChangeEvent evt) {
+		drawPanel();
 	}
 }
