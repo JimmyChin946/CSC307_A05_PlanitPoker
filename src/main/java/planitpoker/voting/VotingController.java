@@ -45,9 +45,9 @@ public class VotingController {
 		s.setActive(false);
 		s.setTime(Repository.getInstance().getTimeLeft());
 
-		HashMap<User, Double> votes = Repository.getInstance().getVotes();
+		HashMap<String, Double> votes = Repository.getInstance().getVotes();
 		double voteSum = 0;
-		for (User user : votes.keySet()) {
+		for (String user : votes.keySet()) {
 			Double vote = votes.get(user);
 			voteSum += vote;
 		}

@@ -154,7 +154,7 @@ public class StoriesPanel extends JPanel implements PropertyChangeListener {
 		}
 
 		JLabel estimationLabel = new JLabel("" + story.getEstimation(), SwingConstants.CENTER);
-		JLabel timeLabel = new JLabel("" + story.getTime(), SwingConstants.CENTER);
+		JLabel timeLabel = new JLabel("" + story.getTime().getSeconds(), SwingConstants.CENTER);
 
 		panel.add(estimationLabel);
 		panel.add(timeLabel);
