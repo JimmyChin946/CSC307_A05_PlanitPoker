@@ -179,12 +179,15 @@ public class Repository extends PropertyChangeSupport {
 	}
 	public void addVote(User user, double score, boolean isSilent) {
 		try {
+			Vote vote = new Vote(user, score);
+
 			this.votes.put(user, score);
+
 			if (!isSilent) { 
-				PublishItem publishItem = new PublishItem("votes", ByteConverter.toBytes(votes), 0);
+				PublishItem publishItem = new PublishItem("vote", ByteConverter.toBytes(vote), 0);
 				pushPublishQueue(publishItem); 
 			}
-			firePropertyChange("votes", null, this.votes);
+			firePropertyChange("vote", null, vote);
 		} catch (IOException e) {
 			logger.error("Error in Repository: " + e);
 		}

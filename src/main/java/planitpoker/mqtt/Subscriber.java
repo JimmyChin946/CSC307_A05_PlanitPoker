@@ -49,6 +49,10 @@ public class Subscriber implements MqttCallback {
 					HashMap<User, Double> votes = ByteConverter.fromBytes(bytes, HashMap.class);
 					Repository.getInstance().setVotes(votes, true);
 					break;
+				case "vote":
+					Vote vote = ByteConverter.fromBytes(bytes, Vote.class);
+					Repository.getInstance().addVote(vote.getUser(), vote.getScore(), true);
+					break;
 			}
 		}
 		else {
@@ -81,6 +85,10 @@ public class Subscriber implements MqttCallback {
 				case "votingStarted":
 					boolean votingStarted = ByteConverter.fromBytes(bytes, Boolean.class);
 					Repository.getInstance().setVotingStarted(votingStarted, true);
+					break;
+				case "vote":
+					Vote vote = ByteConverter.fromBytes(bytes, Vote.class);
+					Repository.getInstance().addVote(vote.getUser(), vote.getScore(), true);
 					break;
 			}
 		}
