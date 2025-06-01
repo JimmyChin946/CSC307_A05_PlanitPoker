@@ -40,7 +40,7 @@ public class VotingPanel extends JPanel implements PropertyChangeListener {
 			Double[][] votingMethodNumbers = Repository.getInstance().getVotingMethodNumbers();
 			Double[] votingMethod = votingMethodNumbers[votingMethodIndex];
 
-			add(new CardsPanel(votingController, new ArrayList<>(Arrays.asList(votingMethod))));
+			add(new CardsPanel(votingController, new ArrayList<Double>(Arrays.asList(votingMethod))));
 		} else {
 			add(new ResultsPanel());
 		}
