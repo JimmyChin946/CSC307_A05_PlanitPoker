@@ -1,5 +1,6 @@
 package planitpoker;
 
+import java.util.ArrayList;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -19,9 +20,9 @@ public class LoginController {
 
 	public void login(String name) {
 		logger.info("loging in " + name + "...");
+
 		User user = new User(name);
-		Repository.getInstance().setCurrentUser(user);
-		Repository.getInstance().addUser(user, false);
+		Repository.getInstance().setCurrentUser(user, false);
 		switchGUI();
 	}
 

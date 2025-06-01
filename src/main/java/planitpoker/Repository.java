@@ -57,9 +57,17 @@ public class Repository extends PropertyChangeSupport {
 	}
 	
 	public User getCurrentUser() { return currentUser; }
-	public void setCurrentUser(User currentUser) {
-		this.currentUser = currentUser;
-		firePropertyChange("currentUser", null, this.currentUser);
+	public void setCurrentUser(User currentUser, boolean isSilent) {
+		try {
+			this.currentUser = currentUser;
+			if (!isSilent) {
+				PublishItem publishItem = new PublishItem("join", ByteConverter.toBytes(currentUser), 2);
+				pushPublishQueue(publishItem);
+			}
+			firePropertyChange("currentUser", null, this.currentUser);
+		} catch (IOException e) {
+			logger.error("Error in Repository: " + e);
+		}
 	}
 
 	public Type getType() { return type; }
@@ -73,19 +81,7 @@ public class Repository extends PropertyChangeSupport {
 		try {
 			this.users = users;
 			if (!isSilent) { 
-				PublishItem publishItem = new PublishItem("users", ByteConverter.toBytes(users), 0);
-				pushPublishQueue(publishItem); 
-			}
-			firePropertyChange("users", null, this.users);
-		} catch (IOException e) {
-			logger.error("Error in Repository: " + e);
-		}
-	}
-	public void addUser(ArrayList<User> users, boolean isSilent) { 
-		try {
-			this.users.addAll(users);
-			if (!isSilent) { 
-				PublishItem publishItem = new PublishItem("users", ByteConverter.toBytes(users), 0);
+				PublishItem publishItem = new PublishItem("users", ByteConverter.toBytes(users), 2);
 				pushPublishQueue(publishItem); 
 			}
 			firePropertyChange("users", null, this.users);
@@ -96,8 +92,8 @@ public class Repository extends PropertyChangeSupport {
 	public void addUser(User user, boolean isSilent) { 
 		try {
 			this.users.add(user);
-			if (!isSilent) { 
-				PublishItem publishItem = new PublishItem("users", ByteConverter.toBytes(users), 2); 
+			if (!isSilent) {
+				PublishItem publishItem = new PublishItem("users", ByteConverter.toBytes(users), 2);
 				pushPublishQueue(publishItem); 
 			}
 			firePropertyChange("users", null, this.users);
@@ -245,21 +241,15 @@ public class Repository extends PropertyChangeSupport {
 	
 	// ================================
 
-	public void publishResults() { 
-		try {
-			PublishItem publishItem = new PublishItem("results", ByteConverter.toBytes(stories), 2);
-			pushPublishQueue(publishItem); 
-		} catch (IOException e) {
-			logger.error("Error in Repository: " + e);
-		}
-	}
-
 	public void publishInit() { 
 		try {
 			pushPublishQueue(new PublishItem("users", ByteConverter.toBytes(users), 2));
-
-			// PublishItem publishItem2 = new PublishItem("", ByteConverter.toBytes(), 0);
-			// pushPublishQueue(publishItem2); 
+			pushPublishQueue(new PublishItem("timeLeft", ByteConverter.toBytes(timeLeft), 0));
+			pushPublishQueue(new PublishItem("votingStarted", ByteConverter.toBytes(votingStarted), 2));
+			pushPublishQueue(new PublishItem("votes", ByteConverter.toBytes(votes), 2));
+			pushPublishQueue(new PublishItem("currentStoryIndex", ByteConverter.toBytes(currentStoryIndex), 2));
+			pushPublishQueue(new PublishItem("stories", ByteConverter.toBytes(stories), 2));
+			pushPublishQueue(new PublishItem("votingMethodIndex", ByteConverter.toBytes(votingMethodIndex), 2));
 		} catch (IOException e) {
 			logger.error("Error in Repository: " + e);
 		}
