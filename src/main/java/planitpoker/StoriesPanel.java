@@ -12,7 +12,6 @@ import java.util.ArrayList;
  */
 public class StoriesPanel extends JPanel {
 	private JPanel storyDisplayPanel;
-	private Repository repository = Repository.getInstance();
 
 	public StoriesPanel(CreateStoryController createStoryController) {
 		setLayout(new BorderLayout());
@@ -21,12 +20,16 @@ public class StoriesPanel extends JPanel {
 		JButton activeStories = new JButton("Active Stories");
 		JButton completedStories = new JButton("Completed Stories");
 		JButton allStories = new JButton("All Stories");
-		JButton newStory = new JButton("+ New");
 
 		buttonPanel.add(activeStories);
 		buttonPanel.add(completedStories);
 		buttonPanel.add(allStories);
-		buttonPanel.add(newStory);
+
+		if (Repository.getInstance().getType() == Repository.Type.HOST) {
+			JButton newStory = new JButton("+ New");
+			buttonPanel.add(newStory);
+			newStory.addActionListener(e -> createStoryController.createNewStoryDialog());
+		}
 
 		add(buttonPanel, BorderLayout.NORTH);
 
@@ -37,13 +40,12 @@ public class StoriesPanel extends JPanel {
 		activeStories.addActionListener(e -> showActiveStories());
 		completedStories.addActionListener(e -> showCompletedStories());
 		allStories.addActionListener(e -> showAllStories());
-		newStory.addActionListener(e -> createStoryController.createNewStoryDialog());
 	}
 
 	private void showActiveStories() {
 		storyDisplayPanel.removeAll();
 		storyDisplayPanel.add(createHeaderPanel());
-		for (Story story : repository.getStories()) {
+		for (Story story : Repository.getInstance().getStories()) {
 			if (story.isActive()) {
 				storyDisplayPanel.add(displayStory(story));
 			}
@@ -55,7 +57,7 @@ public class StoriesPanel extends JPanel {
 	private void showCompletedStories() {
 		storyDisplayPanel.removeAll();
 		storyDisplayPanel.add(createDetailedHeaderPanel());
-		for (Story story : repository.getStories()) {
+		for (Story story : Repository.getInstance().getStories()) {
 			if (!story.isActive()) {
 				storyDisplayPanel.add(displayDetailedStory(story));
 			}
@@ -67,7 +69,7 @@ public class StoriesPanel extends JPanel {
 	private void showAllStories() {
 		storyDisplayPanel.removeAll();
 		storyDisplayPanel.add(createDetailedHeaderPanel()); // Add column labels
-		for (Story story : repository.getStories()) {
+		for (Story story : Repository.getInstance().getStories()) {
 			storyDisplayPanel.add(displayDetailedStory(story));
 		}
 		storyDisplayPanel.revalidate();
