@@ -2,9 +2,12 @@ package planitpoker.voting;
 
 import java.time.Duration;
 import java.util.Timer;
+import java.util.HashMap;
 import java.util.TimerTask;
 import planitpoker.Main;
 import planitpoker.Repository;
+import planitpoker.User;
+import planitpoker.Story;
 
 /**
  * Controller for the VotingPanel 
@@ -36,12 +39,24 @@ public class VotingController {
 
 	public void stopVoting() {
 		if (!Repository.getInstance().getVotingStarted()) return;
+		
+		int i = Repository.getInstance().getCurrentStoryIndex();
+		Story s = Repository.getInstance().getStories().get(i);
+		s.setActive(false);
+		s.setTime(Repository.getInstance().getTimeLeft());
+
+		HashMap<User, Double> votes = Repository.getInstance().getVotes();
+		double voteSum = 0;
+		for (User user : votes.keySet()) {
+			Double vote = votes.get(user);
+			voteSum += vote;
+		}
+		double average = voteSum / votes.size();
+		s.setEstimation(average);
 
 		Repository.getInstance().setVotingStarted(false, false);
 
 		votingTimer.cancel();
-
-		// updte the current story
 	}
 
 	public void vote(double score) {

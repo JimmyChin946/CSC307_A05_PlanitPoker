@@ -25,7 +25,9 @@ public class Story implements Serializable {
 
 	public String getTitle() { return title; }
 	public Duration getTime() {return time;}
+	public void setTime(Duration time) {this.time = time;}
 	public double getEstimation() {return estimation; }
+	public void setEstimation(double estimation) {this.estimation = estimation; }
 	public boolean isActive() { return active; }
 	public void setActive(boolean active) { this.active = active;}
 	public ArrayList<Double> getVotes() { return votes; }
