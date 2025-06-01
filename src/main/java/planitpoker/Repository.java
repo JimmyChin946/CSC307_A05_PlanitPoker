@@ -12,11 +12,6 @@ import org.slf4j.*;
  * Singleton Data Repository for all the information that is being stored in our program
  *
  * @author Jude Shin 
-
-/**
- * Singleton Data Repository for all the information that is being stored in our program
- *
- * @author Jude Shin 
  */
 public class Repository extends PropertyChangeSupport {
 	private Logger logger = LoggerFactory.getLogger(Repository.class);
@@ -39,6 +34,7 @@ public class Repository extends PropertyChangeSupport {
 
 	private final String[] votingMethodNames = {"Sequential", "Fibonacci"};;
 	private final Double[][] votingMethodNumbers = {{0.0, 1.0, 2.0, 3.0, 4.0, 5.0, 6.0}, {0.0, 0.5, 1.0, 2.0, 3.0, 5.0, 8.0}};
+	private int votingMethodIndex;
 
 	private Queue<PublishItem> publishQueue;
 	
@@ -52,6 +48,7 @@ public class Repository extends PropertyChangeSupport {
 		currentStoryIndex = 0;
 		stories = new ArrayList<>();
 		publishQueue = new LinkedBlockingQueue<>();
+		votingMethodIndex = 0;
 	}
 
 	public static Repository getInstance() {
@@ -248,6 +245,20 @@ public class Repository extends PropertyChangeSupport {
 
 	public String[] getVotingMethodNames() { return votingMethodNames; }
 	public Double[][] getVotingMethodNumbers() { return votingMethodNumbers; }
+	public int getVotingMethodIndex() { return votingMethodIndex; }
+	public void setVotingMethodIndex(int votingMethodIndex, boolean isSilent) {
+		try {
+			this.votingMethodIndex = votingMethodIndex;
+			if (!isSilent) { 
+				PublishItem publishItem = new PublishItem("votingMethodIndex", ByteConverter.toBytes(votingMethodIndex), 0);
+				pushPublishQueue(publishItem); 
+			}
+			firePropertyChange("votingMethodIndex", null, this.votingMethodIndex);
+		} catch (IOException e) {
+			// System.out.println("Error in Repository: " + e);
+			logger.error("Error in Repository: " + e);
+		}
+	}
 
 	public void pushPublishQueue(PublishItem publishItem) { publishQueue.offer(publishItem); }
 	public PublishItem popPublishQueue() {
