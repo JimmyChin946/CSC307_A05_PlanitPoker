@@ -20,7 +20,7 @@ public class LoginController {
 	public void login(String name) {
 		logger.info("loging in " + name + "...");
 		User user = new User(name);
-		Repository.getInstance().setCurrentUser(user, false);
+		Repository.getInstance().setCurrentUser(user);
 		Repository.getInstance().addUser(user, false);
 		switchGUI();
 	}

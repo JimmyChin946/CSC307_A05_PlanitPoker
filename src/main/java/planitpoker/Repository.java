@@ -57,17 +57,9 @@ public class Repository extends PropertyChangeSupport {
 	}
 	
 	public User getCurrentUser() { return currentUser; }
-	public void setCurrentUser (User currentUser, boolean isSilent) {
-		try {
-			this.currentUser = currentUser; 
-			if (!isSilent) { 
-				PublishItem publishItem = new PublishItem("currentUser", ByteConverter.toBytes(currentUser), 0);
-				pushPublishQueue(publishItem); 
-			}
-			firePropertyChange("currentUser", null, this.currentUser);
-		} catch (IOException e) {
-			logger.error("Error in Repository: " + e);
-		}
+	public void setCurrentUser(User currentUser) {
+		this.currentUser = currentUser;
+		firePropertyChange("currentUser", null, this.currentUser);
 	}
 
 	public Type getType() { return type; }
