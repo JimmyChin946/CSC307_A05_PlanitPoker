@@ -30,6 +30,11 @@
             <artifactId>logback-classic</artifactId>
             <version>1.4.14</version> <!-- Or the latest version -->
         </dependency>
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20250517</version>
+        </dependency>
     </dependencies>
 
 
