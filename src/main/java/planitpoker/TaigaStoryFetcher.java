@@ -16,11 +16,14 @@ import java.util.Map;
  * @author javiergs 
  */
 public class TaigaStoryFetcher {
-
+	
+	// TODO: make these parameters to a function
 	private static final String TAIGA_API = "https://api.taiga.io/api/v1";
 	private static final String USERNAME = "your_username";
 	private static final String PASSWORD = "your_password";
 
+
+	// TODO make this a function with three things as a parameter
 	public static void main(String[] args) throws Exception {
 		try {
 			String authToken = loginAndGetToken(USERNAME, PASSWORD);
