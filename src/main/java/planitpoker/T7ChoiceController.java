@@ -23,8 +23,10 @@ public class T7ChoiceController {
 	public void chooseCreateRoom() {
 		main.setTitle("Create Room");
 		T7Repository.getInstance().setType(T7Repository.Type.HOST);
+
 		T7CreateRoomController createRoomController = new T7CreateRoomController(main);
 		T7CreateRoomPanel createRoomPanel = new T7CreateRoomPanel(createRoomController);
+
 		main.setContentPane(createRoomPanel);
 		switchGUI();
 	}
