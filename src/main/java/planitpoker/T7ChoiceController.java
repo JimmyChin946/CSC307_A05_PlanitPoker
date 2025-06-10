@@ -16,6 +16,8 @@ public class T7ChoiceController {
 		T7Repository.getInstance().setType(T7Repository.Type.CLIENT);
 		T7JoinRoomController joinRoomController = new T7JoinRoomController(main);
 		T7JoinRoomPanel joinRoomPanel = new T7JoinRoomPanel(joinRoomController);
+
+		main.setSize(300, 150);
 		main.setContentPane(joinRoomPanel);
 		switchGUI();
 	}
@@ -27,6 +29,7 @@ public class T7ChoiceController {
 		T7CreateRoomController createRoomController = new T7CreateRoomController(main);
 		T7CreateRoomPanel createRoomPanel = new T7CreateRoomPanel(createRoomController);
 
+		main.setSize(300, 150);
 		main.setContentPane(createRoomPanel);
 		switchGUI();
 	}
