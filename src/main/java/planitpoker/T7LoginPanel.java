@@ -17,7 +17,7 @@ public class T7LoginPanel extends JPanel{
 		JTextField nameField = new JTextField("John Doe");
 		JButton enterButton = new JButton("Login!");
 
-		setLayout(new GridLayout(4, 1));
+		setLayout(new GridLayout(3, 1));
 		add(titleLabel);
 		add(nameField);
 		add(enterButton);

@@ -10,7 +10,7 @@ import java.awt.*;
  */
 public class T7TaigaImportPanel extends JPanel {
 	public T7TaigaImportPanel(T7TaigaImportController taigaImportController) {
-		setLayout(new GridLayout(4, 1));
+		setLayout(new GridLayout(5, 1));
 		JLabel title = new JLabel("Create new Room");
 		title.setHorizontalAlignment(SwingConstants.CENTER);
 		add(title);
