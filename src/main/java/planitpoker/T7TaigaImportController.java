@@ -29,19 +29,25 @@ public class T7TaigaImportController {
 		ArrayList<T7Story> stories = parseJson(jsonArray);
 		
 		logger.info("Updating Repository with the new stories");
-		updateStories(stories);
+		T7Repository.getInstance().setStories(stories, false);
 		
 		switchGUI();
 	}
 
-	private ArrayList<T7Story> parseJson(JSONArray json) {
-		return null;
-	}
+	private ArrayList<T7Story> parseJson(JSONArray jsonArray) {
+		ArrayList<T7Story> stories = new ArrayList<>();
 
-	private void updateStories(ArrayList<T7Story> stories) {
-							
-	}
+		for (int i = 0; i < jsonArray.length(); i++) {
+			JSONObject jsonObject = jsonArray.getJSONObject(i);
 
+			String title = jsonObject.getString("subject");
+
+			T7Story story = new T7Story(title);
+			stories.add(story);
+		}
+
+		return stories;
+	}
 
 	private void switchGUI() {
 		main.setTitle("Room");

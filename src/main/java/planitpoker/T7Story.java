@@ -15,7 +15,6 @@ public class T7Story implements Serializable {
 	private HashMap<String, Double> votes;
 	private Duration time;
 
-
 	public T7Story(String title) {
 		this.title = title;
 		this.active = true;
