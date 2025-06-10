@@ -20,7 +20,7 @@ public class T7StoriesPanel extends JPanel implements PropertyChangeListener {
 	private JPanel storyDisplayPanel;
 	private ActivePanel activePanel = ActivePanel.ACTIVE_STORIES;
 
-	public T7StoriesPanel(T7CreateStoryController createStoryController) {
+	public T7StoriesPanel() {
 		setLayout(new BorderLayout());
 
 		JPanel buttonPanel = new JPanel(new GridLayout(1, 4));
@@ -31,12 +31,6 @@ public class T7StoriesPanel extends JPanel implements PropertyChangeListener {
 		buttonPanel.add(activeStories);
 		buttonPanel.add(completedStories);
 		buttonPanel.add(allStories);
-
-		if (T7Repository.getInstance().getType() == T7Repository.Type.HOST) {
-			JButton newStory = new JButton("+ New");
-			buttonPanel.add(newStory);
-			newStory.addActionListener(e -> createStoryController.createNewStoryDialog());
-		}
 
 		add(buttonPanel, BorderLayout.NORTH);
 
@@ -176,7 +170,5 @@ public class T7StoriesPanel extends JPanel implements PropertyChangeListener {
 	}
 
 	@Override
-	public void propertyChange(PropertyChangeEvent evt) {
-		drawPanel();
-	}
+	public void propertyChange(PropertyChangeEvent evt) { drawPanel(); }
 }
