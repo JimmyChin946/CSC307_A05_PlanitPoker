@@ -32,10 +32,11 @@ public class T7TotalsPanel extends ChartPanel {
         }
 
         for (String user : userTotals.keySet()) {
-            data.addValue(userTotals.get(user) / userAmounts.get(user), "Category", user);
+            data.addValue(userTotals.get(user) / userAmounts.get(user), "Default", user);
         }
 
         JFreeChart chart = ChartFactory.createBarChart("Average User Votes", "User", "Average Vote", data);
+        chart.removeLegend();
         return new T7TotalsPanel(chart);
     }
 }
