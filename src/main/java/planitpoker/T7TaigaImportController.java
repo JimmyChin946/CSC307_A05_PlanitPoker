@@ -22,8 +22,7 @@ public class T7TaigaImportController {
 
 	public void importStories(String username, String password, String projectId) {
 		logger.info("Getting JSON Array");
-		// JSONArray jsonArray = TaigaStoryFetcher.getStories(username, password, projectId);
-		JSONArray jsonArray = TaigaStoryFetcher.getStories("TestUser12345", "testtest", "nathan-lackie-csc-307-final-project");
+		JSONArray jsonArray = TaigaStoryFetcher.getStories(username, password, projectId);
 
 		logger.info("Converting JSON Array to ArrayList of Story");
 		ArrayList<T7Story> stories = parseJson(jsonArray);

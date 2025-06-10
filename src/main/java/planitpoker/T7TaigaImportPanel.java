@@ -18,7 +18,7 @@ public class T7TaigaImportPanel extends JPanel {
 		JPanel box1 = new JPanel();
 		box1.setLayout(new GridLayout(1, 2));
 		JLabel usernameLabel= new JLabel("Username: ");
-		JTextField usernameField = new JTextField("@my_username");
+		JTextField usernameField = new JTextField("TestUser12345");
 		box1.add(usernameLabel);
 		box1.add(usernameField);
 		add(box1);
@@ -26,7 +26,7 @@ public class T7TaigaImportPanel extends JPanel {
 		JPanel box2 = new JPanel();
 		box2.setLayout(new GridLayout(1, 2));
 		JLabel passwordLabel = new JLabel("Password: ");
-		JTextField passwordField = new JTextField("my_password");
+		JTextField passwordField = new JTextField("testtest");
 		box2.add(passwordLabel);
 		box2.add(passwordField);
 		add(box2);
