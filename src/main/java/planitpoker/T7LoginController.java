@@ -27,6 +27,7 @@ public class T7LoginController {
 		T7ChoiceController choiceController = new T7ChoiceController(main);
 		T7ChoicePanel choicePanel = new T7ChoicePanel(choiceController);
 		main.setContentPane(choicePanel);
+		main.setSize(300, 150);
 		main.revalidate();
 		main.repaint();
 	}
