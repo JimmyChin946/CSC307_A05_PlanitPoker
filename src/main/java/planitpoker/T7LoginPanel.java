@@ -14,10 +14,10 @@ public class T7LoginPanel extends JPanel{
 		JLabel titleLabel = new JLabel("PlanItPoker");
 		titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
 
-		JTextField nameField = new JTextField("Enter your name");
+		JTextField nameField = new JTextField("John Doe");
 		JButton enterButton = new JButton("Login!");
 
-		setLayout(new GridLayout(8, 1));
+		setLayout(new GridLayout(4, 1));
 		add(titleLabel);
 		add(nameField);
 		add(enterButton);

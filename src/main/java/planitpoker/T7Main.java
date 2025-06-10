@@ -18,7 +18,7 @@ public class T7Main extends JFrame {
 	public static void main(String[] args) {
 		T7Main main = new T7Main();
 		main.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		main.setSize(800, 800);
+		main.setSize(300, 100);
 		main.setLocationRelativeTo(null);
 		main.setVisible(true);
 	}
