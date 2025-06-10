@@ -39,8 +39,7 @@ public class T7CreateRoomController {
 	private void switchGUI() {
 		main.setTitle("Import from Taiga");
 		T7TaigaImportController taigaImportController = new T7TaigaImportController(main);
-		T7TaigaImportPanel taigaImportPanel = new T7TaigaImportPanel(taigaImportController);
-		main.setSize(350, 200);	
+		T7TaigaImportPanel taigaImportPanel = new T7TaigaImportPanel(taigaImportController, main);
 		main.setContentPane(taigaImportPanel);
 		main.revalidate();
 		main.repaint();

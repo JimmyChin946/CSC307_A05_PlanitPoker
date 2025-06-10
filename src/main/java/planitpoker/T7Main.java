@@ -11,14 +11,13 @@ import javax.swing.*;
 public class T7Main extends JFrame {
 	public T7Main() {
 		T7LoginController loginController = new T7LoginController(this);
-		T7LoginPanel loginPanel = new T7LoginPanel(loginController);
+		T7LoginPanel loginPanel = new T7LoginPanel(loginController, this);
 		add(loginPanel);
 	}
 
 	public static void main(String[] args) {
 		T7Main main = new T7Main();
 		main.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		main.setSize(300, 100);
 		main.setLocationRelativeTo(null);
 		main.setVisible(true);
 	}

@@ -9,7 +9,9 @@ import java.awt.*;
  * @author Jude Shin 
  */
 public class T7CreateRoomPanel extends JPanel {
-	public T7CreateRoomPanel(T7CreateRoomController createRoomController) {
+	public T7CreateRoomPanel(T7CreateRoomController createRoomController, T7Main main) {
+		main.setSize(300, 150);
+
 		setLayout(new GridLayout(4, 1));
 		JLabel title = new JLabel("Create new Room");
 		title.setHorizontalAlignment(SwingConstants.CENTER);

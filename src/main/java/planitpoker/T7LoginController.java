@@ -25,9 +25,8 @@ public class T7LoginController {
 	private void switchGUI() {
 		main.setTitle("Dashboard");
 		T7ChoiceController choiceController = new T7ChoiceController(main);
-		T7ChoicePanel choicePanel = new T7ChoicePanel(choiceController);
+		T7ChoicePanel choicePanel = new T7ChoicePanel(choiceController, main);
 		main.setContentPane(choicePanel);
-		main.setSize(300, 150);
 		main.revalidate();
 		main.repaint();
 	}

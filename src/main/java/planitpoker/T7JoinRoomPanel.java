@@ -9,7 +9,9 @@ import java.awt.*;
  * @author Jude Shin 
  */
 public class T7JoinRoomPanel extends JPanel {
-	public T7JoinRoomPanel(T7JoinRoomController joinRoomController) {
+	public T7JoinRoomPanel(T7JoinRoomController joinRoomController, T7Main main) {
+		main.setSize(300, 150);
+
 		setLayout(new GridLayout(3, 1));
 		JLabel title = new JLabel("Join an existing room");
 		title.setHorizontalAlignment(SwingConstants.CENTER);

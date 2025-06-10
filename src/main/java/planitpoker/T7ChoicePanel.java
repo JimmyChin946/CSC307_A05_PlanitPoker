@@ -10,7 +10,8 @@ import java.awt.*;
  */
 public class T7ChoicePanel extends JPanel {
 	
-	public T7ChoicePanel(T7ChoiceController choiceController) {
+	public T7ChoicePanel(T7ChoiceController choiceController, T7Main main) {
+		main.setSize(300, 150);
 		setLayout(new GridLayout(3, 1));
 
 		JLabel title = new JLabel("Make a Choice:");

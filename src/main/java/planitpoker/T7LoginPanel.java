@@ -10,7 +10,9 @@ import java.awt.*;
  * @author Jude Shin 
  */
 public class T7LoginPanel extends JPanel{
-	public T7LoginPanel(T7LoginController loginController) {
+	public T7LoginPanel(T7LoginController loginController, T7Main main) {
+		main.setSize(300, 100);
+
 		JLabel titleLabel = new JLabel("PlanItPoker");
 		titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
 
