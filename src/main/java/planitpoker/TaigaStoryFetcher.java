@@ -17,32 +17,6 @@ import org.slf4j.LoggerFactory;
  * @author javiergs 
  */
 public class TaigaStoryFetcher {
-	private Logger logger = LoggerFactory.getLogger(T7CreateRoomController.class);
-
-	// TODO: make these parameters to a function
-	// private static final String TAIGA_API = "https://api.taiga.io/api/v1";
-	// private static final String USERNAME = "your_username";
-	// private static final String PASSWORD = "your_password";
-
-
-	// // TODO make this a function with three things as a parameter
-	// public static void main(String[] args) throws Exception {
-	// 	try {
-	// 		String authToken = loginAndGetToken(USERNAME, PASSWORD);
-	// 		// System.out.println("Authenticated successfully. Taiga Token: " + authToken);
-	// 		int projectId = getProjectId(authToken, "2thesimplexity-pac-man");
-	// 		//	getUserStories(authToken, projectId);
-	// 		System.out.println(projectId);
-	// 		// 1. Get all user stories
-	// 		JSONArray stories = fetchUserStories(authToken, projectId);						
-	// 		// TODO the following code below is broken example code
-	// 		// I belive that we need to write our own script that updates the Reposiory singleton from here
-	// 		// updateBacklogTotalPoints(authToken, stories, 5.0);
-	// 	} catch (Exception e) {
-	// 		e.printStackTrace();
-	// 	}
-	// }
-
 	public static JSONArray getStories(String username, String password, String projectId) {
 		try {
 			String authToken = loginAndGetToken(username, password);
@@ -83,7 +57,7 @@ public class TaigaStoryFetcher {
 			throw new RuntimeException("Login failed: " + errorMessage);
 		}
 		String authToken = json.getString("auth_token");
-		// System.out.println("Auth token: " + authToken);
+		System.out.println("Auth token: " + authToken);
 		return authToken;
 	}
 
