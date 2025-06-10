@@ -22,5 +22,8 @@ public class T7RoomPanel extends JPanel {
 
         T7VotingController votingController = new T7VotingController();
         add(new T7VotingPanel(votingController));
+
+        T7CreateStoryController createStoryController = new T7CreateStoryController(main);
+        add(new T7StoriesPanel(createStoryController));
     }
 }
