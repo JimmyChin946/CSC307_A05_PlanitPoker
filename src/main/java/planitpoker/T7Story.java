@@ -12,22 +12,31 @@ import java.util.*;
 public class T7Story implements Serializable {
 	private String title;
 	private boolean active;
-	private ArrayList<Double> votes;
-	private double estimation;
+	private HashMap<String, Double> votes;
 	private Duration time;
 
 
 	public T7Story(String title) {
 		this.title = title;
 		this.active = true;
-		this.votes = new ArrayList<>();
+		this.votes = new HashMap<>();
+	}
+
+	public double getEstimation() {
+		double total = 0;
+
+		for (Double vote : votes.values()) {
+			total += vote;
+		}
+
+		return total / votes.size();
 	}
 
 	public String getTitle() { return title; }
 	public Duration getTime() {return time;}
 	public void setTime(Duration time) {this.time = time;}
-	public double getEstimation() {return estimation; }
-	public void setEstimation(double estimation) {this.estimation = estimation; }
+	public HashMap<String, Double> getVotes() { return votes; }
+	public void setVotes(HashMap<String, Double> votes) { this.votes = votes; }
 	public boolean isActive() { return active; }
 	public void setActive(boolean active) { this.active = active;}
 }

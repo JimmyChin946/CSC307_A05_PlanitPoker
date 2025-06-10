@@ -38,13 +38,8 @@ public class T7VotingController {
 		s.setTime(T7Repository.getInstance().getTimeLeft());
 
 		HashMap<String, Double> votes = T7Repository.getInstance().getVotes();
-		double voteSum = 0;
-		for (String user : votes.keySet()) {
-			Double vote = votes.get(user);
-			voteSum += vote;
-		}
-		double average = voteSum / votes.size();
-		s.setEstimation(average);
+		s.setVotes(votes);
+		T7Repository.getInstance().setVotes(new HashMap<>(), false);
 
 		T7Repository.getInstance().setVotingStarted(false, false);
 
