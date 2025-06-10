@@ -34,7 +34,7 @@ public class T7TaigaImportPanel extends JPanel {
 		JPanel box3 = new JPanel();
 		box3.setLayout(new GridLayout(1, 2));
 		JLabel projectIdLabel = new JLabel("Project Id: ");
-		JTextField projectIdField = new JTextField("my_projectId");
+		JTextField projectIdField = new JTextField("nathan-lackie-csc-307-final-project");
 		box3.add(projectIdLabel);
 		box3.add(projectIdField);
 		add(box3);
