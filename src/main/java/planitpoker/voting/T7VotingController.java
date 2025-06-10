@@ -19,6 +19,8 @@ public class T7VotingController {
 		if (T7Repository.getInstance().getVotingStarted()) return;
 		if (T7Repository.getInstance().getStories().size()-1 <= T7Repository.getInstance().getCurrentStoryIndex()) return;
 
+		T7Repository.getInstance().setVotes(new HashMap<>(), false);
+
 		T7Repository.getInstance().setVotingStarted(true, false);
 
 		T7Repository.getInstance().setTimeLeft(Duration.ZERO, false);
@@ -39,7 +41,6 @@ public class T7VotingController {
 
 		HashMap<String, Double> votes = T7Repository.getInstance().getVotes();
 		s.setVotes(votes);
-		T7Repository.getInstance().setVotes(new HashMap<>(), false);
 
 		T7Repository.getInstance().setVotingStarted(false, false);
 
