@@ -8,7 +8,8 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Map;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Fetches story information given a username, password, and project id from taiga
@@ -16,28 +17,42 @@ import java.util.Map;
  * @author javiergs 
  */
 public class TaigaStoryFetcher {
-	
+	private Logger logger = LoggerFactory.getLogger(T7CreateRoomController.class);
+
 	// TODO: make these parameters to a function
-	private static final String TAIGA_API = "https://api.taiga.io/api/v1";
-	private static final String USERNAME = "your_username";
-	private static final String PASSWORD = "your_password";
+	// private static final String TAIGA_API = "https://api.taiga.io/api/v1";
+	// private static final String USERNAME = "your_username";
+	// private static final String PASSWORD = "your_password";
 
 
-	// TODO make this a function with three things as a parameter
-	public static void main(String[] args) throws Exception {
+	// // TODO make this a function with three things as a parameter
+	// public static void main(String[] args) throws Exception {
+	// 	try {
+	// 		String authToken = loginAndGetToken(USERNAME, PASSWORD);
+	// 		// System.out.println("Authenticated successfully. Taiga Token: " + authToken);
+	// 		int projectId = getProjectId(authToken, "2thesimplexity-pac-man");
+	// 		//	getUserStories(authToken, projectId);
+	// 		System.out.println(projectId);
+	// 		// 1. Get all user stories
+	// 		JSONArray stories = fetchUserStories(authToken, projectId);						
+	// 		// TODO the following code below is broken example code
+	// 		// I belive that we need to write our own script that updates the Reposiory singleton from here
+	// 		// updateBacklogTotalPoints(authToken, stories, 5.0);
+	// 	} catch (Exception e) {
+	// 		e.printStackTrace();
+	// 	}
+	// }
+
+	public static JSONArray getStories(String username, String password, String projectId) {
 		try {
-			String authToken = loginAndGetToken(USERNAME, PASSWORD);
-			// System.out.println("Authenticated successfully. Taiga Token: " + authToken);
-			int projectId = getProjectId(authToken, "2thesimplexity-pac-man");
-			//	getUserStories(authToken, projectId);
-			System.out.println(projectId);
-			// 1. Get all user stories
-			JSONArray stories = fetchUserStories(authToken, projectId);						
-			// TODO the following code below is broken example code
-			// I belive that we need to write our own script that updates the Reposiory singleton from here
-			// updateBacklogTotalPoints(authToken, stories, 5.0);
+			String authToken = loginAndGetToken(username, password);
+			int projectIdNumber = getProjectId(authToken, projectId);
+			JSONArray stories = fetchUserStories(authToken, projectIdNumber);						
+			return stories;
+
 		} catch (Exception e) {
 			e.printStackTrace();
+			return null;
 		}
 	}
 
