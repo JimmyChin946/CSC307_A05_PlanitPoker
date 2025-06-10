@@ -17,9 +17,9 @@ import org.slf4j.LoggerFactory;
  * @author javiergs 
  */
 public class TaigaStoryFetcher {
-	private Logger logger = LoggerFactory.getLogger(T7CreateRoomController.class);
+	private static Logger logger = LoggerFactory.getLogger(T7CreateRoomController.class);
 
-	public JSONArray getStories(String username, String password, String projectId) {
+	public static JSONArray getStories(String username, String password, String projectId) {
 		try {
 			String authToken = loginAndGetToken(username, password);
 			int projectIdNumber = getProjectId(authToken, projectId);
