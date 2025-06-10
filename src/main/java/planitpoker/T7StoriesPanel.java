@@ -49,6 +49,7 @@ public class T7StoriesPanel extends JPanel implements PropertyChangeListener {
 		allStories.addActionListener(e -> switchPanel(ActivePanel.ALL_STORIES));
 
 		T7Repository.getInstance().addPropertyChangeListener("stories", this);
+		T7Repository.getInstance().addPropertyChangeListener("votingStarted", this);
 
 		drawPanel();
 	}
