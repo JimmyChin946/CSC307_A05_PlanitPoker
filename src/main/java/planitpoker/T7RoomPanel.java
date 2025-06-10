@@ -15,7 +15,7 @@ public class T7RoomPanel extends JPanel {
     public T7RoomPanel(T7Main main) {
         super();
 
-        setLayout(new GridLayout(4, 1));
+        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         T7TitlePanel titlePanel = new T7TitlePanel(main);
         add(titlePanel);

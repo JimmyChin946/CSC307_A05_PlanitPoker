@@ -23,6 +23,7 @@ public class T7VotingPanel extends JPanel implements PropertyChangeListener {
 		this.votingController = votingController;
 
 		setLayout(new GridLayout(1, 2));
+		setPreferredSize(new Dimension(0, 300));
 
 		T7Repository.getInstance().addPropertyChangeListener("votingStarted", this);
 
