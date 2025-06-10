@@ -14,7 +14,7 @@ import planitpoker.voting.T7VotingPanel;
 public class T7RoomPanel extends JPanel {
     public T7RoomPanel(T7Main main) {
         super();
-        // main.setSize(200, 200);
+        main.setSize(800, 800);
 
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
