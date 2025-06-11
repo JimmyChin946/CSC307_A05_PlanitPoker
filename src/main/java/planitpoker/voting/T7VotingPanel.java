@@ -39,9 +39,9 @@ public class T7VotingPanel extends JPanel implements PropertyChangeListener {
 			Double[][] votingMethodNumbers = T7Repository.getInstance().getVotingMethodNumbers();
 			Double[] votingMethod = votingMethodNumbers[votingMethodIndex];
 
-			add(new T7CardsPanel(votingController, new ArrayList<Double>(Arrays.asList(votingMethod))));
+			add(new T7CardsPanel(votingController, new ArrayList<>(Arrays.asList(votingMethod))));
 		} else {
-			add(new T7ResultsPanel());
+			add(T7ResultsPanel.createPanel());
 			add(T7TotalsPanel.createPanel());
 		}
 

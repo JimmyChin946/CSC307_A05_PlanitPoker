@@ -1,60 +1,48 @@
 package planitpoker.voting;
 
-import java.awt.*;
 import java.util.HashMap;
-import java.util.Set;
-import javax.swing.*;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.labels.StandardPieSectionLabelGenerator;
+import org.jfree.chart.plot.PiePlot;
+import org.jfree.chart.title.TextTitle;
+import org.jfree.data.general.DefaultPieDataset;
 import planitpoker.T7Repository;
 
 /**
- * Panel for displaying the voting results for a story
+ * Pie chart showing the breakdown of total votes
  *
  * @author Nathan Lackie
  */
-public class T7ResultsPanel extends JPanel {
-    public T7ResultsPanel() {
-        super();
+public class T7ResultsPanel extends ChartPanel {
+    protected T7ResultsPanel(JFreeChart chart) {
+        super(chart);
     }
 
-    @Override
-    protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        int size = Math.min(getWidth(), getHeight());
-
+    public static T7ResultsPanel createPanel() {
         HashMap<String, Double> votes = T7Repository.getInstance().getVotes();
-
-        if (votes.isEmpty()) return;
 
         HashMap<Double, Integer> voteCounts = new HashMap<>();
 
-        double voteSum = 0;
+        double voteTotal = 0;
         for (String user : votes.keySet()) {
             Double vote = votes.get(user);
             voteCounts.merge(vote, 1, Integer::sum);
-            voteSum += vote;
+            voteTotal += vote;
+        }
+        double voteAverage = voteTotal / votes.size();
+
+
+        DefaultPieDataset<Double> data = new DefaultPieDataset<>();
+        for (Double vote : voteCounts.keySet()) {
+            data.setValue(vote, voteCounts.get(vote) );
         }
 
-        Set<Double> distinctVotes = voteCounts.keySet();
-        double numVotes = votes.size();
-        int prevTotal = 0;
-        int currTotal = 0;
-        for (Double vote : distinctVotes) {
-            currTotal += voteCounts.get(vote);
+        JFreeChart chart = ChartFactory.createPieChart("Vote Distribution", data, true, true, false);
+        ((PiePlot<Double>) chart.getPlot()).setLabelGenerator(new StandardPieSectionLabelGenerator("{1} ({2})"));
+        chart.addSubtitle(new TextTitle("Average: " + String.format("%.2f", voteAverage)));
 
-            g.setColor(Color.getHSBColor(prevTotal / (float) numVotes, 1, 0.8f));
-            ((Graphics2D) g).setStroke(new BasicStroke(10));
-
-            int startAngle = (int) (prevTotal * 360.0 / numVotes);
-            int endAngle = (int) (currTotal * 360.0 / numVotes);
-            g.drawArc(
-                50, 50,
-                size - 100, size - 100,
-                startAngle, endAngle - startAngle
-            );
-            prevTotal = currTotal;
-        }
-        g.setColor(Color.black);
-        setFont(new Font("Impact", Font.PLAIN, 20));
-        g.drawString("Avg: " + (voteSum / numVotes), (size - 50) / 2, size / 2);
+        return new T7ResultsPanel(chart);
     }
 }
