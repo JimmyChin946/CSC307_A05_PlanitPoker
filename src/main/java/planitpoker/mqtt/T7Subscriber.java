@@ -13,7 +13,7 @@ import planitpoker.*;
  * Subscribes for the cloud based on a topic
  *
  * @author Jude Shin
- * 
+ *
  */
 public class T7Subscriber implements MqttCallback {
 	private Logger logger = LoggerFactory.getLogger(T7Subscriber.class);
@@ -38,10 +38,12 @@ public class T7Subscriber implements MqttCallback {
 
 	@Override
 	public void messageArrived(String s, MqttMessage mqttMessage) throws IOException, ClassNotFoundException {
+		logger.info("Message Arrived: " + s + ": " + new String(mqttMessage.getPayload()));
+
 		byte[] bytes = mqttMessage.getPayload();
 		String[] topics = s.split("/");
 		String subTopic = topics[topics.length - 1];
-		
+
 		if (T7Repository.getInstance().getType() == T7Repository.Type.HOST) {
 			switch (subTopic) {
 				// votes on the currentStoryIndex 
