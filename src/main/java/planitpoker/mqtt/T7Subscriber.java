@@ -27,7 +27,7 @@ public class T7Subscriber implements MqttCallback {
 			client.subscribe(topic);
 			logger.info("Subscribed to TOPIC: " + topic);
 		} catch (MqttException e) {
-			e.printStackTrace();
+			logger.error(e.getMessage());
 		}
 	}
 

@@ -50,7 +50,7 @@ public class T7Publisher implements Runnable {
 				}
 			}
 		} catch (MqttException e) {
-			e.printStackTrace();
+			logger.error(e.getMessage());
 		}
 	}
 }
