@@ -11,10 +11,10 @@ import java.util.List;
  *
  * @author Kai Swangler
  */
-public class ConnectedUsersPanel extends JPanel implements PropertyChangeListener {
+public class T7ConnectedUsersPanel extends JPanel implements PropertyChangeListener {
     private JPanel usersListPanel;
 
-    public ConnectedUsersPanel() {
+    public T7ConnectedUsersPanel() {
         setLayout(new BorderLayout());
 
         JLabel header = new JLabel("Players", SwingConstants.CENTER);
