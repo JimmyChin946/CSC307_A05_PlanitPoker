@@ -27,10 +27,21 @@ public class T7VotingControlsPanel extends JPanel implements PropertyChangeListe
         T7Repository.getInstance().addPropertyChangeListener("votingStarted", this);
         T7Repository.getInstance().addPropertyChangeListener("timeLeft", this);
 
-        votingNotStartedUI();
-				T7InvitePlayerPanel invitePlayerPanel = new T7InvitePlayerPanel();
-				add(invitePlayerPanel);
+        drawUI();
+    }
 
+    private void drawUI() {
+        if (T7Repository.getInstance().getVotingStarted()) {;
+            votingStartedUI();
+        } else {
+            votingNotStartedUI();
+        }
+
+        T7InvitePlayerPanel invitePlayerPanel = new T7InvitePlayerPanel();
+        add(invitePlayerPanel);
+
+        T7ConnectedUsersPanel connectedUsersPanel = new T7ConnectedUsersPanel();
+        add(connectedUsersPanel);
     }
 
     private void votingNotStartedUI() {
@@ -57,21 +68,14 @@ public class T7VotingControlsPanel extends JPanel implements PropertyChangeListe
             timer.setAlignmentX(JComponent.CENTER_ALIGNMENT);
             add(timer);
         }
-
-        HashMap<String, Double> votes = T7Repository.getInstance().getVotes();
-        for (T7User user : T7Repository.getInstance().getUsers()) {
-            add(new JLabel(user.getName() + ": " + votes.get(user.getName())));
-        }
     }
 
     @Override
     public void propertyChange(PropertyChangeEvent propertyChangeEvent) {
         removeAll();
-        if (T7Repository.getInstance().getVotingStarted()) {;
-            votingStartedUI();
-        } else {
-            votingNotStartedUI();
-        }
+
+        drawUI();
+
         revalidate();
         repaint();
     }

@@ -1,5 +1,6 @@
 package planitpoker;
 
+import java.util.HashMap;
 import javax.swing.*;
 import java.awt.*;
 import java.beans.PropertyChangeEvent;
@@ -24,17 +25,26 @@ public class T7ConnectedUsersPanel extends JPanel implements PropertyChangeListe
         usersListPanel.setLayout(new BoxLayout(usersListPanel, BoxLayout.Y_AXIS));
         add(new JScrollPane(usersListPanel), BorderLayout.CENTER);
 
-        updateUserList(Repository.getInstance().getUsers());
+        updateUserList(T7Repository.getInstance().getUsers());
 
-        Repository.getInstance().addPropertyChangeListener("users", this);
+        T7Repository.getInstance().addPropertyChangeListener("users", this);
     }
 
-    private void updateUserList(List<User> users) {
+    private void updateUserList(List<T7User> users) {
         usersListPanel.removeAll();
-        for (User user : users) {
-            JLabel label = new JLabel(user.getName());
+
+        HashMap<String, Double> votes = T7Repository.getInstance().getVotes();
+        for (T7User user : users) {
+            Double vote = votes.get(user.getName());
+            JLabel label;
+            if (vote == null) {
+                label = new JLabel(user.getName());
+            } else {
+                label = new JLabel(user.getName() + ": " + vote);
+            }
             usersListPanel.add(label);
         }
+
         usersListPanel.revalidate();
         usersListPanel.repaint();
     }
@@ -42,7 +52,7 @@ public class T7ConnectedUsersPanel extends JPanel implements PropertyChangeListe
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         if ("users".equals(evt.getPropertyName())) {
-            updateUserList((List<User>) evt.getNewValue());
+            updateUserList((List<T7User>) evt.getNewValue());
         }
     }
 }
