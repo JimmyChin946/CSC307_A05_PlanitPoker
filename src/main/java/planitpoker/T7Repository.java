@@ -60,7 +60,8 @@ public class T7Repository extends PropertyChangeSupport {
 
 	public T7User getCurrentUser() {
 		logger.debug("Current User: " + currentUser);
-		return currentUser; }
+		return currentUser;
+	}
 	public void setCurrentUser(T7User currentUser, boolean isSilent) {
 		try {
 			this.currentUser = currentUser;
@@ -77,7 +78,8 @@ public class T7Repository extends PropertyChangeSupport {
 
 	public Type getType() {
 		logger.debug("Current Type: " + type);
-		return type; }
+		return type; 
+	}
 	public void setType(Type type) {
 		this.type = type;
 		firePropertyChange("type", null, this.type);
@@ -86,7 +88,8 @@ public class T7Repository extends PropertyChangeSupport {
 
 	public ArrayList<T7User> getUsers() {
 		logger.debug("Current Users: " + users);
-		return users; }
+		return users; 
+	}
 	public void setUsers(ArrayList<T7User> users, boolean isSilent) {
 		try {
 			this.users = users;
@@ -116,7 +119,8 @@ public class T7Repository extends PropertyChangeSupport {
 
 	public String getCurrentRoomName() {
 		logger.debug("Current Room Name: " + currentRoomName);
-		return currentRoomName; }
+		return currentRoomName; 
+	}
 	public void setCurrentRoomName(String roomName) {
 		this.currentRoomName = roomName;
 		firePropertyChange("currentRoomName", null, this.currentRoomName);
@@ -140,7 +144,8 @@ public class T7Repository extends PropertyChangeSupport {
 
 	public boolean getVotingStarted() {
 		logger.debug("Voting Started: " + votingStarted);
-		return votingStarted; }
+		return votingStarted; 
+	}
 	public void setVotingStarted(boolean votingStarted, boolean isSilent) {
 		try {
 			this.votingStarted = votingStarted;
@@ -157,7 +162,8 @@ public class T7Repository extends PropertyChangeSupport {
 
 	public HashMap<String, Double> getVotes() {
 		logger.debug("Votes: " + votes);
-		return votes; }
+		return votes; 
+	}
 	public void setVotes(HashMap<String, Double> votes, boolean isSilent) {
 		try {
 			this.votes = votes;
@@ -190,7 +196,8 @@ public class T7Repository extends PropertyChangeSupport {
 
 	public int getCurrentStoryIndex() {
 		logger.debug("Current Story Index: " + currentStoryIndex);
-		return currentStoryIndex; }
+		return currentStoryIndex; 
+	}
 	public void setCurrentStoryIndex(int storyIndex, boolean isSilent) {
 		try {
 			this.currentStoryIndex = storyIndex;
@@ -220,7 +227,8 @@ public class T7Repository extends PropertyChangeSupport {
 
 	public ArrayList<T7Story> getStories() {
 		logger.debug("Stories: " + stories);
-		return stories; }
+		return stories; 
+	}
 	public void setStories(ArrayList<T7Story> stories, boolean isSilent) {
 		try {
 			this.stories = stories;
@@ -250,13 +258,16 @@ public class T7Repository extends PropertyChangeSupport {
 
 	public String[] getVotingMethodNames() {
 		logger.debug("Voting Method Names: " + votingMethodNames);
-		return votingMethodNames; }
+		return votingMethodNames; 
+	}
 	public Double[][] getVotingMethodNumbers() {
 		logger.debug("Voting Method Numbers: " + votingMethodNumbers);
-		return votingMethodNumbers; }
+		return votingMethodNumbers; 
+	}
 	public int getVotingMethodIndex() {
 		logger.debug("Voting Method Index: " + votingMethodIndex);
-		return votingMethodIndex; }
+		return votingMethodIndex; 
+	}
 	public void setVotingMethodIndex(int votingMethodIndex, boolean isSilent) {
 		try {
 			this.votingMethodIndex = votingMethodIndex;
