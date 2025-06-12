@@ -34,12 +34,12 @@ public class T7Repository extends PropertyChangeSupport {
 
 	private final String[] votingMethodNames = {"Sequential", "Fibonacci"};
 	private final Double[][] votingMethodNumbers = {
-		{0.0, 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0}, 
-		{0.0, 1.0, 2.0, 3.0, 5.0, 8.0, 13.0, 21.0, 34.0, 55.0, 89.0}};
+			{0.0, 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0},
+			{0.0, 1.0, 2.0, 3.0, 5.0, 8.0, 13.0, 21.0, 34.0, 55.0, 89.0}};
 	private int votingMethodIndex;
 
 	private Queue<T7PublishItem> publishQueue;
-	
+
 	private T7Repository() {
 		super(new Object());
 		currentUser = null;
@@ -57,8 +57,10 @@ public class T7Repository extends PropertyChangeSupport {
 		if (instance == null) { instance = new T7Repository(); }
 		return instance;
 	}
-	
-	public T7User getCurrentUser() { return currentUser; }
+
+	public T7User getCurrentUser() {
+		logger.debug("Current User: " + currentUser);
+		return currentUser; }
 	public void setCurrentUser(T7User currentUser, boolean isSilent) {
 		try {
 			this.currentUser = currentUser;
@@ -67,26 +69,33 @@ public class T7Repository extends PropertyChangeSupport {
 				pushPublishQueue(publishItem);
 			}
 			firePropertyChange("currentUser", null, this.currentUser);
+			logger.debug("Current User Set: " + currentUser);
 		} catch (IOException e) {
 			logger.error("Error in Repository: " + e);
 		}
 	}
 
-	public Type getType() { return type; }
+	public Type getType() {
+		logger.debug("Current Type: " + type);
+		return type; }
 	public void setType(Type type) {
 		this.type = type;
 		firePropertyChange("type", null, this.type);
+		logger.debug("Type Set: " + this.type);
 	}
 
-	public ArrayList<T7User> getUsers() { return users; }
+	public ArrayList<T7User> getUsers() {
+		logger.debug("Current Users: " + users);
+		return users; }
 	public void setUsers(ArrayList<T7User> users, boolean isSilent) {
 		try {
 			this.users = users;
-			if (!isSilent) { 
+			if (!isSilent) {
 				T7PublishItem publishItem = new T7PublishItem("users", T7ByteConverter.toBytes(users), 2);
-				pushPublishQueue(publishItem); 
+				pushPublishQueue(publishItem);
 			}
 			firePropertyChange("users", null, this.users);
+			logger.debug("Users Set: " + this.users);
 		} catch (IOException e) {
 			logger.error("Error in Repository: " + e);
 		}
@@ -96,57 +105,68 @@ public class T7Repository extends PropertyChangeSupport {
 			this.users.add(user);
 			if (!isSilent) {
 				T7PublishItem publishItem = new T7PublishItem("users", T7ByteConverter.toBytes(users), 2);
-				pushPublishQueue(publishItem); 
+				pushPublishQueue(publishItem);
 			}
 			firePropertyChange("users", null, this.users);
+			logger.debug("User Added: " + user);
 		} catch (IOException e) {
 			logger.error("Error in Repository: " + e);
 		}
 	}
 
-	public String getCurrentRoomName() { return currentRoomName; }
+	public String getCurrentRoomName() {
+		logger.debug("Current Room Name: " + currentRoomName);
+		return currentRoomName; }
 	public void setCurrentRoomName(String roomName) {
 		this.currentRoomName = roomName;
 		firePropertyChange("currentRoomName", null, this.currentRoomName);
+		logger.debug("Room Name: " + this.currentRoomName + " set");
 	}
 
 	public Duration getTimeLeft() { return timeLeft; }
 	public void setTimeLeft(Duration timeLeft, boolean isSilent) {
 		try {
 			this.timeLeft = timeLeft;
-			if (!isSilent) { 
+			if (!isSilent) {
 				T7PublishItem publishItem = new T7PublishItem("timeLeft", T7ByteConverter.toBytes(timeLeft), 0);
-				pushPublishQueue(publishItem); 
+				pushPublishQueue(publishItem);
 			}
 			firePropertyChange("timeLeft", null, this.timeLeft);
+			logger.debug("Time Left: " + this.timeLeft);
 		} catch (IOException e) {
 			logger.error("Error in Repository: " + e);
 		}
 	}
 
-	public boolean getVotingStarted() { return votingStarted; }
+	public boolean getVotingStarted() {
+		logger.debug("Voting Started: " + votingStarted);
+		return votingStarted; }
 	public void setVotingStarted(boolean votingStarted, boolean isSilent) {
 		try {
 			this.votingStarted = votingStarted;
-			if (!isSilent) { 
+			if (!isSilent) {
 				T7PublishItem publishItem = new T7PublishItem("votingStarted", T7ByteConverter.toBytes(votingStarted), 2);
-				pushPublishQueue(publishItem); 
+				pushPublishQueue(publishItem);
 			}
 			firePropertyChange("votingStarted", null, this.votingStarted);
+			logger.debug("Voting Started: " + this.votingStarted);
 		} catch (IOException e) {
 			logger.error("Error in Repository: " + e);
 		}
 	}
 
-	public HashMap<String, Double> getVotes() { return votes; }
+	public HashMap<String, Double> getVotes() {
+		logger.debug("Votes: " + votes);
+		return votes; }
 	public void setVotes(HashMap<String, Double> votes, boolean isSilent) {
 		try {
-			this.votes = votes;	
-			if (!isSilent) { 
+			this.votes = votes;
+			if (!isSilent) {
 				T7PublishItem publishItem = new T7PublishItem("votes", T7ByteConverter.toBytes(votes), 2);
-				pushPublishQueue(publishItem); 
+				pushPublishQueue(publishItem);
 			}
 			firePropertyChange("votes", null, this.votes);
+			logger.debug("Votes Set: " + this.votes);
 		} catch (IOException e) {
 			logger.error("Error in Repository: " + e);
 		}
@@ -157,25 +177,29 @@ public class T7Repository extends PropertyChangeSupport {
 
 			this.votes.put(user.getName(), score);
 
-			if (!isSilent) { 
+			if (!isSilent) {
 				T7PublishItem publishItem = new T7PublishItem("vote", T7ByteConverter.toBytes(vote), 2);
-				pushPublishQueue(publishItem); 
+				pushPublishQueue(publishItem);
 			}
 			firePropertyChange("vote", null, vote);
+			logger.debug("Vote Added: " + vote);
 		} catch (IOException e) {
 			logger.error("Error in Repository: " + e);
 		}
 	}
 
-	public int getCurrentStoryIndex() { return currentStoryIndex; }
+	public int getCurrentStoryIndex() {
+		logger.debug("Current Story Index: " + currentStoryIndex);
+		return currentStoryIndex; }
 	public void setCurrentStoryIndex(int storyIndex, boolean isSilent) {
 		try {
 			this.currentStoryIndex = storyIndex;
-			if (!isSilent) { 
+			if (!isSilent) {
 				T7PublishItem publishItem = new T7PublishItem("currentStoryIndex", T7ByteConverter.toBytes(currentStoryIndex), 2);
-				pushPublishQueue(publishItem); 
+				pushPublishQueue(publishItem);
 			}
 			firePropertyChange("currentStoryIndex", null, this.currentStoryIndex);
+			logger.debug("Current Story Index Set: " + this.currentStoryIndex);
 		} catch (IOException e) {
 			logger.error("Error in Repository: " + e);
 		}
@@ -183,25 +207,29 @@ public class T7Repository extends PropertyChangeSupport {
 	public void incrementCurrentStoryIndex(boolean isSilent) {
 		try {
 			this.currentStoryIndex = currentStoryIndex + 1;
-			if (!isSilent) { 
+			if (!isSilent) {
 				T7PublishItem publishItem = new T7PublishItem("currentStoryIndex", T7ByteConverter.toBytes(currentStoryIndex), 2);
-				pushPublishQueue(publishItem); 
+				pushPublishQueue(publishItem);
 			}
 			firePropertyChange("currentStoryIndex", null, this.currentStoryIndex);
+			logger.debug("Current Story Index Incremented: " + this.currentStoryIndex);
 		} catch (IOException e) {
 			logger.error("Error in Repository: " + e);
 		}
 	}
 
-	public ArrayList<T7Story> getStories() { return stories; }
+	public ArrayList<T7Story> getStories() {
+		logger.debug("Stories: " + stories);
+		return stories; }
 	public void setStories(ArrayList<T7Story> stories, boolean isSilent) {
 		try {
 			this.stories = stories;
-			if (!isSilent) { 
+			if (!isSilent) {
 				T7PublishItem publishItem = new T7PublishItem("stories", T7ByteConverter.toBytes(stories), 2);
-				pushPublishQueue(publishItem); 
+				pushPublishQueue(publishItem);
 			}
 			firePropertyChange("stories", null, this.stories);
+			logger.debug("Stories Set: " + this.stories);
 		} catch (IOException e) {
 			logger.error("Error in Repository: " + e);
 		}
@@ -209,27 +237,35 @@ public class T7Repository extends PropertyChangeSupport {
 	public void addStory(T7Story story, boolean isSilent) {
 		try {
 			this.stories.add(story);
-			if (!isSilent) { 
+			if (!isSilent) {
 				T7PublishItem publishItem = new T7PublishItem("stories", T7ByteConverter.toBytes(stories), 2);
-				pushPublishQueue(publishItem); 
+				pushPublishQueue(publishItem);
 			}
 			firePropertyChange("stories", null, this.stories);
+			logger.debug("Story Added: " + this.stories);
 		} catch (IOException e) {
 			logger.error("Error in Repository: " + e);
 		}
 	}
 
-	public String[] getVotingMethodNames() { return votingMethodNames; }
-	public Double[][] getVotingMethodNumbers() { return votingMethodNumbers; }
-	public int getVotingMethodIndex() { return votingMethodIndex; }
+	public String[] getVotingMethodNames() {
+		logger.debug("Voting Method Names: " + votingMethodNames);
+		return votingMethodNames; }
+	public Double[][] getVotingMethodNumbers() {
+		logger.debug("Voting Method Numbers: " + votingMethodNumbers);
+		return votingMethodNumbers; }
+	public int getVotingMethodIndex() {
+		logger.debug("Voting Method Index: " + votingMethodIndex);
+		return votingMethodIndex; }
 	public void setVotingMethodIndex(int votingMethodIndex, boolean isSilent) {
 		try {
 			this.votingMethodIndex = votingMethodIndex;
-			if (!isSilent) { 
+			if (!isSilent) {
 				T7PublishItem publishItem = new T7PublishItem("votingMethodIndex", T7ByteConverter.toBytes(votingMethodIndex), 2);
-				pushPublishQueue(publishItem); 
+				pushPublishQueue(publishItem);
 			}
 			firePropertyChange("votingMethodIndex", null, this.votingMethodIndex);
+			logger.debug("Voting Method Index Set: " + this.votingMethodIndex);
 		} catch (IOException e) {
 			logger.error("Error in Repository: " + e);
 		}
@@ -240,10 +276,10 @@ public class T7Repository extends PropertyChangeSupport {
 		T7PublishItem publishItem = publishQueue.poll();
 		return publishItem;
 	}
-	
+
 	// ================================
 
-	public void publishInit() { 
+	public void publishInit() {
 		try {
 			pushPublishQueue(new T7PublishItem("users", T7ByteConverter.toBytes(users), 2));
 			pushPublishQueue(new T7PublishItem("timeLeft", T7ByteConverter.toBytes(timeLeft), 0));
