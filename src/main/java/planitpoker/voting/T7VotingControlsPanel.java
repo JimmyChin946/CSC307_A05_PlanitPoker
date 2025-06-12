@@ -26,6 +26,7 @@ public class T7VotingControlsPanel extends JPanel implements PropertyChangeListe
 
         T7Repository.getInstance().addPropertyChangeListener("votingStarted", this);
         T7Repository.getInstance().addPropertyChangeListener("timeLeft", this);
+        T7Repository.getInstance().addPropertyChangeListener("stories", this);
 
         drawUI();
     }

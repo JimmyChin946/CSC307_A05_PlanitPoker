@@ -38,8 +38,6 @@ public class T7Subscriber implements MqttCallback {
 
 	@Override
 	public void messageArrived(String s, MqttMessage mqttMessage) throws IOException, ClassNotFoundException {
-		logger.info("Message Arrived: " + s + ": " + new String(mqttMessage.getPayload()));
-
 		byte[] bytes = mqttMessage.getPayload();
 		String[] topics = s.split("/");
 		String subTopic = topics[topics.length - 1];
@@ -50,15 +48,18 @@ public class T7Subscriber implements MqttCallback {
 				case "votes":
 					HashMap<String, Double> votes = T7ByteConverter.fromBytes(bytes, HashMap.class);
 					T7Repository.getInstance().setVotes(votes, true);
+					logger.info("Message Arrived: {}: {}", s, votes);
 					break;
 				case "vote":
 					T7Vote vote = T7ByteConverter.fromBytes(bytes, T7Vote.class);
 					T7Repository.getInstance().addVote(vote.getUser(), vote.getScore(), true);
+					logger.info("Message Arrived: {}: {}", s, vote);
 					break;
 				case "join": // could be changed to user
 					T7User user = T7ByteConverter.fromBytes(bytes, T7User.class);
 					T7Repository.getInstance().addUser(user, true);
 					T7Repository.getInstance().publishInit();
+					logger.info("Message Arrived: {}: {}", s, user.getName());
 					break;
 			}
 		}
@@ -68,33 +69,40 @@ public class T7Subscriber implements MqttCallback {
 				case "votingMethodIndex":
 					int votingMethodIndex = T7ByteConverter.fromBytes(bytes, Integer.class);
 					T7Repository.getInstance().setVotingMethodIndex(votingMethodIndex, true);
+					logger.info("Message Arrived: {}: {}", s, votingMethodIndex);
 					break;
 				// stories
 				case "stories":
 					ArrayList<T7Story> stories = T7ByteConverter.fromBytes(bytes, ArrayList.class);
 					T7Repository.getInstance().setStories(stories, true);
+					logger.info("Message Arrived: {}: {}", s, stories);
 					break;
 				// timeLeft 
 				case "timeLeft":
 					Duration timeLeft = T7ByteConverter.fromBytes(bytes, Duration.class);
 					T7Repository.getInstance().setTimeLeft(timeLeft, true);
+					logger.debug("Message Arrived: {}: {}", s, timeLeft);
 					break;
 				// currentStoryIndex
 				case "currentStoryIndex":
 					int currentStoryIndex = T7ByteConverter.fromBytes(bytes, Integer.class);
 					T7Repository.getInstance().setCurrentStoryIndex(currentStoryIndex, true);
+					logger.info("Message Arrived: {}: {}", s, currentStoryIndex);
 					break;
 				case "votingStarted":
 					boolean votingStarted = T7ByteConverter.fromBytes(bytes, Boolean.class);
 					T7Repository.getInstance().setVotingStarted(votingStarted, true);
+					logger.info("Message Arrived: {}: {}", s, votingStarted);
 					break;
 				case "vote":
 					T7Vote vote = T7ByteConverter.fromBytes(bytes, T7Vote.class);
 					T7Repository.getInstance().addVote(vote.getUser(), vote.getScore(), true);
+					logger.info("Message Arrived: {}: {}", s, vote);
 					break;
 				case "users":
 					ArrayList<T7User> users = T7ByteConverter.fromBytes(bytes, ArrayList.class);
 					T7Repository.getInstance().setUsers(users, true);
+					logger.info("Message Arrived: {}: {}", s, users);
 					break;
 			}
 		}

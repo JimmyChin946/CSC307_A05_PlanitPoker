@@ -49,6 +49,8 @@ public class T7VotingController {
 		HashMap<String, Double> votes = T7Repository.getInstance().getVotes();
 		s.setVotes(votes);
 
+		T7Repository.getInstance().setStories(T7Repository.getInstance().getStories(), false);
+
 		T7Repository.getInstance().setVotingStarted(false, false);
 
 		votingTimer.cancel();

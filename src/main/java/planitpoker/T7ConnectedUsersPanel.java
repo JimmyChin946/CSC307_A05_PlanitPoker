@@ -33,12 +33,17 @@ public class T7ConnectedUsersPanel extends JPanel implements PropertyChangeListe
     private void updateUserList(List<T7User> users) {
         usersListPanel.removeAll();
 
+        boolean votingStarted = T7Repository.getInstance().getVotingStarted();
         HashMap<String, Double> votes = T7Repository.getInstance().getVotes();
         for (T7User user : users) {
             Double vote = votes.get(user.getName());
             JLabel label;
-            if (vote == null) {
+            if (vote == null && votingStarted) {
+                label = new JLabel(user.getName() + ": Not yet voted");
+            } else if (vote == null) {
                 label = new JLabel(user.getName());
+            } else if (votingStarted) {
+                label = new JLabel(user.getName() + ": Voted");
             } else {
                 label = new JLabel(user.getName() + ": " + vote);
             }
