@@ -41,8 +41,10 @@ public class T7VotingPanel extends JPanel implements PropertyChangeListener {
 
 			add(new T7CardsPanel(votingController, new ArrayList<>(Arrays.asList(votingMethod))));
 		} else {
-			add(T7ResultsPanel.createPanel());
-			add(T7TotalsPanel.createPanel());
+			T7ResultsPanel resultsPanel = T7ResultsPanel.createPanel();
+			add(resultsPanel);
+			T7TotalsPanel totalsPanel = T7TotalsPanel.createPanel();
+			add(totalsPanel);
 		}
 
 		T7VotingControlsPanel votingControls = new T7VotingControlsPanel(votingController);
