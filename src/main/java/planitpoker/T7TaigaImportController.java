@@ -1,11 +1,8 @@
 package planitpoker;
 
-import java.util.UUID;
 import java.util.ArrayList;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import planitpoker.mqtt.T7Publisher;
-import planitpoker.mqtt.T7Subscriber;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -22,7 +19,7 @@ public class T7TaigaImportController {
 
 	public void importStories(String username, String password, String projectId) {
 		logger.info("Getting JSON Array");
-		JSONArray jsonArray = TaigaStoryFetcher.getStories(username, password, projectId);
+		JSONArray jsonArray = T7TaigaStoryFetcher.getStories(username, password, projectId);
 
 		logger.info("Converting JSON Array to ArrayList of Story");
 		ArrayList<T7Story> stories = parseJson(jsonArray);
