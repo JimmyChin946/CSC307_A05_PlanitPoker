@@ -1,5 +1,5 @@
 # Review
-### What is good in the project 
+### What is good in the product 
 - The application is not bloated 
 - Taiga import functionality was smoother than expected
 - Graphs look very clean with the JFreeChart library
