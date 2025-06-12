@@ -4,6 +4,8 @@ import java.time.Duration;
 import java.util.Timer;
 import java.util.HashMap;
 import java.util.TimerTask;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import planitpoker.T7Repository;
 import planitpoker.T7Story;
 
@@ -13,11 +15,14 @@ import planitpoker.T7Story;
  * @author Nathan Lackie
  */
 public class T7VotingController {
+	private Logger logger = LoggerFactory.getLogger(T7VotingController.class);
 	private Timer votingTimer;
 
 	public void startVoting() {
 		if (T7Repository.getInstance().getVotingStarted()) return;
 		if (T7Repository.getInstance().getStories().size()-1 <= T7Repository.getInstance().getCurrentStoryIndex()) return;
+
+		logger.info("Voting started");
 
 		T7Repository.getInstance().setVotes(new HashMap<>(), false);
 
@@ -33,6 +38,8 @@ public class T7VotingController {
 
 	public void stopVoting() {
 		if (!T7Repository.getInstance().getVotingStarted()) return;
+
+		logger.info("Voting stopped");
 		
 		int i = T7Repository.getInstance().getCurrentStoryIndex();
 		T7Story s = T7Repository.getInstance().getStories().get(i);
@@ -49,6 +56,7 @@ public class T7VotingController {
 
 	public void vote(double score) {
 		if (T7Repository.getInstance().getVotingStarted()) {
+            logger.info("Vote cast: {}", score);
 			T7Repository.getInstance().addVote(T7Repository.getInstance().getCurrentUser(), score, false);
 		}
 	}
